@@ -22,7 +22,8 @@ import java.util.List;
  */
 public class BusquedaBO implements IBusquedaBO {
 
-    IProductoCafeteriaDAO productoCafeteriaDAO = new ProductoCafeteriaDAO();
+    public BusquedaBO() {
+    }
 
     
     public ProductoCafeteriaDTO convertirDAOenDTO(ProductoCafeteria productoCafeteria) {
@@ -41,6 +42,7 @@ public class BusquedaBO implements IBusquedaBO {
 
     @Override
     public List<ProductoCafeteriaDTO> consultarProductos(String palabra) throws CafeteriaException {
+        IProductoCafeteriaDAO productoCafeteriaDAO = new ProductoCafeteriaDAO();
         List<ProductoCafeteriaDTO> productosDTO = new ArrayList<>();
         List<ProductoCafeteria> productosCafeteria = productoCafeteriaDAO.consultarProductos(palabra);
         for (ProductoCafeteria producto : productosCafeteria) {
@@ -52,6 +54,7 @@ public class BusquedaBO implements IBusquedaBO {
 
     @Override
     public List<ProductoCafeteriaDTO> ordenarProductosAZ() throws CafeteriaException {
+        IProductoCafeteriaDAO productoCafeteriaDAO = new ProductoCafeteriaDAO();
         List<ProductoCafeteriaDTO> productosDTO = new ArrayList<>();
         List<ProductoCafeteria> productosCafeteria = productoCafeteriaDAO.ordenarProductosAZ();
         for (ProductoCafeteria producto : productosCafeteria) {
@@ -63,6 +66,7 @@ public class BusquedaBO implements IBusquedaBO {
 
     @Override
     public List<ProductoCafeteriaDTO> ordenarProductosZA() throws CafeteriaException {
+        IProductoCafeteriaDAO productoCafeteriaDAO = new ProductoCafeteriaDAO();
         List<ProductoCafeteriaDTO> productosDTO = new ArrayList<>();
         List<ProductoCafeteria> productosCafeteria = productoCafeteriaDAO.ordenarProductosZA();
         for (ProductoCafeteria producto : productosCafeteria) {
@@ -74,6 +78,7 @@ public class BusquedaBO implements IBusquedaBO {
 
     @Override
     public List<ProductoCafeteriaDTO> ordenarProductosPorPrecio() throws CafeteriaException {
+        IProductoCafeteriaDAO productoCafeteriaDAO = new ProductoCafeteriaDAO();
         List<ProductoCafeteriaDTO> productosDTO = new ArrayList<>();
         List<ProductoCafeteria> productosCafeteria = productoCafeteriaDAO.ordenarProductosPorPrecio();
         for (ProductoCafeteria producto : productosCafeteria) {
@@ -85,6 +90,7 @@ public class BusquedaBO implements IBusquedaBO {
 
     @Override
     public List<ProductoCafeteriaDTO> ordenarProductosFiltradosPorPrecio(List<ProductoCafeteriaDTO> productos) throws CafeteriaException {
+        IProductoCafeteriaDAO productoCafeteriaDAO = new ProductoCafeteriaDAO();
         List<ProductoCafeteriaDTO> productosDTO = new ArrayList<>();
         List<ProductoCafeteria> pro = new ArrayList<>();
         for (ProductoCafeteriaDTO p : productos) {
@@ -100,6 +106,7 @@ public class BusquedaBO implements IBusquedaBO {
 
     @Override
     public List<ProductoCafeteriaDTO> ordenarProductosFiltradosAZ(List<ProductoCafeteriaDTO> productos) throws CafeteriaException {
+        IProductoCafeteriaDAO productoCafeteriaDAO = new ProductoCafeteriaDAO();
         List<ProductoCafeteriaDTO> productosDTO = new ArrayList<>();
         List<ProductoCafeteria> pro = new ArrayList<>();
         for (ProductoCafeteriaDTO p : productos) {
@@ -115,6 +122,7 @@ public class BusquedaBO implements IBusquedaBO {
 
     @Override
     public List<ProductoCafeteriaDTO> ordenarProductosFiltradosZA(List<ProductoCafeteriaDTO> productos) throws CafeteriaException {
+        IProductoCafeteriaDAO productoCafeteriaDAO = new ProductoCafeteriaDAO();
         List<ProductoCafeteriaDTO> productosDTO = new ArrayList<>();
         List<ProductoCafeteria> pro = new ArrayList<>();
         for (ProductoCafeteriaDTO p : productos) {
@@ -128,6 +136,7 @@ public class BusquedaBO implements IBusquedaBO {
         return productosDTO;
     }
     public ProductoCafeteria convertirDTOenDAO(ProductoCafeteriaDTO productoCafeteriaDTO) {
+        IProductoCafeteriaDAO productoCafeteriaDAO = new ProductoCafeteriaDAO();
         ProductoCafeteria productoCafeteria = new ProductoCafeteria();
 
         productoCafeteria.setPrecio(productoCafeteriaDTO.getPrecio());

@@ -26,7 +26,7 @@ public class ControlUsuario implements IControlUsuario {
 
     @Override
     public Usuario consultarUsuario(Usuario usuario) {
-        conexion.Conexion.getDatabase();
+//        conexion.Conexion.getDatabase();
         Usuario u = user.consultarUsuario(usuario);
         return u;
     }

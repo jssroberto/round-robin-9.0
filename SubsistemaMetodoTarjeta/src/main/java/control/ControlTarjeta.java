@@ -28,25 +28,19 @@ public class ControlTarjeta implements IControlTarjeta{
     
     @Override
     public boolean validarDatos(Tarjeta tar) throws BancoException{
-        conexion.ConexionBanco.getDatabase();
         if (datos.validarDatos(tar)) {
-            conexion.ConexionBanco.close();
             return true;
         }else{
-            conexion.ConexionBanco.close();
             return false;
         }
     }
     
     @Override
     public boolean validacionCompra(Tarjeta tar, float total){
-        conexion.ConexionBanco.getDatabase();
         try {
             if (compra.validacionCompra(tar, total)) {
-                conexion.ConexionBanco.close();
               return true;  
             }else{
-                conexion.ConexionBanco.close();
                 throw new BancoException("Saldo Insuficiente");
             }
         } catch (BancoException ex) {

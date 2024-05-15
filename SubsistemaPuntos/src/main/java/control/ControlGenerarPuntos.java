@@ -13,12 +13,12 @@ import java.util.List;
  */
 public class ControlGenerarPuntos {
     public Integer generarPuntos(List<DetalleProducto> productos){
-        conexion.Conexion.getDatabase();
+//        conexion.Conexion.getDatabase();
         Integer total=0;
         for (DetalleProducto producto : productos) {
             total+= producto.getPuntosGenera();
         }
-        conexion.Conexion.close();
+//        conexion.Conexion.close();
         return total;
     }
 }

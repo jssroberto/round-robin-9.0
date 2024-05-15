@@ -26,14 +26,14 @@ import java.util.logging.Logger;
  */
 public class PedidosBO implements IPedidoBO {
 
-    PedidoDAO pedidosDAO;
 
     public PedidosBO() {
-        pedidosDAO = new PedidoDAO();
+        
     }
 
     @Override
     public void persistir(Pedido pedido) {
+        IPedidoDAO pedidosDAO = new PedidoDAO();
         try {
             pedidosDAO.persistir(pedido);
         } catch (PersistenciaException ex) {
@@ -43,6 +43,7 @@ public class PedidosBO implements IPedidoBO {
 
     @Override
     public Pedido consultarPedido(Pedido etiqueta) {
+        IPedidoDAO pedidosDAO = new PedidoDAO();
         try {
             return pedidosDAO.consultar(etiqueta);
         } catch (PersistenciaException ex) {

@@ -7,6 +7,8 @@ package objetosNegocio;
 
 import DAOs.ProductoDAO;
 import DAOs.UsuarioDAO;
+import IDAOs.IProductoDAO;
+import IDAOs.IUsuarioDAO;
 import dominio.DetalleProducto;
 import dominio.Producto;
 import dominio.Usuario;
@@ -23,20 +25,18 @@ import org.bson.types.ObjectId;
  */
 public class CarritoBO implements ICarritoBO{
 
-    UsuarioDAO carrito;
-    ProductoDAO producto;
     
 
     public CarritoBO(){
-        carrito = new UsuarioDAO();
-        producto = new ProductoDAO();
+       
     }
     
    
 
     @Override
     public void agregarCarrito(Usuario usuarioId, Producto product, int cantidad){
-        conexion.Conexion.getDatabase();
+        IProductoDAO producto = new ProductoDAO();
+        IUsuarioDAO carrito = new UsuarioDAO();
         Producto pro = null;
         try {
             pro = producto.consultar(product);
@@ -55,16 +55,17 @@ public class CarritoBO implements ICarritoBO{
         detalle.setPuntosGenera(pro.getPuntosGenera());
         ObjectId o = carrito.consultarUsuario(usuarioId).getId();
         carrito.agregarDetalleProductoAlCarrito(o, detalle);
-        conexion.Conexion.close();
     }
     
     @Override
     public void vaciarCarrito(Usuario user){
+        IUsuarioDAO carrito = new UsuarioDAO();
         carrito.vaciarCarrito(user);
     }
     
     @Override
     public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto nuevoDetalleProducto){
+        IUsuarioDAO carrito = new UsuarioDAO();
         carrito.eliminarProductoCarrito(usuarioId, nuevoDetalleProducto);
     }
     

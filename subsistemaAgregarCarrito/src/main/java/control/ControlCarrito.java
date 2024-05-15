@@ -35,13 +35,10 @@ public class ControlCarrito implements IControlCarrito{
     @Override
     public void vaciarCarrito(Usuario user){
         carro.vaciarCarrito(user);
-        conexion.Conexion.close();
     }
     
     @Override
     public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto nuevoDetalleProducto){
-        conexion.Conexion.getDatabase();
         carro.eliminarProductoCarrito(usuarioId, nuevoDetalleProducto);
-        conexion.Conexion.close();
     }
 }

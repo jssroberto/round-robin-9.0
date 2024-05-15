@@ -16,15 +16,13 @@ import interfaces.IValidarTarjetaBO;
  */
 public class ValidarTarjeta implements IValidarTarjetaBO {
 
-    ITarjetaDAO tarjetas;
 
     public ValidarTarjeta() {
-        tarjetas = new TarjetaDAO();
     }
 
     @Override
     public Tarjeta validarDatos(Tarjeta tarjeta) throws BancoException {
-
+        ITarjetaDAO tarjetas = new TarjetaDAO();
         Tarjeta tar = tarjetas.consultarTarjetaMongo(tarjeta);
         if(tar ==null){
             throw new BancoException("Tarjeta no enonctrada");

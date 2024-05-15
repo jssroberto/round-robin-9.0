@@ -20,19 +20,18 @@ import java.util.List;
  */
 public class ControlPagarPuntos {
 
-    IControlPedido pedidoSub = new ControlPedido();
-    IControlCarrito carritoSub = new ControlCarrito();
-    IUsuarioBO usuarioBO= new UsuarioBO();
-
     public ArrayList<String> PagarPuntos(Usuario usuario, Integer puntosPagar, Integer puntosGenera) throws Exception {
-        conexion.Conexion.getDatabase();
-        ArrayList<String> arreglo= new ArrayList<>();
+        IControlPedido pedidoSub = new ControlPedido();
+        IControlCarrito carritoSub = new ControlCarrito();
+        IUsuarioBO usuarioBO = new UsuarioBO();
+//        conexion.Conexion.getDatabase();
+        ArrayList<String> arreglo = new ArrayList<>();
         try {
             Pedido pedidoGenerado = new Pedido();
-            String numPedido= pedidoSub.generateRandomString();
+            String numPedido = pedidoSub.generateRandomString();
             pedidoGenerado.setNumeroPedido(numPedido);
             arreglo.add(numPedido);
-            String clave= pedidoSub.generateRandomString();
+            String clave = pedidoSub.generateRandomString();
             pedidoGenerado.setClaveRecoleccion(clave);
             arreglo.add(clave);
             pedidoGenerado.setEtiquetaPedido(pedidoSub.generateRandomString());
@@ -40,14 +39,14 @@ public class ControlPagarPuntos {
             pedidoGenerado.setMetodoPago(MetodoPago.PUNTOS);
             pedidoSub.persistir(pedidoGenerado);
             pedidoSub.referenciarPedido(usuario, pedidoSub.consultarPedido(pedidoGenerado));
-            carritoSub.vaciarCarrito(usuario);    
+            carritoSub.vaciarCarrito(usuario);
             System.out.println("xd");
-            usuarioBO.actualizarPuntosUsuario(usuario, usuario.getSaldoPuntos()+puntosGenera-puntosPagar);
-            conexion.Conexion.close();
+            usuarioBO.actualizarPuntosUsuario(usuario, usuario.getSaldoPuntos() + puntosGenera - puntosPagar);
+//            conexion.Conexion.close();
             return arreglo;
         } catch (Exception e) {
-            conexion.Conexion.close();
-            throw new Exception(e.getCause()); 
+//            conexion.Conexion.close();
+            throw new Exception(e.getCause());
         }
     }
 }

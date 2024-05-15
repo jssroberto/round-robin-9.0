@@ -35,6 +35,10 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -86,6 +90,23 @@ public final class PanelBuscar extends javax.swing.JPanel {
                 } catch (CafeteriaException ex) {
                     System.out.println("Error en la búsqueda: "); // Imprime el mensaje de error en la consola
                     framePrincipal.mostrarAviso("Vuelva a intentarlo", "Aviso");
+                }
+            }
+        });
+        ((AbstractDocument) Buscador.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String text, AttributeSet attr) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + text;
+                if (newText.matches("[a-zA-Z]*")) { // Solo permite letras
+                    super.insertString(fb, offset, text, attr);
+                }
+            }
+
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength()) + text;
+                if (newText.matches("[a-zA-Z]*")) { // Solo permite letras
+                    super.replace(fb, offset, length, text, attrs);
                 }
             }
         });

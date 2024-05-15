@@ -14,12 +14,12 @@ import java.util.List;
 public class ControlCalcularCostoPuntos {
     
     public Integer calcularCosto(List<DetalleProducto> productos){
-        conexion.Conexion.getDatabase();
+//        conexion.Conexion.getDatabase();
         Integer total=0;
         for (DetalleProducto producto : productos) {
             total+= producto.getPuntosCuesta();
         }
-        conexion.Conexion.close();
+//        conexion.Conexion.close();
         return total;
     }
 }

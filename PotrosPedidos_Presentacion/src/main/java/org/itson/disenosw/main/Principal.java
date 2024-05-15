@@ -1,5 +1,6 @@
 package org.itson.disenosw.main;
 
+import conexion.ConexionCia;
 import org.itson.disenosw.guis.FramePrincipal;
 import java.util.logging.Logger;
 
@@ -14,6 +15,7 @@ public class Principal {
     static final Logger logger = Logger.getLogger(Principal.class.getName());
 
     public static void main(String[] args) {
+        
         
         FramePrincipal framePrincipal = new FramePrincipal();
         framePrincipal.cambiarVistaInicio();

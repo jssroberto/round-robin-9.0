@@ -2,21 +2,18 @@ package org.itson.disenosw.guis;
 
 import control.ControlCarrito;
 import control.ControlPedido;
-import control.ControlProductos;
 import control.ProductosControl;
 import dominio.MetodoPago;
 import dominio.Producto;
-import dominio.ProductoCafeteria;
 import dominio.Usuario;
 import dtos.DetalleProductoDTO;
 import dtos.PedidoDTO;
 import dtos.ProductoDTO;
 import excepciones.BOException;
+import excepciones.CafeteriaException;
 import excepciones.PersistenciaException;
-import excepciones.PersitenciaException;
 import interfaces.IControlCarrito;
 import interfaces.IControlPedido;
-import interfaces.IControlProductos;
 import interfaces.IProductosControl;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -205,12 +202,12 @@ public class PanelHistorialPedido extends javax.swing.JPanel {
             agregarCarrito();
             framePrincipal.mostrarInformacion("Productos agregados al carrito", "Éxito");
             framePrincipal.cambiarVistaCarrito();
-        } catch (PersitenciaException ex) {
+        } catch (CafeteriaException ex) {
             framePrincipal.mostrarAviso(ex.getMessage(), "Aviso");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    public void agregarCarrito() throws PersitenciaException {
+    public void agregarCarrito() throws CafeteriaException {
         try {
             IControlPedido controlPedido = new ControlPedido();
             detalleProductoDTOs = controlPedido.consultarDetalleProductosPorIdPedido(framePrincipal.getIdPedido());
@@ -223,7 +220,7 @@ public class PanelHistorialPedido extends javax.swing.JPanel {
                 Usuario usuario = new Usuario();
                 usuario.setId(new ObjectId(framePrincipal.getIdUsuario()));
                 usuario.setIdCia(framePrincipal.getNumID());
-                Producto producto = new Producto(new ObjectId(productoDTOs.get(i).getId()),
+                Producto producto = new Producto(productoDTOs.get(i).getId(),
                         detalleProductoDTOs.get(i).getCodigoProducto(),
                         productoDTOs.get(i).getNombre(),
                         productoDTOs.get(i).getPrecio(),

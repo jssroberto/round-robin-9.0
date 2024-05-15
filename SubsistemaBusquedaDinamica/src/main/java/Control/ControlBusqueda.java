@@ -6,7 +6,7 @@ package Control;
 
 import BOs.BusquedaBO;
 import dtos.ProductoCafeteriaDTO;
-import excepciones.PersitenciaException;
+import excepciones.CafeteriaException;
 import java.util.List;
 
 /**
@@ -17,59 +17,80 @@ public class ControlBusqueda {
 
     BusquedaBO b = new BusquedaBO();
 
-    public List<ProductoCafeteriaDTO> consultarProductos(String palabra) throws PersitenciaException {
+    public List<ProductoCafeteriaDTO> consultarProductos(String palabra) throws CafeteriaException {
+        conexion.ConexionCafeteria.getDatabase();
         try {
-            return b.consultarProductos(palabra);
-        } catch (PersitenciaException e) {
-            throw new PersitenciaException(e.getMessage());
+            List<ProductoCafeteriaDTO> a = b.consultarProductos(palabra);
+            conexion.ConexionCafeteria.close();
+            return a;
+        } catch (CafeteriaException e) {
+            throw new CafeteriaException(e.getMessage());
         }
     }
 
-    public List<ProductoCafeteriaDTO> ordenarProductosAZ() throws PersitenciaException {
+    public List<ProductoCafeteriaDTO> ordenarProductosAZ() throws CafeteriaException {
+        conexion.ConexionCafeteria.getDatabase();
         try {
-            return b.ordenarProductosAZ();
-        } catch (PersitenciaException e) {
-            throw new PersitenciaException(e.getMessage());
+            List<ProductoCafeteriaDTO> a =  b.ordenarProductosAZ();
+            conexion.ConexionCafeteria.close();
+            return a;
+        } catch (CafeteriaException e) {
+            throw new CafeteriaException(e.getMessage());
         }
     }
 
-    public List<ProductoCafeteriaDTO> ordenarProductosZA() throws PersitenciaException {
+    public List<ProductoCafeteriaDTO> ordenarProductosZA() throws CafeteriaException {
+        conexion.ConexionCafeteria.getDatabase();
         try {
-            return b.ordenarProductosZA();
-        } catch (PersitenciaException e) {
-            throw new PersitenciaException(e.getMessage());
+            List<ProductoCafeteriaDTO> a =  b.ordenarProductosZA();
+            conexion.ConexionCafeteria.close();
+            return a;
+        } catch (CafeteriaException e) {
+            throw new CafeteriaException(e.getMessage());
         }
     }
 
-    public List<ProductoCafeteriaDTO> ordenarProductosPorPrecio() throws PersitenciaException {
+    public List<ProductoCafeteriaDTO> ordenarProductosPorPrecio() throws CafeteriaException {
+        conexion.ConexionCafeteria.getDatabase();
         try {
-            return b.ordenarProductosPorPrecio();
-        } catch (PersitenciaException e) {
-            throw new PersitenciaException(e.getMessage());
+            List<ProductoCafeteriaDTO> a =  b.ordenarProductosPorPrecio();
+            conexion.ConexionCafeteria.close();
+            return a;
+        } catch (CafeteriaException e) {
+            throw new CafeteriaException(e.getMessage());
         }
     }
 
-    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosPorPrecio(List<ProductoCafeteriaDTO> productos) throws PersitenciaException {
+    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosPorPrecio(List<ProductoCafeteriaDTO> productos) throws CafeteriaException {
+        conexion.ConexionCafeteria.getDatabase();
         try {
-            return b.ordenarProductosFiltradosPorPrecio(productos);
-        } catch (PersitenciaException e) {
-            throw new PersitenciaException(e.getMessage());
+            List<ProductoCafeteriaDTO> a =  b.ordenarProductosFiltradosPorPrecio(productos);
+            conexion.ConexionCafeteria.close();
+            return a;
+        } catch (CafeteriaException e) {
+            throw new CafeteriaException(e.getMessage());
         }
     }
 
-    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosAZ(List<ProductoCafeteriaDTO> productos) throws PersitenciaException {
+    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosAZ(List<ProductoCafeteriaDTO> productos) throws CafeteriaException {
+        conexion.ConexionCafeteria.getDatabase();
         try {
-            return b.ordenarProductosFiltradosAZ(productos);
-        } catch (PersitenciaException e) {
-            throw new PersitenciaException(e.getMessage());
+            List<ProductoCafeteriaDTO> a =  b.ordenarProductosFiltradosAZ(productos);
+            conexion.ConexionCafeteria.close();
+            return a;
+        } catch (CafeteriaException e) {
+            throw new CafeteriaException(e.getMessage());
         }
     }
 
-    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosZA(List<ProductoCafeteriaDTO> productos) throws PersitenciaException {
+    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosZA(List<ProductoCafeteriaDTO> productos) throws CafeteriaException {
+        conexion.ConexionCafeteria.getDatabase();
         try {
-            return b.ordenarProductosFiltradosZA(productos);
-        } catch (PersitenciaException e) {
-            throw new PersitenciaException(e.getMessage());
+            List<ProductoCafeteriaDTO> a =  b.ordenarProductosFiltradosZA(productos);
+            conexion.ConexionCafeteria.close();
+            return a;
+        } catch (CafeteriaException e) {
+            throw new CafeteriaException(e.getMessage());
         }
     }
 }

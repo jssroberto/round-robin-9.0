@@ -6,6 +6,7 @@ package dtos;
 
 import java.time.YearMonth;
 import java.util.Date;
+import org.bson.types.ObjectId;
 
 
 /**
@@ -14,13 +15,13 @@ import java.util.Date;
  */
 public class TarjetaDTO {
  
-    private Long id;
+    private ObjectId id;
     private String numeroTarjeta;
-    private YearMonth fechaVencimiento;
+    private String fechaVencimiento;
     private Integer cvv;
     private Float saldo;
 
-    public TarjetaDTO(Long id, String numeroTarjeta, YearMonth fechaVencimiento, Integer cvv, Float saldo) {
+    public TarjetaDTO(ObjectId id, String numeroTarjeta, String fechaVencimiento, Integer cvv, Float saldo) {
         this.id = id;
         this.numeroTarjeta = numeroTarjeta;
         this.fechaVencimiento = fechaVencimiento;
@@ -28,7 +29,7 @@ public class TarjetaDTO {
         this.saldo = saldo;
     }
 
-    public TarjetaDTO(String numeroTarjeta, YearMonth fechaVencimiento, Integer cvv, Float saldo) {
+    public TarjetaDTO(String numeroTarjeta, String fechaVencimiento, Integer cvv, Float saldo) {
         this.numeroTarjeta = numeroTarjeta;
         this.fechaVencimiento = fechaVencimiento;
         this.cvv = cvv;
@@ -38,11 +39,11 @@ public class TarjetaDTO {
     public TarjetaDTO() {
     }
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 
@@ -54,11 +55,11 @@ public class TarjetaDTO {
         this.numeroTarjeta = numeroTarjeta;
     }
 
-    public YearMonth getFechaVencimiento() {
+    public String getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(YearMonth fechaVencimiento) {
+    public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 

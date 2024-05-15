@@ -6,7 +6,6 @@ package com.mycompany.subsistemaproductosmenu;
 
 import control.ControlProductos;
 import dominio.ProductoCafeteria;
-import excepciones.PersitenciaException;
 import java.util.List;
 
 /**
@@ -15,14 +14,14 @@ import java.util.List;
  */
 public class SubsistemaProductosMenu {
 
-    public static void main(String[] args) throws PersitenciaException {
+    public static void main(String[] args)  {
         
-        ControlProductos control = new  ControlProductos();
-        
-        List<ProductoCafeteria> pros= control.obtenerTodosLosProductos();
-        
-        for(ProductoCafeteria pro : pros){
-            System.out.println(pro.getNombre());
-        }
+//        ControlProductos control = new  ControlProductos();
+//        
+//        List<ProductoCafeteria> pros= control.obtenerTodosLosProductos();
+//        
+//        for(ProductoCafeteria pro : pros){
+//            System.out.println(pro.getNombre());
+//        }
     }
 }

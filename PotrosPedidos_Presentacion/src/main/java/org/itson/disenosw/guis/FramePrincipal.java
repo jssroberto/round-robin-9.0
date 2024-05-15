@@ -1,9 +1,9 @@
 package org.itson.disenosw.guis;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import conexion.Conexion;
 import dominio.ProductoCafeteria;
-import excepciones.PersitenciaException;
+import excepciones.CafeteriaException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,8 +32,10 @@ public class FramePrincipal extends javax.swing.JFrame {
     private String idPedido;
     private int numPedido=0;
     private Long idProducto2;
+    
 
     public Long getIdProducto2() {
+        
         return idProducto2;
     }
 
@@ -191,7 +193,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelPagoExito;
     }
 
-    public void cambiarPanelBuscar() throws PersitenciaException {
+    public void cambiarPanelBuscar() throws CafeteriaException{
         limpiarFrame();
         PanelBuscar panelBuscar = new PanelBuscar(this);
         ponerEnJFrame(panelBuscar);

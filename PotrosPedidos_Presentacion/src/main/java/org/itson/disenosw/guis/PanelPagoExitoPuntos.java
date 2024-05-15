@@ -1,6 +1,5 @@
 package org.itson.disenosw.guis;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

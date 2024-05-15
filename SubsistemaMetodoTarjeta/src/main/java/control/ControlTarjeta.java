@@ -4,8 +4,11 @@
  */
 package control;
 
-import excepciones.PersitenciaException;
+import dominio.Tarjeta;
+import excepciones.BancoException;
 import interfaces.IControlTarjeta;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import metodos.ValidarCompraTarjeta;
 import metodos.ValidarDatosTarjetas;
 
@@ -24,17 +27,32 @@ public class ControlTarjeta implements IControlTarjeta{
     }
     
     @Override
-    public boolean validarDatos(String numeroTarjeta) throws PersitenciaException{
-        
-        if (datos.validarDatos(numeroTarjeta)) {
+    public boolean validarDatos(Tarjeta tar) throws BancoException{
+        conexion.ConexionBanco.getDatabase();
+        if (datos.validarDatos(tar)) {
+            conexion.ConexionBanco.close();
             return true;
         }else{
+            conexion.ConexionBanco.close();
             return false;
         }
     }
     
     @Override
-    public boolean validacionCompra(String num, float total){
-        return compra.validacionCompra(num, total);
+    public boolean validacionCompra(Tarjeta tar, float total){
+        conexion.ConexionBanco.getDatabase();
+        try {
+            if (compra.validacionCompra(tar, total)) {
+                conexion.ConexionBanco.close();
+              return true;  
+            }else{
+                conexion.ConexionBanco.close();
+                throw new BancoException("Saldo Insuficiente");
+            }
+        } catch (BancoException ex) {
+            Logger.getLogger(ControlTarjeta.class.getName()).log(Level.SEVERE, null, ex);
+            conexion.ConexionBanco.close();
+            return false;
+        }
     }
 }

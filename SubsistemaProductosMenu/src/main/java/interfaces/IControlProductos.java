@@ -5,8 +5,9 @@
 package interfaces;
 
 import dominio.ProductoCafeteria;
-import excepciones.PersitenciaException;
+import excepciones.CafeteriaException;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public interface IControlProductos {
     
-    public List<ProductoCafeteria> obtenerTodosLosProductos() throws PersitenciaException;
-     public ProductoCafeteria buscarProductoCafeteriaPorID(Long id) throws PersitenciaException;
-     public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws PersitenciaException;
+    public List<ProductoCafeteria> obtenerTodosLosProductos() throws CafeteriaException;
+     public ProductoCafeteria buscarProductoCafeteriaPorID(ObjectId id) throws CafeteriaException;
+     public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws CafeteriaException;
 }

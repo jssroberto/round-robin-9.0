@@ -15,34 +15,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DTOs</artifactId>
             <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.mycompany</groupId>
-                    <artifactId>PotrosPedidos_Persistencia</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.mycompany</groupId>
-                    <artifactId>cafeteria</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.mycompany</groupId>
-                    <artifactId>banco</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.mycompany</groupId>
-                    <artifactId>cia</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>PotrosPedidos_Persistencia</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>cafeteria</artifactId>
-            <version>${project.version}</version>
+            <groupId>CafeteriaExterna</groupId>
+            <artifactId>CafeteriaExterna</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
     <properties>

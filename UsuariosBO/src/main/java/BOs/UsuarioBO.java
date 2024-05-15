@@ -131,7 +131,7 @@ public class UsuarioBO implements IUsuarioBO {
             productoDTO.setDescripcion(producto.getDescripcion());
         }
         productoDTO.setDireccionImagen(producto.getDireccionImagen());
-        productoDTO.setId(producto.getId().toHexString());
+        productoDTO.setId(producto.getId());
         productoDTO.setNombre(producto.getNombre());
         productoDTO.setPrecio(producto.getPrecio());
         productoDTO.setPuntosGenera(producto.getPuntosGenera());

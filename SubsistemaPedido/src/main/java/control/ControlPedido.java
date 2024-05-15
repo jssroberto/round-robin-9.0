@@ -42,19 +42,27 @@ public class ControlPedido implements IControlPedido {
 
     @Override
     public Pedido consultarPedido(Pedido numeroPedido) {
-        return pedidos.consultarPedido(numeroPedido);
+        conexion.Conexion.getDatabase();
+        Pedido a =  pedidos.consultarPedido(numeroPedido);
+        conexion.Conexion.close();
+        return a;
     }
 
     @Override
     public void referenciarPedido(Usuario usuario, Pedido pedido) {
+        conexion.Conexion.getDatabase();
         pedidos.referenciarPedido(usuario, pedido);
+        conexion.Conexion.close();
     }
 
     @Override
     public boolean pedidoAceptado() {
+        conexion.Conexion.getDatabase();
         if (this.getRandomBinaryValue() == 0) {
+            conexion.Conexion.close();
             return true;
         } else {
+            conexion.Conexion.close();
             return false;
         }
     }
@@ -91,24 +99,29 @@ public class ControlPedido implements IControlPedido {
 
     @Override
     public List<PedidoDTO> consultarPedidos(String idUsuario) throws BOException, PersistenciaException {
-
+        conexion.Conexion.getDatabase();
         IPedidoBO pedidoBO = new PedidosBO();
         List<PedidoDTO> pedidoDTOs = pedidoBO.consultarPedidos(idUsuario);
+        conexion.Conexion.close();
         return pedidoDTOs;
     }
     
     
     @Override
     public PedidoDTO consultarPorId(String idPedido) throws BOException, PersistenciaException{
+        conexion.Conexion.getDatabase();
         IPedidoBO pedidoBO = new PedidosBO();
         PedidoDTO pedidoDTO = pedidoBO.consultarPorId(idPedido);
+        conexion.Conexion.close();
         return pedidoDTO;
     }
     
     @Override
     public List<DetalleProductoDTO> consultarDetalleProductosPorIdPedido(String idPedido) throws BOException, PersistenciaException {
+        conexion.Conexion.getDatabase();
         IPedidoBO pedidoBO = new PedidosBO();
         List<DetalleProductoDTO> detalleProductoDTOs = pedidoBO.consultarDetalleProductosPorIdPedido(idPedido);
+        conexion.Conexion.close();
         return detalleProductoDTOs;
     }
     

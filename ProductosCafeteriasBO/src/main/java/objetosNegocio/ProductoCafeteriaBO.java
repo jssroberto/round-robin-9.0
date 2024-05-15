@@ -4,12 +4,13 @@
  */
 package objetosNegocio;
 
-import DAOs.ProductoCafeteriaDAO;
+import daos.ProductoCafeteriaDAO;
 import dominio.ProductoCafeteria;
-import excepciones.PersitenciaException;
+import excepciones.CafeteriaException;
 import interfaces.IProductoCafeteriaBO;
 import interfaces.IProductoCafeteriaDAO;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -25,32 +26,31 @@ public class ProductoCafeteriaBO implements IProductoCafeteriaBO {
     }
 
     @Override
-    public List<ProductoCafeteria> obtenerTodosLosProductos() throws PersitenciaException {
+    public List<ProductoCafeteria> obtenerTodosLosProductos() throws CafeteriaException {
         List<ProductoCafeteria> productos;
 
         productos = cafeteria.obtenerTodosLosProductos();
         if (productos.isEmpty()) {
-            throw new PersitenciaException("lista vacia");
+            throw new CafeteriaException("lista vacia");
         } else {
             return productos;
         }
     }
 
-    @Override
-    public ProductoCafeteria buscarProductoCafeteriaPorID(Long id) throws PersitenciaException {
+    public ProductoCafeteria buscarProductoCafeteriaPorID(ObjectId id) throws CafeteriaException {
         ProductoCafeteria pro;
         
         pro = cafeteria.buscarProductoCafeteriaPorID(id);
         
         if(pro == null){
-            throw new PersitenciaException("producto no encontrado");
+            throw new CafeteriaException("producto no encontrado");
         } else {
             return pro;
         }
     }
     
     @Override
-    public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws PersitenciaException{
+    public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws CafeteriaException{
         return cafeteria.consultarProductosPorCodigo(codigo);
     }
 }

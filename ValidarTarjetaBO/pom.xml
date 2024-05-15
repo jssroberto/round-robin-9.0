@@ -7,9 +7,9 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>banco</artifactId>
-            <version>${project.version}</version>
+            <groupId>bancoExterna</groupId>
+            <artifactId>BancoExterna</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
     <properties>

@@ -4,7 +4,9 @@
  */
 package interfaces;
 
-import excepciones.PersitenciaException;
+import dominio.Tarjeta;
+import excepciones.BancoException;
+
 
 /**
  *
@@ -12,6 +14,6 @@ import excepciones.PersitenciaException;
  */
 public interface IControlTarjeta {
     
-    public boolean validarDatos(String numeroTarjeta) throws PersitenciaException;
-    public boolean validacionCompra(String num, float total);
+    public boolean validarDatos(Tarjeta tar) throws BancoException;
+    public boolean validacionCompra(Tarjeta tar, float total);
 }

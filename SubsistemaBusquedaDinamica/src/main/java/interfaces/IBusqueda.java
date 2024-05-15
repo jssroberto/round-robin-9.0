@@ -5,7 +5,7 @@
 package interfaces;
 
 import dtos.ProductoCafeteriaDTO;
-import excepciones.PersitenciaException;
+import excepciones.CafeteriaException;
 import java.util.List;
 
 /**
@@ -14,17 +14,17 @@ import java.util.List;
  */
 public interface IBusqueda {
 
-    public List<ProductoCafeteriaDTO> consultarProductos(String palabra) throws PersitenciaException;
+    public List<ProductoCafeteriaDTO> consultarProductos(String palabra) throws CafeteriaException;
 
-    public List<ProductoCafeteriaDTO> ordenarProductosAZ() throws PersitenciaException;
+    public List<ProductoCafeteriaDTO> ordenarProductosAZ() throws CafeteriaException;
 
-    public List<ProductoCafeteriaDTO> ordenarProductosZA() throws PersitenciaException;
+    public List<ProductoCafeteriaDTO> ordenarProductosZA() throws CafeteriaException;
 
-    public List<ProductoCafeteriaDTO> ordenarProductosPorPrecio() throws PersitenciaException;
+    public List<ProductoCafeteriaDTO> ordenarProductosPorPrecio() throws CafeteriaException;
 
-    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosPorPrecio(List<ProductoCafeteriaDTO> productos) throws PersitenciaException;
+    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosPorPrecio(List<ProductoCafeteriaDTO> productos) throws CafeteriaException;
 
-    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosAZ(List<ProductoCafeteriaDTO> productos) throws PersitenciaException;
+    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosAZ(List<ProductoCafeteriaDTO> productos) throws CafeteriaException;
 
-    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosZA(List<ProductoCafeteriaDTO> productos) throws PersitenciaException;
+    public List<ProductoCafeteriaDTO> ordenarProductosFiltradosZA(List<ProductoCafeteriaDTO> productos) throws CafeteriaException;
 }

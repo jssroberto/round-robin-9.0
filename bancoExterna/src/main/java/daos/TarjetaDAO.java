@@ -7,7 +7,7 @@ import static com.mongodb.client.model.Aggregates.match;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.exists;
 import static com.mongodb.client.model.Filters.expr;
-import conexion.Conexion;
+import conexion.ConexionBanco;
 import dominio.Tarjeta;
 import excepciones.BancoException;
 import idaos.ITarjetaDAO;
@@ -24,7 +24,7 @@ public class TarjetaDAO implements ITarjetaDAO {
     private final MongoCollection<Tarjeta> coleccionTarjetas;
 
     public TarjetaDAO() {
-        this.coleccionTarjetas = Conexion.getDatabase().getCollection("tarjetas", Tarjeta.class);
+        this.coleccionTarjetas = ConexionBanco.getDatabase().getCollection("tarjetas", Tarjeta.class);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class TarjetaDAO implements ITarjetaDAO {
             if (result.isEmpty()) {
                 throw new BancoException("La tarjeta no esta registrada");
             }
-            Tarjeta tarjeta1 = result.getFirst();
+            Tarjeta tarjeta1 = result.get(0);
 
             return tarjeta1;
         } catch (MongoException e) {

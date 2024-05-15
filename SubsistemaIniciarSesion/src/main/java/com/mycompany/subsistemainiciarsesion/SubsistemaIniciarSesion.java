@@ -15,7 +15,7 @@ public class SubsistemaIniciarSesion {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello World!");
         IControlLogin control = new ControlLogin();
-        if (control.validacionDatos("00000244978", "MNO97531")) {
+        if (control.validacionDatos("00000011211", "ABC12345")) {
             System.out.println("si");
         } else {
             System.out.println("no");

@@ -3,5 +3,5 @@ pruebas\BancoExterna.class
 dominio\Tarjeta.class
 inserciones\InserscionMasivaBanco.class
 excepciones\BancoException.class
-conexion\Conexion.class
 daos\TarjetaDAO.class
+conexion\ConexionBanco.class

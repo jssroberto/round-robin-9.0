@@ -1,6 +1,8 @@
 package org.itson.disenosw.guis;
 
 //import Incerciones.InsercionMasivaBanco;
+import conexion.Conexion;
+import conexion.ConexionCia;
 import control.ControlLogin;
 import control.ControlProductos;
 import control.ControlUsuario;
@@ -129,10 +131,10 @@ public class PanelInicioSesion extends javax.swing.JPanel {
 
             try {
                 control.validacionDatos(txtId.getText(), txtContraseña.getText());
+                framePrincipal.setNumID(txtId.getText());
                 IControlUsuario controlUsuario = new ControlUsuario();
                 usuarioDTO = controlUsuario.consultarUsuarioPorId(txtId.getText());
                 framePrincipal.setIdUsuario(usuarioDTO.getId());
-                framePrincipal.setNumID(txtId.getText());
                 IControlProductos consultarProductoBO = new ControlProductos();
                 framePrincipal.setProductos(consultarProductoBO.obtenerTodosLosProductos());
                 framePrincipal.cambiarVistaMenu();

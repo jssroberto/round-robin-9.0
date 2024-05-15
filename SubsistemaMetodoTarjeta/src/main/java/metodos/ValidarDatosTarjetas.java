@@ -5,7 +5,8 @@
 package metodos;
 
 import BOs.ValidarTarjeta;
-import excepciones.PersitenciaException;
+import dominio.Tarjeta;
+import excepciones.BancoException;
 import interfaces.IValidarTarjetaBO;
 import javax.swing.JOptionPane;
 
@@ -15,19 +16,24 @@ import javax.swing.JOptionPane;
  */
 public class ValidarDatosTarjetas {
 
-    IValidarTarjetaBO tarjeta;
+    IValidarTarjetaBO tarjetas;
 
     public ValidarDatosTarjetas() {
-        tarjeta = new ValidarTarjeta();
+        tarjetas = new ValidarTarjeta();
     }
 
-    public boolean validarDatos(String numeroTarjeta) throws PersitenciaException {
+    public boolean validarDatos(Tarjeta tarjeta) throws BancoException {
         try {
 
-            return tarjeta.validarDatos(numeroTarjeta);
+            Tarjeta tar = tarjetas.validarDatos(tarjeta);
+            if(tar==null){
+                throw new BancoException("Credenciales no válidas");
+            }else{
+                return true;
+            }
 
-        } catch (PersitenciaException e) {
-            throw new IllegalArgumentException(e.getMessage());
+        } catch (BancoException e) {
+            throw new BancoException(e.getMessage());
         }
     }
 }

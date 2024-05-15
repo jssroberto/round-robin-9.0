@@ -4,9 +4,12 @@
  */
 package BOs;
 
-import DAOs.UsuarioCiaDAO;
+import daos.UsuarioCiaDAO;
+import exepciones.CiaException;
 import interfaces.IUsuarioCiaBO;
 import interfaces.IUsuarioCiaDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,13 +23,17 @@ public class UsuariosCiaBO implements IUsuarioCiaBO{
     }
     
     @Override
-    public boolean validacionDatos(String idEstudiante, String contra) throws Exception{
+    public boolean validacionDatos(String idEstudiante, String contra)  {
         
-        if (usuario.BuscarPersona(idEstudiante, contra)) {
-            return true;
-        }else{
-            throw new Exception("Credenciales no válidas");
+        try {
+            if (usuario.BuscarPersona(idEstudiante, contra)) {
+                return true;
+            }
+        } catch (CiaException ex) {
+            Logger.getLogger(UsuariosCiaBO.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
+        return false;
     }
     
 }

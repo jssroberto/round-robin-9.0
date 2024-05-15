@@ -1,5 +1,7 @@
 package dtos;
 
+import org.bson.types.ObjectId;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,14 +14,14 @@ package dtos;
  */
  public class ProductoDTO {
 
-    private String id;
+    private ObjectId id;
     private String nombre;
     private Float precio;
     private Integer puntosCuesta, puntosGenera;
     private String descripcion;
     private String direccionImagen;
 
-    public ProductoDTO(String id, String nombre, Float precio, Integer puntosCuesta, Integer puntosGenera, String descripcion, String direccionImagen) {
+    public ProductoDTO(ObjectId id, String nombre, Float precio, Integer puntosCuesta, Integer puntosGenera, String descripcion, String direccionImagen) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -43,11 +45,11 @@ package dtos;
     
     
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

@@ -3,7 +3,7 @@ package org.itson.disenosw.guis;
 import control.ControlProductos;
 import dominio.Producto;
 import dominio.ProductoCafeteria;
-import excepciones.PersitenciaException;
+import excepciones.CafeteriaException;
 import interfaces.IControlProductos;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -54,7 +54,7 @@ public final class PanelMenu extends javax.swing.JPanel {
 
         try {
             this.crearMenu();
-        } catch (IllegalArgumentException | PersitenciaException ex) {
+        } catch (IllegalArgumentException | CafeteriaException ex) {
             framePrincipal.mostrarAviso("Vuelva a Intentarlo", "Aviso");
         }
         setFuentes();
@@ -158,7 +158,7 @@ public final class PanelMenu extends javax.swing.JPanel {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
             framePrincipal.cambiarPanelBuscar();        // TODO add your handling code here:
-        } catch (PersitenciaException ex) {
+        } catch (CafeteriaException ex) {
             framePrincipal.mostrarAviso("Vuelva a intentarlo", "Aviso");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -273,7 +273,7 @@ public final class PanelMenu extends javax.swing.JPanel {
 //            panelContenedor.repaint();
 //        }
 //    }
-    public void crearMenu() throws PersitenciaException {
+    public void crearMenu() throws CafeteriaException {
 
         List<ProductoCafeteria> productos = framePrincipal.getProductos();
 

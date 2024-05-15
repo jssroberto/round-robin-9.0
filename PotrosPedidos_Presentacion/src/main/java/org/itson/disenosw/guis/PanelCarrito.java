@@ -6,9 +6,6 @@ import control.ControlPedido;
 import control.ControlUsuario;
 import dominio.DetalleProducto;
 import dominio.Usuario;
-import dtos.DetalleProductoDTO;
-import dtos.UsuarioDTO;
-import excepciones.PersitenciaException;
 import interfaces.IControlCarrito;
 import interfaces.IControlPedido;
 import interfaces.IControlUsuario;
@@ -20,8 +17,6 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -57,12 +52,9 @@ public final class PanelCarrito extends javax.swing.JPanel {
     public PanelCarrito(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
-        try {
 //            ayuda();
             crearMenu();
-        } catch (PersitenciaException ex) {
-            Logger.getLogger(PanelCarrito.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
 
     /**
@@ -151,7 +143,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
 //        }
 //        DetalleCarritoDAO d = new DetalleCarritoDAO();
 //    }
-    public void crearMenu() throws PersitenciaException{
+    public void crearMenu(){
         Font sizedFontBook = cargarFuente("/fonts/futura/FuturaPTBook.otf", 28F);
         lblTotal.setFont(sizedFontBook);
         lblTotal.setForeground(Color.BLACK);

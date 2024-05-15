@@ -36,6 +36,7 @@ public class PedidoDAO implements IPedidoDAO {
 
     @Override
     public void persistir(Pedido pedido) throws PersistenciaException {
+        conexion.Conexion.getDatabase();
         try {
             coleccionPedido.insertOne(pedido);
         } catch (MongoException e) {

@@ -5,21 +5,17 @@ import control.ControlProductos;
 import dominio.Producto;
 import dominio.ProductoCafeteria;
 import dominio.Usuario;
-import dtos.UsuarioDTO;
+import excepciones.CafeteriaException;
 import excepciones.PersistenciaException;
-import excepciones.PersitenciaException;
 import interfaces.IControlCarrito;
 import interfaces.IControlProductos;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 /**
  * Esta clase representa la vista de inicio de sesión en la interfaz gráfica del
@@ -293,7 +289,7 @@ public class PanelProducto extends javax.swing.JPanel {
     private void setDatos() {
         try {
             consultarProducto();
-        } catch (PersitenciaException ex) {
+        } catch (CafeteriaException ex) {
             framePrincipal.mostrarAviso("Vuelva a intentarlo", "Aviso");
             framePrincipal.cambiarVistaMenu();
         }
@@ -313,7 +309,7 @@ public class PanelProducto extends javax.swing.JPanel {
         lblImagen.setIcon(icon);
     }
 
-    private void consultarProducto() throws PersitenciaException {
+    private void consultarProducto() throws CafeteriaException {
         String idProducto = framePrincipal.getIdProducto();
         productoDTO = control.consultarProductosPorCodigo(idProducto);
     }

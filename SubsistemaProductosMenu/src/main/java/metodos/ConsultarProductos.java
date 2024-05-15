@@ -5,11 +5,12 @@
 package metodos;
 
 import dominio.ProductoCafeteria;
-import excepciones.PersitenciaException;
+import excepciones.CafeteriaException;
 import interfaces.IProductoCafeteriaBO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import objetosNegocio.ProductoCafeteriaBO;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -24,7 +25,7 @@ public class ConsultarProductos {
     }
     
     
-    public List<ProductoCafeteria> obtenerTodosLosProductos() throws PersitenciaException{
+    public List<ProductoCafeteria> obtenerTodosLosProductos() throws CafeteriaException{
         List<ProductoCafeteria> productos;
         
         productos = this.producto.obtenerTodosLosProductos();
@@ -37,7 +38,7 @@ public class ConsultarProductos {
         }
     }
     
-    public ProductoCafeteria buscarProductoCafeteriaPorID(Long id) throws PersitenciaException{
+    public ProductoCafeteria buscarProductoCafeteriaPorID(ObjectId id) throws CafeteriaException{
         ProductoCafeteria pro;
          
         pro = producto.buscarProductoCafeteriaPorID(id);
@@ -50,10 +51,10 @@ public class ConsultarProductos {
         }
     }
     
-    public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws PersitenciaException{
+    public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws CafeteriaException{
         ProductoCafeteria pro = producto.consultarProductosPorCodigo(codigo);
         if(pro==null){
-            throw  new PersitenciaException("Producto encontrado ");
+            throw  new CafeteriaException("Producto encontrado ");
         }else{
             return pro;
         }

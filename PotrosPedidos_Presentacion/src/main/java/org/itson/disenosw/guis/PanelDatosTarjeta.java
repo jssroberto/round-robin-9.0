@@ -1,25 +1,20 @@
 package org.itson.disenosw.guis;
 
-import static com.mysql.cj.conf.PropertyKey.logger;
 import control.ControlCarrito;
 import control.ControlPedido;
 import control.ControlTarjeta;
 import control.ControlUsuario;
 import dominio.MetodoPago;
 import dominio.Pedido;
+import dominio.Tarjeta;
 import dominio.Usuario;
-import excepciones.PersitenciaException;
+import excepciones.BancoException;
 import interfaces.IControlCarrito;
 import interfaces.IControlPedido;
 import interfaces.IControlTarjeta;
 import interfaces.IControlUsuario;
 import java.time.LocalDate;
-import java.util.List;
-import javax.swing.JOptionPane;
-//import mocks.Banco;
 
-import java.util.Random;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
@@ -179,12 +174,16 @@ public class PanelDatosTarjeta extends javax.swing.JPanel {
             IControlCarrito carrito = new ControlCarrito();
             IControlTarjeta tarjeta = new ControlTarjeta();
             Usuario user = new Usuario();
+            Tarjeta tar = new Tarjeta();
+            tar.setNumeroTarjeta(txtNumero.getText());
+            tar.setCvv(Integer.parseInt(txtcvv.getText()));
+            tar.setFechaVencimiento(txtfecha.getText());
             user.setIdCia(ventana.getNumID());
             Usuario usuarioNuevo = usuario.consultarUsuario(user);
             try {
-                if (tarjeta.validarDatos(txtNumero.getText())) {
+                if (tarjeta.validarDatos(tar)) {
                     ventana.mostrarAviso("Tarjeta válida", "Aviso");
-                    if (tarjeta.validacionCompra(txtNumero.getText(), ventana.getTotalCarrito())) {
+                    if (tarjeta.validacionCompra(tar, ventana.getTotalCarrito())) {
                         ventana.mostrarAviso("Compra procesada con éxito", "Aviso");
                         Pedido pedidoNuevo = new Pedido("", Integer.toString(ventana.getNumPedido()), "", LocalDate.now(), usuarioNuevo.getCarrito().getProductos().size(), 0.0f, MetodoPago.TARJETA, usuarioNuevo.getCarrito().getProductos());
                         pedidoNuevo.setClaveRecoleccion(pedido.generateRandomString());
@@ -201,7 +200,7 @@ public class PanelDatosTarjeta extends javax.swing.JPanel {
                 } else {
                     ventana.mostrarAviso("Datos no válidos", "Aviso");
                 }
-            } catch (IllegalArgumentException | PersitenciaException ex) {
+            } catch (IllegalArgumentException | BancoException ex) {
                 ventana.mostrarAviso("Vuelva a intentarlo", "Aviso");
             }
 

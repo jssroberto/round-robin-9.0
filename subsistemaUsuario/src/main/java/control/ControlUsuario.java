@@ -26,7 +26,10 @@ public class ControlUsuario implements IControlUsuario {
 
     @Override
     public Usuario consultarUsuario(Usuario usuario) {
-        return user.consultarUsuario(usuario);
+        conexion.Conexion.getDatabase();
+        Usuario u = user.consultarUsuario(usuario);
+        conexion.Conexion.close();
+        return u;
     }
 
     /**
@@ -38,8 +41,10 @@ public class ControlUsuario implements IControlUsuario {
      */
     @Override
     public UsuarioDTO consultarUsuarioPorId(String idCia) throws PersistenciaException, BOException{
+        conexion.Conexion.getDatabase();
         IUsuarioBO usuarioBO = new UsuarioBO();
         UsuarioDTO usuarioDTO = usuarioBO.consultarUsuario(idCia);
+        conexion.Conexion.close();
         return usuarioDTO;
     }
 

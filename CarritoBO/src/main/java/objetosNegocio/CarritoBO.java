@@ -36,7 +36,8 @@ public class CarritoBO implements ICarritoBO{
 
     @Override
     public void agregarCarrito(Usuario usuarioId, Producto product, int cantidad){
-         Producto pro = null;
+        conexion.Conexion.getDatabase();
+        Producto pro = null;
         try {
             pro = producto.consultar(product);
         } catch (PersistenciaException ex) {
@@ -52,7 +53,9 @@ public class CarritoBO implements ICarritoBO{
         detalle.setPrecio(pro.getPrecio());
         detalle.setPuntosCuesta(pro.getPuntosCuesta());
         detalle.setPuntosGenera(pro.getPuntosGenera());
-        carrito.agregarDetalleProductoAlCarrito(carrito.consultarUsuario(usuarioId).getId(), detalle);
+        ObjectId o = carrito.consultarUsuario(usuarioId).getId();
+        carrito.agregarDetalleProductoAlCarrito(o, detalle);
+        conexion.Conexion.close();
     }
     
     @Override

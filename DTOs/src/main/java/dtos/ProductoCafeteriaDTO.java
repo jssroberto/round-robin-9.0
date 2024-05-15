@@ -4,13 +4,15 @@
  */
 package dtos;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author galan
  */
 public class ProductoCafeteriaDTO {
 
-    private Long id;
+    private ObjectId id;
     private Float precio;
     private String nombre;
     private String descripcion;
@@ -42,11 +44,11 @@ public class ProductoCafeteriaDTO {
         this.idProductoCafeteria = idProductoCafeteria;
     }
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
     

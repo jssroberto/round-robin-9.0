@@ -4,7 +4,6 @@ import BOs.UsuarioBO;
 import Interfaz.IUsuarioBO;
 import control.ControlCarrito;
 import control.ControlPedido;
-import control.ControlTarjeta;
 import control.ControlUsuario;
 import dominio.DetalleProducto;
 import dominio.MetodoPago;
@@ -13,7 +12,6 @@ import dominio.Usuario;
 import interfaces.ICalcularCostoPuntos;
 import interfaces.IControlCarrito;
 import interfaces.IControlPedido;
-import interfaces.IControlTarjeta;
 import interfaces.IControlUsuario;
 import java.time.LocalDate;
 import java.util.List;
@@ -166,6 +164,7 @@ public class PanelMetodoPago extends javax.swing.JPanel {
         Pedido pedidoNuevo = new Pedido("", Integer.toString(ventana.getNumPedido()), "", LocalDate.now(), usuarioNuevo.getCarrito().getProductos().size(), 0.0f, MetodoPago.EFECTIVO, usuarioNuevo.getCarrito().getProductos());
         pedidoNuevo.setClaveRecoleccion(pedido.generateRandomString());
         pedidoNuevo.setEtiquetaPedido(pedido.generateRandomString());
+        
         pedido.persistir(pedidoNuevo);
         pedido.referenciarPedido(usuarioNuevo, pedido.consultarPedido(pedidoNuevo));
         carrito.vaciarCarrito(usuarioNuevo);

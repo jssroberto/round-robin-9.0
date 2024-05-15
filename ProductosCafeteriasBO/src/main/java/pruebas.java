@@ -1,5 +1,4 @@
 import dominio.ProductoCafeteria;
-import excepciones.PersitenciaException;
 import java.util.List;
 import objetosNegocio.ProductoCafeteriaBO;
 
@@ -17,14 +16,14 @@ public class pruebas {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws PersitenciaException {
-            ProductoCafeteriaBO pro = new ProductoCafeteriaBO();
-            
-            List<ProductoCafeteria>  pa = pro.obtenerTodosLosProductos();
-            
-            for(ProductoCafeteria prr: pa){
-                System.out.println(prr.getNombre());
-            }
+    public static void main(String[] args)   {
+//            ProductoCafeteriaBO pro = new ProductoCafeteriaBO();
+//            
+//            List<ProductoCafeteria>  pa = pro.obtenerTodosLosProductos();
+//            
+//            for(ProductoCafeteria prr: pa){
+//                System.out.println(prr.getNombre());
+//            }
             
     }
     

@@ -9,25 +9,6 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>DTOs</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.mycompany</groupId>
-                    <artifactId>cia</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.mycompany</groupId>
-                    <artifactId>cafeteria</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.mycompany</groupId>
-                    <artifactId>banco</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>PotrosPedidos_Persistencia</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -35,6 +16,25 @@
             <groupId>excepciones</groupId>
             <artifactId>BOException</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DTOs</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>bancoExterna</groupId>
+                    <artifactId>BancoExterna</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>CiaExterna</groupId>
+                    <artifactId>CiaExterna</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>CafeteriaExterna</groupId>
+                    <artifactId>CafeteriaExterna</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <properties>

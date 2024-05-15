@@ -14,8 +14,11 @@ public class ProductosControl implements IProductosControl {
 
     @Override
     public ProductoDTO consultarPorCodigo(String codigoProducto) throws PersistenciaException {
+        conexion.Conexion.getDatabase();
         IProductoBO productosControl = new ProductoBO();
-        return productosControl.consultarPorCodigo(codigoProducto);
+        ProductoDTO a =  productosControl.consultarPorCodigo(codigoProducto);
+        conexion.Conexion.close();
+        return a;
         
     }
 

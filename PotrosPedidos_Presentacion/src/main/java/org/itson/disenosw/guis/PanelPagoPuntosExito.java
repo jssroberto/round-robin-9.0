@@ -112,7 +112,7 @@ public class PanelPagoPuntosExito extends javax.swing.JPanel {
 
         IPagarPuntos pagarPuntos = new PagarPuntos();
         try {
-            ArrayList<String> info= (ArrayList<String>) pagarPuntos.PagarPuntos(usuarioBueno, calcularPuntos.calcularCostoPuntos(detallesCarritos), generarPuntos.generarPuntos(detallesCarritos));
+            ArrayList<String> info= pagarPuntos.PagarPuntos(usuarioBueno, calcularPuntos.calcularCostoPuntos(detallesCarritos), generarPuntos.generarPuntos(detallesCarritos));
             info.get(0);
             ventana.mostrarConfirmacion("PEDIDO EXITOSO", "EXITO");
             ventana.cambiarPanelPagoExitoPuntos(generarPuntos.generarPuntos(detallesCarritos), info.get(0), info.get(1));

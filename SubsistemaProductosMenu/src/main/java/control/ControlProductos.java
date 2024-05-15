@@ -5,10 +5,11 @@
 package control;
 
 import dominio.ProductoCafeteria;
-import excepciones.PersitenciaException;
+import excepciones.CafeteriaException;
 import interfaces.IControlProductos;
 import java.util.List;
 import metodos.ConsultarProductos;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -23,17 +24,26 @@ public class ControlProductos implements IControlProductos{
     }
     
     @Override
-    public List<ProductoCafeteria> obtenerTodosLosProductos() throws PersitenciaException{
-        return consultar.obtenerTodosLosProductos();
+    public List<ProductoCafeteria> obtenerTodosLosProductos() throws CafeteriaException{
+        conexion.ConexionCafeteria.getDatabase();
+        List<ProductoCafeteria> a= consultar.obtenerTodosLosProductos();
+        conexion.ConexionCafeteria.close();
+        return a;
     }
     
     @Override
-    public ProductoCafeteria buscarProductoCafeteriaPorID(Long id) throws PersitenciaException{
-        return consultar.buscarProductoCafeteriaPorID(id);
+    public ProductoCafeteria buscarProductoCafeteriaPorID(ObjectId id) throws CafeteriaException{
+        conexion.ConexionCafeteria.getDatabase();
+        ProductoCafeteria a = consultar.buscarProductoCafeteriaPorID(id);
+        conexion.ConexionCafeteria.close();
+        return a;
     }
     
     @Override
-    public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws PersitenciaException{
-        return consultar.consultarProductosPorCodigo(codigo);
+    public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws CafeteriaException{
+        conexion.ConexionCafeteria.getDatabase();
+        ProductoCafeteria a = consultar.consultarProductosPorCodigo(codigo);
+        conexion.ConexionCafeteria.close();
+        return a;
     }
 }

@@ -8,7 +8,6 @@ import IDAOs.IProductoDAO;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import com.mongodb.client.result.InsertOneResult;
 import conexion.Conexion;
 import dominio.Producto;
 import excepciones.PersistenciaException;
@@ -27,18 +26,13 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public void persistir(Producto producto) throws PersistenciaException {
-        try {
-            InsertOneResult insertOneResult = coleccionProductos.insertOne(producto);
-            if (!insertOneResult.wasAcknowledged()) {
-                throw new PersistenciaException("Error al persisir el producto");
-            }
-        } catch (MongoException e) {
-            throw new PersistenciaException("Error al persistir el producto", e);
-        }
+            coleccionProductos.insertOne(producto);
+            
     }
 
     @Override
     public Producto consultar(Producto pro) throws PersistenciaException {
+        
         try {
             Producto producto = coleccionProductos.find(Filters.eq("codigoProducto", pro.getCodigoProducto())).first();
             if (producto == null) {

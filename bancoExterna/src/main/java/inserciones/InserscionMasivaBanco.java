@@ -2,7 +2,7 @@ package inserciones;
 
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
-import conexion.Conexion;
+import conexion.ConexionBanco;
 import dominio.Tarjeta;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class InserscionMasivaBanco {
     private final MongoCollection<Tarjeta> coleccionTarjetas;
 
     public InserscionMasivaBanco() {
-        this.coleccionTarjetas = Conexion.getDatabase().getCollection("tarjetas", Tarjeta.class);
+        this.coleccionTarjetas = ConexionBanco.getDatabase().getCollection("tarjetas", Tarjeta.class);
     }
     
     public void insercionMasivaBanco() throws Exception{

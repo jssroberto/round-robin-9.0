@@ -4,7 +4,9 @@
  */
 package control;
 
+import BOs.UsuariosCiaBO;
 import interfaces.IControlLogin;
+import interfaces.IUsuarioCiaBO;
 import metodos.IniciarSesion;
 
 /**
@@ -12,17 +14,20 @@ import metodos.IniciarSesion;
  * @author jl4ma
  */
 public class ControlLogin implements IControlLogin{
-    IniciarSesion inicio;
+    IUsuarioCiaBO inicio;
     
     public ControlLogin(){
-        inicio = new IniciarSesion();
+        inicio = new UsuariosCiaBO();
     }
     
     @Override
     public boolean validacionDatos(String idEstudiante, String contra) throws Exception{
+        conexion.ConexionCia.getDatabase();
         if (inicio.validacionDatos(idEstudiante, contra)) {
+            conexion.ConexionCia.close();
             return true;
         }else{
+            conexion.ConexionCia.close();
             return false;
         }
     }

@@ -25,6 +25,7 @@ public class ControlPagarPuntos {
     IUsuarioBO usuarioBO= new UsuarioBO();
 
     public ArrayList<String> PagarPuntos(Usuario usuario, Integer puntosPagar, Integer puntosGenera) throws Exception {
+        conexion.Conexion.getDatabase();
         ArrayList<String> arreglo= new ArrayList<>();
         try {
             Pedido pedidoGenerado = new Pedido();
@@ -42,8 +43,10 @@ public class ControlPagarPuntos {
             carritoSub.vaciarCarrito(usuario);    
             System.out.println("xd");
             usuarioBO.actualizarPuntosUsuario(usuario, usuario.getSaldoPuntos()+puntosGenera-puntosPagar);
+            conexion.Conexion.close();
             return arreglo;
         } catch (Exception e) {
+            conexion.Conexion.close();
             throw new Exception(e.getCause()); 
         }
     }

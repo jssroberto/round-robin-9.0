@@ -6,8 +6,8 @@ package metodos;
 
 import BOs.ValidarTarjeta;
 import dominio.Tarjeta;
+import excepciones.BancoException;
 import interfaces.IValidarTarjetaBO;
-import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
 
 
@@ -23,15 +23,14 @@ public class ValidarCompraTarjeta {
         tarjeta = new ValidarTarjeta();
     }
     
-    public boolean validacionCompra(String num, float total){
+    public boolean validacionCompra(Tarjeta num, float total) throws BancoException{
         
-        Tarjeta tar = tarjeta.consultar(num);
+        Tarjeta tar = tarjeta.validarDatos(num);
         float saldo = tar.getSaldo()-total;
-        
         if (saldo >=0) {
             return true;
         }else{
-            throw new IllegalArgumentException("Saldo insuficiente");
+            throw new BancoException("Saldo insuficiente");
         }
         
     }

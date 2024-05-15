@@ -1,0 +1,10 @@
+dtos\ProductoCafeteriaDTO.class
+dtos\MetodoPago.class
+convertidores\ConvertidorDAOaDTO.class
+dtos\CarritoDTO.class
+dtos\DetalleProductoDTO.class
+convertidores\ConvertidorDTOaDAO.class
+dtos\TarjetaDTO.class
+dtos\UsuarioDTO.class
+dtos\PedidoDTO.class
+dtos\ProductoDTO.class

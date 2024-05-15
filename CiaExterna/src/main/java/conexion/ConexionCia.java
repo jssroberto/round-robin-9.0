@@ -19,9 +19,8 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 public class ConexionCia {
     private static MongoClient mongoClient = null;
     //Si se conectaron por Atlas su URL es la que les proporciona la página
-    private static final String URI = "mongodb+srv://josemadero244903:12345@cluster0.82cvjpv.mongodb.net/";//CAMBIEN PARA EL SUYO
-//    private static final String URI = "mongodb://localhost:27017";
-
+//    private static final String URI = "mongodb+srv://josemadero244903:12345@cluster0.82cvjpv.mongodb.net/";//CAMBIEN PARA EL SUYO
+    private static final String URI = "mongodb://localhost:27017";
     private static final String DATABASE_NAME = "cia_externo";
 
     public ConexionCia() {

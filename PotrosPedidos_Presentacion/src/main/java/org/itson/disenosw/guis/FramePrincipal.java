@@ -27,7 +27,6 @@ public class FramePrincipal extends javax.swing.JFrame {
     private String claveRecoleccion;
     private float totalCarrito = 0.0f;
     private String numID;
-    private List<ProductoCafeteria> productos;
     private String idUsuario;
     private String idPedido;
     private int numPedido=0;
@@ -308,14 +307,6 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     public void setTotalCarrito(float totalCarrito) {
         this.totalCarrito = totalCarrito;
-    }
-
-    public List<ProductoCafeteria> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<ProductoCafeteria> productos) {
-        this.productos = productos;
     }
 
     public String getClaveRecoleccion() {

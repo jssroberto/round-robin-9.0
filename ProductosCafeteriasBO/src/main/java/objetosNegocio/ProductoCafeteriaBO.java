@@ -18,39 +18,43 @@ import org.bson.types.ObjectId;
  */
 public class ProductoCafeteriaBO implements IProductoCafeteriaBO {
 
-    IProductoCafeteriaDAO cafeteria;
-  
+
     public ProductoCafeteriaBO() {
-        this.cafeteria = new ProductoCafeteriaDAO();
 
     }
 
     @Override
     public List<ProductoCafeteria> obtenerTodosLosProductos() throws CafeteriaException {
+        IProductoCafeteriaDAO cafeteria = new ProductoCafeteriaDAO();
         List<ProductoCafeteria> productos;
 
         productos = cafeteria.obtenerTodosLosProductos();
         if (productos.isEmpty()) {
-            throw new CafeteriaException("lista vacia");
+            throw new CafeteriaException("No existe ningún producto registrado");
         } else {
             return productos;
         }
     }
 
+    @Override
     public ProductoCafeteria buscarProductoCafeteriaPorID(ObjectId id) throws CafeteriaException {
+        IProductoCafeteriaDAO cafeteria = new ProductoCafeteriaDAO();
+
         ProductoCafeteria pro;
-        
+
         pro = cafeteria.buscarProductoCafeteriaPorID(id);
-        
-        if(pro == null){
+
+        if (pro == null) {
             throw new CafeteriaException("producto no encontrado");
         } else {
             return pro;
         }
     }
-    
+
     @Override
-    public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws CafeteriaException{
+    public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws CafeteriaException {
+        IProductoCafeteriaDAO cafeteria = new ProductoCafeteriaDAO();
+
         return cafeteria.consultarProductosPorCodigo(codigo);
     }
 }

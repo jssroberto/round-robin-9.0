@@ -19,12 +19,12 @@ public class BancoExterna {
 
     public static void main(String[] args) {
         try {
-//            InserscionMasivaBanco imb = new InserscionMasivaBanco();
-//            
-//            imb.insercionMasivaBanco();
-            ITarjetaDAO tarjetaDAO = new TarjetaDAO();
-            Tarjeta tarjeta = tarjetaDAO.consultarTarjetaMongo(new Tarjeta("4696164174646464", "2030-09", 754));
-            System.out.println(tarjeta.toString());
+            InserscionMasivaBanco imb = new InserscionMasivaBanco();
+            
+            imb.insercionMasivaBanco();
+//            ITarjetaDAO tarjetaDAO = new TarjetaDAO();
+//            Tarjeta tarjeta = tarjetaDAO.consultarTarjetaMongo(new Tarjeta("4696164174646464", "2030-09", 754));
+//            System.out.println(tarjeta.toString());
         } catch (Exception ex) {
             Logger.getLogger(BancoExterna.class.getName()).log(Level.SEVERE, null, ex);
         }

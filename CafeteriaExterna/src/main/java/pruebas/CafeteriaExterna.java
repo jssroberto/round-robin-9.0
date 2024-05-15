@@ -16,13 +16,13 @@ import interfaces.IProductoCafeteriaDAO;
 public class CafeteriaExterna {
 
     public static void main(String[] args) throws Exception {
-//        InsercionMasivaProductosCafeteria i = new InsercionMasivaProductosCafeteria();
-//        
-//        i.insertarRegistros();
+        InsercionMasivaProductosCafeteria i = new InsercionMasivaProductosCafeteria();
+        
+        i.insertarRegistros();
 
-    IProductoCafeteriaDAO c = new ProductoCafeteriaDAO();
-    for(ProductoCafeteria c22: c.obtenerTodosLosProductos()){
-        System.out.println(c22);
-    }
+//    IProductoCafeteriaDAO c = new ProductoCafeteriaDAO();
+//    for(ProductoCafeteria c22: c.obtenerTodosLosProductos()){
+//        System.out.println(c22);
+//    }
     }
 }

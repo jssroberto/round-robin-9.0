@@ -7,6 +7,7 @@ import control.ControlLogin;
 import control.ControlProductos;
 import control.ControlUsuario;
 import dtos.UsuarioDTO;
+import excepciones.BOException;
 import interfaces.IControlLogin;
 import interfaces.IControlProductos;
 import javax.swing.text.AbstractDocument;
@@ -21,13 +22,13 @@ import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * Esta clase representa la vista de inicio de sesión en la interfaz gráfica del
  * banco. Permite a los usuarios iniciar sesión proporcionando su nombre de
  * usuario y contraseña.
  */
 public class PanelInicioSesion extends javax.swing.JPanel {
+
     private static final Logger logger = Logger.getLogger(PanelInicioSesion.class.getName());
 
     private final FramePrincipal framePrincipal;
@@ -135,13 +136,10 @@ public class PanelInicioSesion extends javax.swing.JPanel {
                 IControlUsuario controlUsuario = new ControlUsuario();
                 usuarioDTO = controlUsuario.consultarUsuarioPorId(txtId.getText());
                 framePrincipal.setIdUsuario(usuarioDTO.getId());
-                IControlProductos consultarProductoBO = new ControlProductos();
-                framePrincipal.setProductos(consultarProductoBO.obtenerTodosLosProductos());
                 framePrincipal.cambiarVistaMenu();
 
             } catch (Exception ex) {
-                logger.log(Level.SEVERE, ex.getMessage());
-
+                framePrincipal.mostrarAviso(ex.getMessage(), "Aviso");
             }
         }
     }//GEN-LAST:event_btnIngresarActionPerformed

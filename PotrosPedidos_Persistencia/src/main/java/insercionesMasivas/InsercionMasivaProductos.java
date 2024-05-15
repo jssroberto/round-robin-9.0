@@ -10,20 +10,19 @@ import dominio.Producto;
 import java.util.LinkedList;
 import java.util.List;
 
-
-
 /**
  *
  * @author jl4ma
  */
 public class InsercionMasivaProductos {
-    
+
     List<Producto> productoCafeterias = new LinkedList<>();
     private final MongoCollection<Producto> coleccionProducto;
-    
-    public InsercionMasivaProductos(){
+
+    public InsercionMasivaProductos() {
         this.coleccionProducto = Conexion.getDatabase().getCollection("productos", Producto.class);
     }
+
     public void insertarRegistros() throws Exception {
         List<Producto> productosCafeteria = new LinkedList<>();
         productosCafeteria.add(new Producto("HCL080", "Hamburguesa clásica", 80.0F, "Hamburguesa con carne, queso y verdura, acompañada de papas a la francesa", "hamburguesa-clasica.png"));
@@ -36,8 +35,9 @@ public class InsercionMasivaProductos {
         productosCafeteria.add(new Producto("CCN025", "Coca-Cola", 25.0F, "Coca-Cola regular en lata de 355ml", "coca-cola-regular.png"));
         productosCafeteria.add(new Producto("CCL025", "Coca-Cola light", 25.0F, "Coca-Cola light en lata de 355ml", "coca-cola-light.png"));
         productosCafeteria.add(new Producto("CCZ025", "Coca-Cola zero", 25.0F, "Coca-Cola zero en lata de 355ml", "coca-cola-zero.png"));
-    
-        coleccionProducto.insertMany(productosCafeteria);
+
+            coleccionProducto.insertMany(productosCafeteria);
+        
     }
-    
+
 }

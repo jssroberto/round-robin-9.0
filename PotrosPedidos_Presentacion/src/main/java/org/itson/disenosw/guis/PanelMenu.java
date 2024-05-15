@@ -40,7 +40,6 @@ public final class PanelMenu extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(PanelMenu.class.getName());
     private FramePrincipal framePrincipal;
-    private Integer idProducto = 0;
 
     /**
      * Constructor de la clase VistaInicioSesion.
@@ -53,9 +52,9 @@ public final class PanelMenu extends javax.swing.JPanel {
         initComponents();
 
         try {
-            this.crearMenu();
+            crearMenu();
         } catch (IllegalArgumentException | CafeteriaException ex) {
-            framePrincipal.mostrarAviso("Vuelva a Intentarlo", "Aviso");
+            framePrincipal.mostrarAviso(ex.getMessage(), "Aviso");
         }
         setFuentes();
     }
@@ -175,107 +174,10 @@ public final class PanelMenu extends javax.swing.JPanel {
 
     }
 
-//    public void crearMenu() throws PersitenciaException {
-//        JPanel mainPanel = new JPanel(new GridBagLayout());
-//        mainPanel.setOpaque(false);
-//        mainPanel.setMaximumSize(new Dimension(380, 600));
-//        mainPanel.setSize(new Dimension(380, 600));
-//
-//        IControlProductos consultarProductoBO = new ControlProductos();
-//        List<ProductoCafeteria> productos = consultarProductoBO.obtenerTodosLosProductos();
-//
-//        GridBagConstraints c = new GridBagConstraints();
-//
-//        TODO no jala el insertar elemento de arriba a abajo, empiezan del centro
-//        c.anchor = GridBagConstraints.NORTH;
-//        c.fill = GridBagConstraints.BOTH;
-//
-//         Iterar sobre la lista de productos y crear los paneles correspondientes
-//        for (int i = 0; i < productos.size(); i++) {
-//            String[] producto = productosDTO.get(i);
-//            JPanel productoPanel = createProductoPanel(productos.get(i).getNombre(), productos.get(i).getPrecio(), productos.get(i).getDireccionImagen());
-//
-//            String identificador = "producto_" + i;
-//            Long identificador = productos.get(i).getId();
-//            productoPanel.putClientProperty(identificador, productoPanel);
-//            String identificadorString = String.valueOf(identificador);
-//            productoPanel.putClientProperty(i, idProducto);
-//             Añade un ActionListener al panel de producto
-//            productoPanel.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-//                     Acción a realizar al hacer clic en el panel de producto
-//                     Aquí puedes acceder al identificador del panel haciendo uso de la variable 'identificador'
-//                    System.out.println("Clic en el panel de producto: " + identificador);
-//                    framePrincipal.setIdProducto(identificador);
-//                    framePrincipal.cambiarVistaProducto();
-//
-//                }
-//            });
-//            idProducto++;
-//             Añade el panel del producto en la posición i * 2 (para dejar espacio para los separadores)
-//            c.gridx = 0;
-//            c.gridy = i * 2;
-//            mainPanel.add(productoPanel, c);
-//
-//             Añade un separador después de cada producto, excepto el último
-//            if (i < productos.size() - 1) {
-//                JPanel separatorPanel = createSeparatorPanel();
-//                c.gridx = 0;
-//                c.gridy = i * 2 + 1;
-//                mainPanel.add(separatorPanel, c);
-//            }
-//
-//            productoPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//
-//        }
-//
-//        TODO hacer el scrollPane un ScrollPaneWin11
-//         Configurar el JScrollPane para desplazamiento vertical
-//        JScrollPane scrollPane = new JScrollPane(mainPanel);
-//        scrollPane.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
-//        scrollPane.add(mainPanel);
-//
-//        scrollPane.setPreferredSize(new Dimension(380, 600)); // Establece un tamaño predeterminado
-//        scrollPane.setMaximumSize(new Dimension(380, 600)); // Establece un tamaño máximo
-//        scrollPane.getViewport().setPreferredSize(new Dimension(380, 600)); // Establece un tamaño predeterminado para el viewport
-//        scrollPane.getViewport().setMaximumSize(new Dimension(380, 600)); // Establece un tamaño mínimo para el viewport
-//        scrollPane.getViewport().setSize(380, 600);
-//
-//        scrollPane.setOpaque(false); // Hacer el JScrollPane transparente
-//        scrollPane.getViewport().setOpaque(false); // Hacer transparente el viewport del JScrollPane
-//        scrollPane.setBorder(null); // Eliminar el borde del JScrollPane
-//        scrollPane.getVerticalScrollBar().setUnitIncrement(16); // Ajustar la velocidad del scroll vertical
-//        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER); // Ocultar la barra de desplazamiento horizontal
-//
-//        JPanel cont = new JPanel(new FlowLayout(FlowLayout.LEADING, 0, 0));
-//        cont.add(scrollPane);
-//        cont.setOpaque(false);
-//
-//        panelTop.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
-//        panelTop.add(cont);
-//        
-//        this.setLayout(new BorderLayout());
-//        JLabel fondo = new javax.swing.JLabel();fondo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-//        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelMenu.png"))); // NOI18N
-//        fondo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-//        add(fondo,BorderLayout.CENTER);
-//
-//        Container contenedor = fondo.getParent();
-// Asegúrate de que el contenedor utiliza un layout que soporte z-order, como JPanel
-//        if (contenedor instanceof JPanel) {
-//            JPanel panelContenedor = (JPanel) contenedor;
-//             Cambia el orden de los componentes para poner el menú encima del fondo
-//            panelContenedor.setComponentZOrder(mainPanel, 0);
-//            panelContenedor.setComponentZOrder(fondo, 1);
-//             Repinta el contenedor para reflejar los cambios
-//            panelContenedor.revalidate();
-//            panelContenedor.repaint();
-//        }
-//    }
     public void crearMenu() throws CafeteriaException {
 
-        List<ProductoCafeteria> productos = framePrincipal.getProductos();
+        IControlProductos consultarProductoBO = new ControlProductos();
+        List<ProductoCafeteria> productos = consultarProductoBO.obtenerTodosLosProductos();
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setOpaque(false);
@@ -291,18 +193,13 @@ public final class PanelMenu extends javax.swing.JPanel {
         // Iterar sobre la lista de productos y crear los paneles correspondientes
         for (int i = 0; i < productos.size(); i++) {
 
-//            String[] producto = productosDTO.get(i);
             JPanel productoPanel = createProductoPanel(
                     productos.get(i).getNombre(),
                     productos.get(i).getPrecio(),
                     productos.get(i).getDireccionImagen());
 
-//            String identificador = "producto_" + i;
             String identificador = productos.get(i).getCodigo();
             productoPanel.putClientProperty(identificador, productoPanel);
-//            String identificadorString = String.valueOf(identificador);
-//            productoPanel.putClientProperty(i, idProducto);
-            // Añade un ActionListener al panel de producto
             productoPanel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -333,7 +230,6 @@ public final class PanelMenu extends javax.swing.JPanel {
         //TODO hacer el scrollPane un ScrollPaneWin11
         // Configurar el JScrollPane para desplazamiento vertical
         JScrollPane scrollPane = new JScrollPane(mainPanel);
-//        scrollPane.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 
         scrollPane.setPreferredSize(new Dimension(380, 600)); // Establece un tamaño predeterminado
         scrollPane.setMaximumSize(new Dimension(380, 600)); // Establece un tamaño máximo

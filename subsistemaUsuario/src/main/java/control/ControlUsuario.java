@@ -40,10 +40,10 @@ public class ControlUsuario implements IControlUsuario {
      */
     @Override
     public UsuarioDTO consultarUsuarioPorId(String idCia) throws PersistenciaException, BOException{
-        conexion.Conexion.getDatabase();
+//        conexion.Conexion.getDatabase();
         IUsuarioBO usuarioBO = new UsuarioBO();
         UsuarioDTO usuarioDTO = usuarioBO.consultarUsuario(idCia);
-        conexion.Conexion.close();
+//        conexion.Conexion.close();
         return usuarioDTO;
     }
 

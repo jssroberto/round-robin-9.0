@@ -23,10 +23,7 @@ import org.bson.types.ObjectId;
  */
 public class UsuarioBO implements IUsuarioBO {
 
-    IUsuarioDAO usuarios;
-
     public UsuarioBO() {
-        usuarios = new UsuarioDAO();
     }
 
 //    public Usuario convertirDTOenDAO(UsuarioDTO usuarioDTO) {
@@ -139,7 +136,7 @@ public class UsuarioBO implements IUsuarioBO {
 
         return productoDTO;
     }
-    
+
     public UsuarioDTO convertirDAOenDTO(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
 
@@ -161,7 +158,7 @@ public class UsuarioBO implements IUsuarioBO {
         return usuarioDTO;
 
     }
-    
+
     public Carrito convertirDTOenDAO(CarritoDTO carritoDTO) {
         Carrito carrito = new Carrito();
 
@@ -192,7 +189,7 @@ public class UsuarioBO implements IUsuarioBO {
 
         return detalleProducto;
     }
-    
+
     public CarritoDTO convertirDAOenDTO(Carrito carrito) {
         CarritoDTO carritoDTO = new CarritoDTO();
 
@@ -207,7 +204,6 @@ public class UsuarioBO implements IUsuarioBO {
         return carritoDTO;
     }
 
-
     @Override
     public void persistir(UsuarioDTO usuario) {
 //        if (usuario == null) {
@@ -218,11 +214,12 @@ public class UsuarioBO implements IUsuarioBO {
 
     @Override
     public Usuario consultarUsuario(Usuario usuario) {
+        IUsuarioDAO usuarioDAO = new UsuarioDAO();
 
         if (usuario == null) {
             return null;
         } else {
-            return usuarios.consultarUsuario(usuario);
+            return usuarioDAO.consultarUsuario(usuario);
         }
     }
 
@@ -238,9 +235,10 @@ public class UsuarioBO implements IUsuarioBO {
 //    public void referenciarPedido(Usuario usuario, Pedido pedido) {
 //
 //    }
-    
     @Override
     public void actualizarPuntosUsuario(Usuario usuario, Integer puntos) {
-        usuarios.actualizarPuntosUsuario(usuario, puntos);
+        IUsuarioDAO usuarioDAO = new UsuarioDAO();
+
+        usuarioDAO.actualizarPuntosUsuario(usuario, puntos);
     }
 }

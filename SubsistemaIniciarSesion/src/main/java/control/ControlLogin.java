@@ -22,9 +22,9 @@ public class ControlLogin implements IControlLogin{
     
     @Override
     public boolean validacionDatos(String idEstudiante, String contra) throws Exception{
-        conexion.ConexionCia.getDatabase();
+//        conexion.ConexionCia.getDatabase();
         if (inicio.validacionDatos(idEstudiante, contra)) {
-            conexion.ConexionCia.close();
+//            conexion.ConexionCia.close();
             return true;
         }else{
             conexion.ConexionCia.close();

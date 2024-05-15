@@ -30,10 +30,10 @@ public class ConsultarProductos {
         
         productos = this.producto.obtenerTodosLosProductos();
         if(productos.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Lista Vacia");
+//            JOptionPane.showMessageDialog(null, "Lista Vacia");
             return null;
         }else{
-            JOptionPane.showMessageDialog(null, "Lista de Productos");
+//            JOptionPane.showMessageDialog(null, "Lista de Productos");
             return productos;
         }
     }
@@ -43,10 +43,10 @@ public class ConsultarProductos {
          
         pro = producto.buscarProductoCafeteriaPorID(id);
         if (pro == null) {
-            JOptionPane.showMessageDialog(null, "Producto null");
+//            JOptionPane.showMessageDialog(null, "Producto null");
             return null;
         } else {
-            JOptionPane.showMessageDialog(null, "Producto encontrado");
+//            JOptionPane.showMessageDialog(null, "Producto encontrado");
             return pro;
         }
     }

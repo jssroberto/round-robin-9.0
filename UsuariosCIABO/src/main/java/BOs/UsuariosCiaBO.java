@@ -17,14 +17,12 @@ import java.util.logging.Logger;
  */
 public class UsuariosCiaBO implements IUsuarioCiaBO{
     
-    IUsuarioCiaDAO usuario;
     public UsuariosCiaBO(){
-        usuario  = new UsuarioCiaDAO();
     }
     
     @Override
     public boolean validacionDatos(String idEstudiante, String contra)  {
-        
+        UsuarioCiaDAO usuario = new UsuarioCiaDAO();
         try {
             if (usuario.BuscarPersona(idEstudiante, contra)) {
                 return true;

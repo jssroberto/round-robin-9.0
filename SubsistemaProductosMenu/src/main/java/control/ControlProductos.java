@@ -25,25 +25,25 @@ public class ControlProductos implements IControlProductos{
     
     @Override
     public List<ProductoCafeteria> obtenerTodosLosProductos() throws CafeteriaException{
-        conexion.ConexionCafeteria.getDatabase();
+//        conexion.ConexionCafeteria.getDatabase();
         List<ProductoCafeteria> a= consultar.obtenerTodosLosProductos();
-        conexion.ConexionCafeteria.close();
+//        conexion.ConexionCafeteria.close();
         return a;
     }
     
     @Override
     public ProductoCafeteria buscarProductoCafeteriaPorID(ObjectId id) throws CafeteriaException{
-        conexion.ConexionCafeteria.getDatabase();
+//        conexion.ConexionCafeteria.getDatabase();
         ProductoCafeteria a = consultar.buscarProductoCafeteriaPorID(id);
-        conexion.ConexionCafeteria.close();
+//        conexion.ConexionCafeteria.close();
         return a;
     }
     
     @Override
     public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws CafeteriaException{
-        conexion.ConexionCafeteria.getDatabase();
+//        conexion.ConexionCafeteria.getDatabase();
         ProductoCafeteria a = consultar.consultarProductosPorCodigo(codigo);
-        conexion.ConexionCafeteria.close();
+//        conexion.ConexionCafeteria.close();
         return a;
     }
 }

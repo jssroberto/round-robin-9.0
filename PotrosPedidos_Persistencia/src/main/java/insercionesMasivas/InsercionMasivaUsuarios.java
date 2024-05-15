@@ -20,7 +20,6 @@ import org.bson.types.ObjectId;
  */
 public class InsercionMasivaUsuarios {
 
-    List<Usuario> Usuario = new LinkedList<>();
     private final MongoCollection<Usuario> coleccionUsuarios;
 
     public InsercionMasivaUsuarios() {
@@ -35,12 +34,16 @@ public class InsercionMasivaUsuarios {
         List<ObjectId> pedidos4 = new LinkedList<>();
         List<ObjectId> pedidos5 = new LinkedList<>();
         List<DetalleProducto> deta = new LinkedList<>();
-        usuario.add(new Usuario("00000011211", "Juan", "Perez", "Garcia", new Carrito(0.0f,deta), 0, pedidos1));
-        usuario.add(new Usuario("00000244454", "Maria", "Lopez", "Martinez", new Carrito(0.0f,deta), 0, pedidos2));
-        usuario.add(new Usuario("00000046574", "Pedro", "Gonzalez", "Santos", new Carrito(0.0f,deta), 0, pedidos3));
-        usuario.add(new Usuario("00000240157", "Ana", "Rodriguez", "Fernandez", new Carrito(0.0f,deta), 0, pedidos4));
-        usuario.add(new Usuario("00000244978", "Luis", "Martinez", "Diaz", new Carrito(0.0f,deta), 0, pedidos5));
-        coleccionUsuarios.insertMany(usuario);
+        usuario.add(new Usuario("00000011211", "Juan", "Perez", "Garcia", new Carrito(0.0f, deta), 0, pedidos1));
+        usuario.add(new Usuario("00000244454", "Maria", "Lopez", "Martinez", new Carrito(0.0f, deta), 0, pedidos2));
+        usuario.add(new Usuario("00000046574", "Pedro", "Gonzalez", "Santos", new Carrito(0.0f, deta), 0, pedidos3));
+        usuario.add(new Usuario("00000240157", "Ana", "Rodriguez", "Fernandez", new Carrito(0.0f, deta), 0, pedidos4));
+        usuario.add(new Usuario("00000244978", "Luis", "Martinez", "Diaz", new Carrito(0.0f, deta), 0, pedidos5));
+        try {
+            coleccionUsuarios.insertMany(usuario);
+        } finally {
+            Conexion.close();
+        }
     }
 
 }

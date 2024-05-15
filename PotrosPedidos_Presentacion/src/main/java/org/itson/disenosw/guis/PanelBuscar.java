@@ -1,10 +1,12 @@
 package org.itson.disenosw.guis;
 
 import Metodos.BusquedaDinamica;
+import control.ControlProductos;
 import dominio.ProductoCafeteria;
 import dtos.ProductoCafeteriaDTO;
 import excepciones.CafeteriaException;
 import interfaces.IBusqueda;
+import interfaces.IControlProductos;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -107,15 +109,15 @@ public final class PanelBuscar extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     List<ProductoCafeteriaDTO> productosFiltrados = new ArrayList<>(productos);
-                    
+
                     IBusqueda busqueda = new BusquedaDinamica();
                     List<ProductoCafeteriaDTO> productosOrdenados;
                     productosOrdenados = busqueda.ordenarProductosFiltradosAZ(productosFiltrados);
-                    
+
                     panelTop.removeAll();
                     panelTop.revalidate();
                     panelTop.repaint();
-                    
+
                     productos.clear();
                     productos.addAll(productosOrdenados);
                     try {
@@ -134,15 +136,15 @@ public final class PanelBuscar extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     List<ProductoCafeteriaDTO> productosFiltrados = new ArrayList<>(productos);
-                    
+
                     IBusqueda busqueda = new BusquedaDinamica();
                     List<ProductoCafeteriaDTO> productosOrdenados;
                     productosOrdenados = busqueda.ordenarProductosFiltradosZA(productosFiltrados);
-                    
+
                     panelTop.removeAll();
                     panelTop.revalidate();
                     panelTop.repaint();
-                    
+
                     productos.clear();
                     productos.addAll(productosOrdenados);
                     try {
@@ -161,15 +163,15 @@ public final class PanelBuscar extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 try {
                     List<ProductoCafeteriaDTO> productosFiltrados = new ArrayList<>(productos);
-                    
+
                     IBusqueda busqueda = new BusquedaDinamica();
                     List<ProductoCafeteriaDTO> productosOrdenados;
                     productosOrdenados = busqueda.ordenarProductosFiltradosPorPrecio(productosFiltrados);
-                    
+
                     panelTop.removeAll();
                     panelTop.revalidate();
                     panelTop.repaint();
-                    
+
                     productos.clear();
                     productos.addAll(productosOrdenados);
                     try {
@@ -201,7 +203,8 @@ public final class PanelBuscar extends javax.swing.JPanel {
     private void buscarProductosSimilares(String textoBusqueda) throws CafeteriaException {
         try {
             // Obtener todos los productos al inicio
-            List<ProductoCafeteria> productosCafeteria = framePrincipal.getProductos();
+            IControlProductos consultarProductoBO = new ControlProductos();
+            List<ProductoCafeteria> productosCafeteria = consultarProductoBO.obtenerTodosLosProductos();
 
             // Crear una lista para almacenar los productos filtrados
             List<ProductoCafeteriaDTO> productosFiltrados = new ArrayList<>();
@@ -240,7 +243,8 @@ public final class PanelBuscar extends javax.swing.JPanel {
     public void inicializarProductos() throws CafeteriaException {
         try {
             // Obtener todos los productos al inicio
-            List<ProductoCafeteria> productosCafeteria = framePrincipal.getProductos();
+            IControlProductos consultarProductoBO = new ControlProductos();
+            List<ProductoCafeteria> productosCafeteria = consultarProductoBO.obtenerTodosLosProductos();
             for (ProductoCafeteria producto : productosCafeteria) {
                 productos.add(convertirDAOenDTO(producto));
             }

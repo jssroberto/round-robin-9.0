@@ -194,6 +194,7 @@ public final class PanelBuscar extends javax.swing.JPanel {
         productoCafeteriaDTO.setCantidadDisponible(productoCafeteria.getCantidadDisponible());
         productoCafeteriaDTO.setDireccionImagen(productoCafeteria.getDireccionImagen());
         productoCafeteriaDTO.setId(productoCafeteria.getId());
+        productoCafeteriaDTO.setIdProductoCafeteria(productoCafeteria.getCodigo());
         return productoCafeteriaDTO;
     }
 
@@ -240,7 +241,6 @@ public final class PanelBuscar extends javax.swing.JPanel {
         try {
             // Obtener todos los productos al inicio
             List<ProductoCafeteria> productosCafeteria = framePrincipal.getProductos();
-            productos.clear();
             for (ProductoCafeteria producto : productosCafeteria) {
                 productos.add(convertirDAOenDTO(producto));
             }
@@ -266,7 +266,7 @@ public final class PanelBuscar extends javax.swing.JPanel {
         for (ProductoCafeteriaDTO producto : productos) {
             JPanel productoPanel = createProductoPanel(producto.getNombre(), producto.getPrecio(), producto.getDireccionImagen());
 
-            Long identificador = producto.getIdProductoCafeteria();
+            String identificador = producto.getIdProductoCafeteria();
             productoPanel.putClientProperty(identificador, productoPanel);
             productoPanel.addMouseListener(new MouseAdapter() {
                 @Override
@@ -275,8 +275,8 @@ public final class PanelBuscar extends javax.swing.JPanel {
                         // Acción a realizar al hacer clic en el panel de producto
                         // Aquí puedes acceder al identificador del panel haciendo uso de la variable 'identificador'
 
-                        framePrincipal.setIdProducto2(identificador);
-                        System.out.println(framePrincipal.getIdProducto());
+                        framePrincipal.setCodigoProducto(identificador);
+                        System.out.println(framePrincipal.getCodigoProducto());
                         framePrincipal.cambiarVistaProducto();
                     } catch (Exception ex) {
                         framePrincipal.mostrarAviso(ex.getMessage(), "Aviso");

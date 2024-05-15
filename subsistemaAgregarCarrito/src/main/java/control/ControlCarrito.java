@@ -28,15 +28,12 @@ public class ControlCarrito implements IControlCarrito{
     
     @Override
     public boolean agregarCarrito(Usuario usuarioId, Producto product, int cantidad) throws PersistenciaException{
-        conexion.Conexion.getDatabase();
         carro.agregarCarrito(usuarioId, product, cantidad);
-        conexion.Conexion.close();
         return true;
     }
     
     @Override
     public void vaciarCarrito(Usuario user){
-        conexion.Conexion.getDatabase();
         carro.vaciarCarrito(user);
         conexion.Conexion.close();
     }

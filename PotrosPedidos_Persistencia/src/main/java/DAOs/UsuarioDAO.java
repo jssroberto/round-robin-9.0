@@ -69,13 +69,16 @@ public class UsuarioDAO implements IUsuarioDAO {
 
     @Override
     public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto nuevoDetalleProducto) {
-
+        
         coleccionCursos.updateOne(Filters.eq("_id", usuarioId), Updates.pull("carrito.productos", nuevoDetalleProducto));
+        Conexion.close();
     }
 
     @Override
     public void vaciarCarrito(Usuario usuario) {
+        Conexion.getDatabase();
         for (int i = 0; i < usuario.getCarrito().getProductos().size(); i++) {
+            Conexion.getDatabase();
             this.eliminarProductoCarrito(usuario.getId(), usuario.getCarrito().getProductos().get(i));
         }
 

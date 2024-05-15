@@ -28,7 +28,6 @@ public class ControlUsuario implements IControlUsuario {
     public Usuario consultarUsuario(Usuario usuario) {
         conexion.Conexion.getDatabase();
         Usuario u = user.consultarUsuario(usuario);
-        conexion.Conexion.close();
         return u;
     }
 

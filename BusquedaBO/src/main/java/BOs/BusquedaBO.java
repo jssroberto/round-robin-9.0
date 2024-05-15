@@ -34,6 +34,7 @@ public class BusquedaBO implements IBusquedaBO {
         productoCafeteriaDTO.setCantidadDisponible(productoCafeteria.getCantidadDisponible());
         productoCafeteriaDTO.setDireccionImagen(productoCafeteria.getDireccionImagen());
         productoCafeteriaDTO.setId(productoCafeteria.getId());
+        productoCafeteriaDTO.setIdProductoCafeteria(productoCafeteria.getCodigo());
         return productoCafeteriaDTO;
     }
 
@@ -135,6 +136,7 @@ public class BusquedaBO implements IBusquedaBO {
         productoCafeteria.setCantidadDisponible(productoCafeteriaDTO.getCantidadDisponible());
         productoCafeteria.setDireccionImagen(productoCafeteriaDTO.getDireccionImagen());
         productoCafeteria.setId(productoCafeteriaDTO.getId());
+        productoCafeteria.setCodigo(productoCafeteriaDTO.getIdProductoCafeteria());
 
         return productoCafeteria;
     }

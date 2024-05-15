@@ -32,11 +32,13 @@ public class ControlPedido implements IControlPedido {
 
     @Override
     public void persistir(Pedido pedido) {
+        conexion.Conexion.getDatabase();
         float total = 0;
         for (DetalleProducto pe : pedido.getDetalleProductos()) {
             total += pe.getSubtotal();
         }
         pedido.setTotal(total);
+        conexion.Conexion.close();
         pedidos.persistir(pedido);
     }
 
@@ -57,12 +59,9 @@ public class ControlPedido implements IControlPedido {
 
     @Override
     public boolean pedidoAceptado() {
-        conexion.Conexion.getDatabase();
         if (this.getRandomBinaryValue() == 0) {
-            conexion.Conexion.close();
             return true;
         } else {
-            conexion.Conexion.close();
             return false;
         }
     }

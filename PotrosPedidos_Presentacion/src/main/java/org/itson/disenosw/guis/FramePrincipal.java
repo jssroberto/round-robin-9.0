@@ -31,15 +31,15 @@ public class FramePrincipal extends javax.swing.JFrame {
     private String idUsuario;
     private String idPedido;
     private int numPedido=0;
-    private Long idProducto2;
+    private String idProducto2;
     
 
-    public Long getIdProducto2() {
+    public String getIdProducto2() {
         
         return idProducto2;
     }
 
-    public void setIdProducto2(Long idProducto2) {
+    public void setIdProducto2(String idProducto2) {
         this.idProducto2 = idProducto2;
     }
 

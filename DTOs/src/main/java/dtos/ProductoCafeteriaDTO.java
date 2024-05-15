@@ -18,16 +18,16 @@ public class ProductoCafeteriaDTO {
     private String descripcion;
     private Integer cantidadDisponible;
     private String direccionImagen;
-    private Long idProductoCafeteria;
+    private String idProductoCafeteria;
 
     public ProductoCafeteriaDTO() {
     }
 
-    public ProductoCafeteriaDTO(Long idProductoCafeteria) {
+    public ProductoCafeteriaDTO(String idProductoCafeteria) {
         this.idProductoCafeteria = idProductoCafeteria;
     }
 
-    public ProductoCafeteriaDTO(Float precio, String nombre, String descripcion, Integer cantidadDisponible, String direccionImagen, Long idProductoCafeteria) {
+    public ProductoCafeteriaDTO(Float precio, String nombre, String descripcion, Integer cantidadDisponible, String direccionImagen, String idProductoCafeteria) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -36,7 +36,7 @@ public class ProductoCafeteriaDTO {
         this.idProductoCafeteria = idProductoCafeteria;
     }
 
-    public ProductoCafeteriaDTO(Float precio, String nombre, String descripcion, String direccionImagen, Long idProductoCafeteria) {
+    public ProductoCafeteriaDTO(Float precio, String nombre, String descripcion, String direccionImagen, String idProductoCafeteria) {
         this.precio = precio;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -94,11 +94,11 @@ public class ProductoCafeteriaDTO {
         this.direccionImagen = direccionImagen;
     }
 
-    public Long getIdProductoCafeteria() {
+    public String getIdProductoCafeteria() {
         return idProductoCafeteria;
     }
 
-    public void setIdProductoCafeteria(Long idProductoCafeteria) {
+    public void setIdProductoCafeteria(String idProductoCafeteria) {
         this.idProductoCafeteria = idProductoCafeteria;
     }
 

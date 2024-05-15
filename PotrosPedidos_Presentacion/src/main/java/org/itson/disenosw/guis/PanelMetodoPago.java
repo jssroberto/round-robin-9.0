@@ -160,16 +160,16 @@ public class PanelMetodoPago extends javax.swing.JPanel {
         Usuario user = new Usuario();
         user.setIdCia(ventana.getNumID());
         Usuario usuarioNuevo = usuario.consultarUsuario(user);
-        ventana.mostrarAviso("Compra procesada con éxito", "Aviso");
+        
         Pedido pedidoNuevo = new Pedido("", Integer.toString(ventana.getNumPedido()), "", LocalDate.now(), usuarioNuevo.getCarrito().getProductos().size(), 0.0f, MetodoPago.EFECTIVO, usuarioNuevo.getCarrito().getProductos());
         pedidoNuevo.setClaveRecoleccion(pedido.generateRandomString());
         pedidoNuevo.setEtiquetaPedido(pedido.generateRandomString());
-        
         pedido.persistir(pedidoNuevo);
         pedido.referenciarPedido(usuarioNuevo, pedido.consultarPedido(pedidoNuevo));
         carrito.vaciarCarrito(usuarioNuevo);
         ventana.setClaveRecoleccion(pedidoNuevo.getClaveRecoleccion());
         ventana.cambiarPanelPagoExito();
+        ventana.mostrarAviso("Compra procesada con éxito", "Aviso");
     }//GEN-LAST:event_btnBotonEfectivoActionPerformed
 
     private void btnPuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuntosActionPerformed

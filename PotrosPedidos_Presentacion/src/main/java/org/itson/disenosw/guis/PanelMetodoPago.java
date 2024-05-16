@@ -26,15 +26,15 @@ import metodos.CalcularCostoPuntos;
  */
 public class PanelMetodoPago extends javax.swing.JPanel {
 
-    private FramePrincipal ventana;
+    private FramePrincipal framePrincipal;
 
     /**
      * Constructor de la clase VistaInicioSesion.
      *
-     * @param ventana La ventana principal de la aplicación.
+     * @param framePrincipal La framePrincipal principal de la aplicación.
      */
-    public PanelMetodoPago(FramePrincipal ventana) {
-        this.ventana = ventana;
+    public PanelMetodoPago(FramePrincipal framePrincipal) {
+        this.framePrincipal = framePrincipal;
         initComponents();
     }
 
@@ -54,6 +54,7 @@ public class PanelMetodoPago extends javax.swing.JPanel {
         btnBotonEfectivo = new javax.swing.JButton();
         btnPuntos = new javax.swing.JButton();
         btnEfectivo = new javax.swing.JLabel();
+        btnMenu = new javax.swing.JButton();
 
         btnTarjeta3.setBorder(null);
         btnTarjeta3.setContentAreaFilled(false);
@@ -131,14 +132,24 @@ public class PanelMetodoPago extends javax.swing.JPanel {
         btnEfectivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelMetodoPago.png"))); // NOI18N
         btnEfectivo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         add(btnEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjetaActionPerformed
-        ventana.cambiarVistaDatosTarjeta();
+        framePrincipal.cambiarVistaDatosTarjeta();
     }//GEN-LAST:event_btnTarjetaActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        ventana.cambiarVistaCarrito();
+        framePrincipal.cambiarVistaCarrito();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnTarjeta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTarjeta1ActionPerformed
@@ -158,18 +169,18 @@ public class PanelMetodoPago extends javax.swing.JPanel {
         IControlCarrito carrito = new ControlCarrito();
         IControlUsuario usuario = new ControlUsuario();
         Usuario user = new Usuario();
-        user.setIdCia(ventana.getNumID());
+        user.setIdCia(framePrincipal.getNumID());
         Usuario usuarioNuevo = usuario.consultarUsuario(user);
         
-        Pedido pedidoNuevo = new Pedido("", Integer.toString(ventana.getNumPedido()), "", LocalDate.now(), usuarioNuevo.getCarrito().getProductos().size(), 0.0f, MetodoPago.EFECTIVO, usuarioNuevo.getCarrito().getProductos());
+        Pedido pedidoNuevo = new Pedido("", Integer.toString(framePrincipal.getNumPedido()), "", LocalDate.now(), usuarioNuevo.getCarrito().getProductos().size(), 0.0f, MetodoPago.EFECTIVO, usuarioNuevo.getCarrito().getProductos());
         pedidoNuevo.setClaveRecoleccion(pedido.generateRandomString());
         pedidoNuevo.setEtiquetaPedido(pedido.generateRandomString());
         pedido.persistir(pedidoNuevo);
         pedido.referenciarPedido(usuarioNuevo, pedido.consultarPedido(pedidoNuevo));
         carrito.vaciarCarrito(usuarioNuevo);
-        ventana.setClaveRecoleccion(pedidoNuevo.getClaveRecoleccion());
-        ventana.cambiarPanelPagoExito();
-        ventana.mostrarAviso("Compra procesada con éxito", "Aviso");
+        framePrincipal.setClaveRecoleccion(pedidoNuevo.getClaveRecoleccion());
+        framePrincipal.cambiarPanelPagoExito();
+        framePrincipal.mostrarAviso("Compra procesada con éxito", "Aviso");
     }//GEN-LAST:event_btnBotonEfectivoActionPerformed
 
     private void btnPuntosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuntosActionPerformed
@@ -177,25 +188,30 @@ public class PanelMetodoPago extends javax.swing.JPanel {
             IUsuarioBO usuarioBO= new UsuarioBO();
             IControlUsuario user = new ControlUsuario();
             Usuario u = new Usuario();
-            u.setIdCia(ventana.getNumID());
+            u.setIdCia(framePrincipal.getNumID());
             Usuario usuarioBueno= usuarioBO.consultarUsuario(u);
             List<DetalleProducto> detallesCarritos = usuarioBueno.getCarrito().getProductos();
             ICalcularCostoPuntos calcularPuntos= new CalcularCostoPuntos();
             
             if(usuarioBueno.getSaldoPuntos()>=calcularPuntos.calcularCostoPuntos(detallesCarritos)){
-                ventana.cambiarPanelPagoPuntosExito();
+                framePrincipal.cambiarPanelPagoPuntosExito();
             }else{
-               ventana.cambiarPanelPagoPuntosError(); 
+               framePrincipal.cambiarPanelPagoPuntosError(); 
             }        
         } catch (Exception ex) {
             Logger.getLogger(PanelMetodoPago.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnPuntosActionPerformed
 
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBotonEfectivo;
     private javax.swing.JLabel btnEfectivo;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnPuntos;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTarjeta;

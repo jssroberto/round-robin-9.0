@@ -502,6 +502,7 @@ public final class PanelBuscar extends javax.swing.JPanel {
     private void initComponents() {
 
         ppMenu = new javax.swing.JPopupMenu();
+        btnMenu = new javax.swing.JButton();
         btnCarrito = new javax.swing.JButton();
         btnOrdenar = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
@@ -516,8 +517,20 @@ public final class PanelBuscar extends javax.swing.JPanel {
             }
         });
 
+        setMaximumSize(new java.awt.Dimension(400, 800));
+        setMinimumSize(new java.awt.Dimension(400, 800));
         setPreferredSize(new java.awt.Dimension(400, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
 
         btnCarrito.setBorder(null);
         btnCarrito.setContentAreaFilled(false);
@@ -609,10 +622,15 @@ public final class PanelBuscar extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ppMenuMouseClicked
 
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Buscador;
     private javax.swing.JButton btnCarrito;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnOrdenar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnUsuario;

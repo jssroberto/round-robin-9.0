@@ -64,6 +64,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnMenu = new javax.swing.JButton();
         btnPagar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblTotal = new javax.swing.JLabel();
@@ -75,6 +76,16 @@ public final class PanelCarrito extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(400, 800));
         setPreferredSize(new java.awt.Dimension(400, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
 
         btnPagar.setBorder(null);
         btnPagar.setContentAreaFilled(false);
@@ -99,6 +110,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
         lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTotal.setText("Total:");
         add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 642, 150, 36));
+        lblTotal.getAccessibleContext().setAccessibleName("Total: $0");
 
         lblCarritoVacío.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCarritoVacío.setEnabled(false);
@@ -134,14 +146,10 @@ public final class PanelCarrito extends javax.swing.JPanel {
         framePrincipal.cambiarVistaMenu();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-//    public void ayuda() throws PersistenciaException {
-//        try {
-//            usuario = carritoDAO.buscarCarritoPorUsuarioId(Long.valueOf(framePrincipal.getNumID()));
-//        } catch (PersistenciaException ex) {
-//            Logger.getLogger(PanelCarrito.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        DetalleCarritoDAO d = new DetalleCarritoDAO();
-//    }
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
+
     public void crearMenu() {
         Font sizedFontBook = cargarFuente("/fonts/futura/FuturaPTBook.otf", 28F);
         lblTotal.setFont(sizedFontBook);
@@ -203,8 +211,6 @@ public final class PanelCarrito extends javax.swing.JPanel {
 
         }
 
-        //TODO hacer el scrollPane un ScrollPaneWin11
-        // Configurar el JScrollPane para desplazamiento vertical
         JScrollPane scrollPane = new JScrollPane(mainPanel);
 
         scrollPane.setPreferredSize(new Dimension(380, 477)); // Establece un tamaño predeterminado
@@ -228,7 +234,11 @@ public final class PanelCarrito extends javax.swing.JPanel {
         Usuario ua = new Usuario();
         ua.setIdCia(framePrincipal.getNumID());
         framePrincipal.setTotalCarrito(con.actualizarTotalCarrito(user.consultarUsuario(ua)));
-        lblTotal.setText("Total: " + framePrincipal.getTotalCarrito());
+        String totalFormateado = String.valueOf(framePrincipal.getTotalCarrito());
+        if (totalFormateado.endsWith(".0")) {
+            totalFormateado = totalFormateado.substring(0, totalFormateado.length() - 2);
+        }
+        lblTotal.setText("Total: $" + totalFormateado);
 
     }
 
@@ -377,6 +387,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel fondo;

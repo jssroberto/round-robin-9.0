@@ -29,15 +29,15 @@ import javax.swing.text.DocumentFilter;
 public class PanelDatosTarjeta extends javax.swing.JPanel {
 
     private static final Logger logger = Logger.getLogger(PanelMenu.class.getName());
-    private FramePrincipal ventana;
+    private FramePrincipal framePrincipal;
 
     /**
      * Constructor de la clase VistaInicioSesion.
      *
-     * @param ventana La ventana principal de la aplicación.
+     * @param framePrincipal La framePrincipal principal de la aplicación.
      */
-    public PanelDatosTarjeta(FramePrincipal ventana) {
-        this.ventana = ventana;
+    public PanelDatosTarjeta(FramePrincipal framePrincipal) {
+        this.framePrincipal = framePrincipal;
         initComponents();
         ((AbstractDocument) txtNumero.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override
@@ -118,6 +118,7 @@ public class PanelDatosTarjeta extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnMenu = new javax.swing.JButton();
         txtcvv = new javax.swing.JTextField();
         txtfecha = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
@@ -130,6 +131,16 @@ public class PanelDatosTarjeta extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(400, 800));
         setPreferredSize(new java.awt.Dimension(400, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
 
         txtcvv.setBorder(null);
         add(txtcvv, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 80, 30));
@@ -178,43 +189,48 @@ public class PanelDatosTarjeta extends javax.swing.JPanel {
             tar.setNumeroTarjeta(txtNumero.getText());
             tar.setCvv(Integer.parseInt(txtcvv.getText()));
             tar.setFechaVencimiento(txtfecha.getText());
-            user.setIdCia(ventana.getNumID());
+            user.setIdCia(framePrincipal.getNumID());
             Usuario usuarioNuevo = usuario.consultarUsuario(user);
             try {
                 if (tarjeta.validarDatos(tar)) {
-                    ventana.mostrarAviso("Tarjeta válida", "Aviso");
-                    if (tarjeta.validacionCompra(tar, ventana.getTotalCarrito())) {
-                        ventana.mostrarAviso("Compra procesada con éxito", "Aviso");
-                        Pedido pedidoNuevo = new Pedido("", Integer.toString(ventana.getNumPedido()), "", LocalDate.now(), usuarioNuevo.getCarrito().getProductos().size(), 0.0f, MetodoPago.TARJETA, usuarioNuevo.getCarrito().getProductos());
+                    framePrincipal.mostrarAviso("Tarjeta válida", "Aviso");
+                    if (tarjeta.validacionCompra(tar, framePrincipal.getTotalCarrito())) {
+                        framePrincipal.mostrarAviso("Compra procesada con éxito", "Aviso");
+                        Pedido pedidoNuevo = new Pedido("", Integer.toString(framePrincipal.getNumPedido()), "", LocalDate.now(), usuarioNuevo.getCarrito().getProductos().size(), 0.0f, MetodoPago.TARJETA, usuarioNuevo.getCarrito().getProductos());
                         pedidoNuevo.setClaveRecoleccion(pedido.generateRandomString());
                         pedidoNuevo.setEtiquetaPedido(pedido.generateRandomString());
                         pedido.persistir(pedidoNuevo);
                         pedido.referenciarPedido(usuarioNuevo, pedido.consultarPedido(pedidoNuevo));
                         carrito.vaciarCarrito(usuarioNuevo);
-                        ventana.setClaveRecoleccion(pedidoNuevo.getClaveRecoleccion());
-                        ventana.cambiarPanelPagoExito();
+                        framePrincipal.setClaveRecoleccion(pedidoNuevo.getClaveRecoleccion());
+                        framePrincipal.cambiarPanelPagoExito();
                     } else {
-                        ventana.mostrarAviso("Saldo insuficiente", "Aviso");
-                        ventana.cambiarVistaMetodoPago();
+                        framePrincipal.mostrarAviso("Saldo insuficiente", "Aviso");
+                        framePrincipal.cambiarVistaMetodoPago();
                     }
                 } else {
-                    ventana.mostrarAviso("Datos no válidos", "Aviso");
+                    framePrincipal.mostrarAviso("Datos no válidos", "Aviso");
                 }
             } catch (IllegalArgumentException | BancoException ex) {
-                ventana.mostrarAviso("Vuelva a intentarlo", "Aviso");
+                framePrincipal.mostrarAviso("Vuelva a intentarlo", "Aviso");
             }
 
         } else {
-            ventana.mostrarAviso("Rellena todos los campos", "AVISO");
+            framePrincipal.mostrarAviso("Rellena todos los campos", "AVISO");
         }
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        ventana.cambiarVistaMetodoPago();
+        framePrincipal.cambiarVistaMetodoPago();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel fondo;

@@ -77,7 +77,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Potro Pedidos");
+        setTitle("Cafetería Potros");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(400, 800));
         setResizable(false);

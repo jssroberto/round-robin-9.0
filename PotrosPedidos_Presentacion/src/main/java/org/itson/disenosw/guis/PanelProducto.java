@@ -58,6 +58,7 @@ public class PanelProducto extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnMenu = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnMenos = new javax.swing.JButton();
         btnMas = new javax.swing.JButton();
@@ -74,6 +75,16 @@ public class PanelProducto extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(400, 800));
         setPreferredSize(new java.awt.Dimension(400, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
 
         btnAgregar.setBorder(null);
         btnAgregar.setContentAreaFilled(false);
@@ -208,89 +219,10 @@ public class PanelProducto extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnMasActionPerformed
 
-//    private void setDatos() {
-//        try {
-//            consultarProducto();
-//        } catch (PersistenciaException ex) {
-//            logger.log(Level.SEVERE, "Producto no encontrado");
-//        }
-//        lblNombre.setText(productoDTO.getNombre().toUpperCase());
-//        String precioFormateado = String.valueOf(productoDTO.getPrecio());
-//        if (precioFormateado.endsWith(".0")) {
-//            precioFormateado = precioFormateado.substring(0, precioFormateado.length() - 2);
-//        }
-//        lblPrecio.setText("$" + precioFormateado);
-//        try {
-//            lblDescripcion.setText(productoDTO.getDescripcion());
-//        } catch (NullPointerException e) {
-//            logger.log(Level.INFO, "El producto no tiene descrpición");
-//        }
-//        String rutaFolder = "/productos/400x200/";
-//        StringBuilder rutaRelativa = new StringBuilder();
-//        rutaRelativa.append(rutaFolder);
-//        rutaRelativa.append(productoDTO.getDireccionImagen());
-//
-//        // Cargar la imagen del producto
-//        ImageIcon icon = new ImageIcon(PanelMenu.class.getResource(String.valueOf(rutaRelativa)));
-//
-//        lblImagen.setIcon(icon);
-//    }
-//    private void setDatos() {
-//        try {
-//            // Consultar la información del producto desde la base de datos
-//            
-//            Long idProducto = framePrincipal.getIdProducto();
-//            IControlProductos consultarProductoBO = new ControlProductos();
-//            productos = consultarProductoBO.obtenerTodosLosProductos();
-//            p pro = consultarProductoBO.buscarProductoCafeteriaPorID(idProducto);
-//            // Actualizar los componentes del panel con la información del producto
-//            lblNombre.setText(productoDTO.getNombre().toUpperCase());
-//            String precioFormateado = String.valueOf(productoDTO.getPrecio());
-//            if (precioFormateado.endsWith(".0")) {
-//                precioFormateado = precioFormateado.substring(0, precioFormateado.length() - 2);
-//            }
-//            lblPrecio.setText("$" + precioFormateado);
-//            lblDescripcion.setText(productoDTO.getDescripcion());
-//
-//            // Cargar la imagen del producto
-//            ImageIcon icon = new ImageIcon(PanelProducto.class.getResource(productoDTO.getDireccionImagen()));
-//            lblImagen.setIcon(icon);
-//
-//        } catch (PersitenciaException ex) {
-//            logger.log(Level.SEVERE, "Producto no encontrado", ex);
-//        }
-//    }
-//    private void setDatos() {
-//
-//        try {
-//            consultarProducto();
-//        } catch (PersitenciaException ex) {
-//            logger.log(Level.SEVERE, "Producto no encontrado");
-//        }
-//        lblNombre.setText(productoDTO.getNombre().toUpperCase());
-//        try {
-//            lblDescripcion.setText(productoDTO.getDescripcion());
-//        } catch (NullPointerException e) {
-//            logger.log(Level.INFO, "El producto no tiene descrpición");
-//        }
-//        lblPrecio.setText(String.valueOf(productoDTO.getPrecio()));
-//        String rutaFolder = "/productos/370x150/";
-//        StringBuilder rutaRelativa = new StringBuilder();
-//        rutaRelativa.append(rutaFolder);
-//        rutaRelativa.append(productoDTO.getDireccionImagen());
-//
-//        // Cargar la imagen del producto
-//        // Cargar la imagen del producto
-//        ImageIcon icon = new ImageIcon(PanelMenu.class.getResource(rutaRelativa.toString()));
-//
-//        lblImagen.setIcon(icon);
-//
-//    }
-//
-//    private void consultarProducto() throws PersitenciaException {
-//        Long idProducto = framePrincipal.getIdProducto();
-//        productoDTO = control.buscarProductoCafeteriaPorID(idProducto);
-//    }
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
+
     private void setDatos() {
         try {
             consultarProducto();
@@ -300,7 +232,12 @@ public class PanelProducto extends javax.swing.JPanel {
         }
         lblNombre.setText(productoDTO.getNombre().toUpperCase());
         lblDescripcion.setText(productoDTO.getDescripcion());
-        lblPrecio.setText(String.valueOf(productoDTO.getPrecio()));
+        
+        String precioFormateado = String.valueOf(productoDTO.getPrecio());
+        if (precioFormateado.endsWith(".0")) {
+            precioFormateado = precioFormateado.substring(0, precioFormateado.length() - 2);
+        }
+        lblPrecio.setText("$" + precioFormateado);
 
         // Cargar la imagen del producto
         String rutaFolder = "/productos/400x200/";
@@ -462,6 +399,7 @@ public class PanelProducto extends javax.swing.JPanel {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnMas;
     private javax.swing.JButton btnMenos;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel fondo;
     private javax.swing.JTextField jTextField1;

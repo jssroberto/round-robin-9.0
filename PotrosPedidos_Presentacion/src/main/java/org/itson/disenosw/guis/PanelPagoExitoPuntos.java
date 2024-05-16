@@ -10,22 +10,22 @@ import java.util.logging.Logger;
  */
 public class PanelPagoExitoPuntos extends javax.swing.JPanel {
 
-    private FramePrincipal ventana;
+    private FramePrincipal framePrincipal;
 
     /**
      * Constructor de la clase VistaInicioSesion.
      *
-     * @param ventana La ventana principal de la aplicación.
+     * @param framePrincipal La framePrincipal principal de la aplicación.
      */
-    public PanelPagoExitoPuntos(FramePrincipal ventana) {
-        this.ventana = ventana;
+    public PanelPagoExitoPuntos(FramePrincipal framePrincipal) {
+        this.framePrincipal = framePrincipal;
         initComponents();
 
     }
 
-    public PanelPagoExitoPuntos(FramePrincipal ventana, Integer puntosGenerados, String numPedido, String claveRecoger) {
+    public PanelPagoExitoPuntos(FramePrincipal framePrincipal, Integer puntosGenerados, String numPedido, String claveRecoger) {
         try {
-            this.ventana = ventana;
+            this.framePrincipal = framePrincipal;
             initComponents();
 
             lblPuntosGenerados.setText(puntosGenerados.toString() + " puntos");
@@ -44,6 +44,7 @@ public class PanelPagoExitoPuntos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnMenu = new javax.swing.JButton();
         lblPuntosGenerados = new javax.swing.JLabel();
         lblClaveRecoger = new javax.swing.JLabel();
         lblNumPedido = new javax.swing.JLabel();
@@ -54,6 +55,16 @@ public class PanelPagoExitoPuntos extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(400, 800));
         setPreferredSize(new java.awt.Dimension(400, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
         add(lblPuntosGenerados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 230, 30));
         add(lblClaveRecoger, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 230, 30));
         add(lblNumPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 230, 30));
@@ -73,11 +84,16 @@ public class PanelPagoExitoPuntos extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuActionPerformed
-        ventana.cambiarVistaMenu();
+        framePrincipal.cambiarVistaMenu();
     }//GEN-LAST:event_btnRegresarMenuActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresarMenu;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel lblClaveRecoger;

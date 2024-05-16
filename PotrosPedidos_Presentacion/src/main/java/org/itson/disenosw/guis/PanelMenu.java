@@ -67,6 +67,7 @@ public final class PanelMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnMenu = new javax.swing.JButton();
         btnCarrito = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
         btnHistorial = new javax.swing.JButton();
@@ -80,6 +81,16 @@ public final class PanelMenu extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(400, 800));
         setPreferredSize(new java.awt.Dimension(400, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
 
         btnCarrito.setBorder(null);
         btnCarrito.setContentAreaFilled(false);
@@ -169,6 +180,10 @@ public final class PanelMenu extends javax.swing.JPanel {
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         framePrincipal.cambiarPanelHistorial();
     }//GEN-LAST:event_btnHistorialActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     public void inicializarCarrito() {
 
@@ -395,6 +410,7 @@ public final class PanelMenu extends javax.swing.JPanel {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnOrdenar;
     private javax.swing.JButton btnUsuario;
     private javax.swing.JLabel lblCantidadCarrito;

@@ -28,6 +28,7 @@ public class PanelPagoExito extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnMenu = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblNumPeddo = new javax.swing.JLabel();
         lblCalave = new javax.swing.JLabel();
@@ -36,6 +37,16 @@ public class PanelPagoExito extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(400, 800));
         setMinimumSize(new java.awt.Dimension(400, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
 
         btnRegresar.setBorder(null);
         btnRegresar.setContentAreaFilled(false);
@@ -65,8 +76,13 @@ public class PanelPagoExito extends javax.swing.JPanel {
         framePrincipal.cambiarVistaMenu();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel lblCalave;
     private javax.swing.JLabel lblFondo;

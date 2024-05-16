@@ -24,22 +24,22 @@ import metodos.PagarPuntos;
  */
 public class PanelPagoPuntosExito extends javax.swing.JPanel {
 
-    private FramePrincipal ventana;
+    private FramePrincipal framePrincipal;
 
     /**
      * Constructor de la clase VistaInicioSesion.
      *
-     * @param ventana La ventana principal de la aplicación.
+     * @param framePrincipal La framePrincipal principal de la aplicación.
      */
-    public PanelPagoPuntosExito(FramePrincipal ventana) {
+    public PanelPagoPuntosExito(FramePrincipal framePrincipal) {
         try {
-            this.ventana = ventana;
+            this.framePrincipal = framePrincipal;
             initComponents();
 
             IUsuarioBO usuarioBO = new UsuarioBO();
             IControlUsuario user = new ControlUsuario();
             Usuario u = new Usuario();
-            u.setIdCia(ventana.getNumID());
+            u.setIdCia(framePrincipal.getNumID());
             Usuario usuarioBueno = usuarioBO.consultarUsuario(u);
             List<DetalleProducto> detallesCarritos = usuarioBueno.getCarrito().getProductos();
             ICalcularCostoPuntos calcularPuntos = new CalcularCostoPuntos();
@@ -61,6 +61,7 @@ public class PanelPagoPuntosExito extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnMenu = new javax.swing.JButton();
         lblPuntosDisponibles = new javax.swing.JLabel();
         lblPuntosRequeridos = new javax.swing.JLabel();
         lblPuntosRestantes = new javax.swing.JLabel();
@@ -72,6 +73,16 @@ public class PanelPagoPuntosExito extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(400, 800));
         setPreferredSize(new java.awt.Dimension(400, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
         add(lblPuntosDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 360, 40));
         add(lblPuntosRequeridos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 360, 40));
         add(lblPuntosRestantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 350, 40));
@@ -104,7 +115,7 @@ public class PanelPagoPuntosExito extends javax.swing.JPanel {
         IUsuarioBO usuarioBO = new UsuarioBO();
         IControlUsuario user = new ControlUsuario();
         Usuario u = new Usuario();
-        u.setIdCia(ventana.getNumID());
+        u.setIdCia(framePrincipal.getNumID());
         Usuario usuarioBueno = usuarioBO.consultarUsuario(u);
         List<DetalleProducto> detallesCarritos = usuarioBueno.getCarrito().getProductos();
         ICalcularCostoPuntos calcularPuntos = new CalcularCostoPuntos();
@@ -114,22 +125,27 @@ public class PanelPagoPuntosExito extends javax.swing.JPanel {
         try {
             ArrayList<String> info= pagarPuntos.PagarPuntos(usuarioBueno, calcularPuntos.calcularCostoPuntos(detallesCarritos), generarPuntos.generarPuntos(detallesCarritos));
             info.get(0);
-            ventana.mostrarConfirmacion("PEDIDO EXITOSO", "EXITO");
-            ventana.cambiarPanelPagoExitoPuntos(generarPuntos.generarPuntos(detallesCarritos), info.get(0), info.get(1));
+            framePrincipal.mostrarConfirmacion("PEDIDO EXITOSO", "EXITO");
+            framePrincipal.cambiarPanelPagoExitoPuntos(generarPuntos.generarPuntos(detallesCarritos), info.get(0), info.get(1));
         } catch (Exception ex) {
-            ventana.mostrarAviso("Algo ha ocurrido mal", "ERROR");
-            ventana.cambiarVistaMetodoPago();
+            framePrincipal.mostrarAviso("Algo ha ocurrido mal", "ERROR");
+            framePrincipal.cambiarVistaMetodoPago();
             Logger.getLogger(PanelPagoPuntosExito.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
 
     private void btnRegresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuActionPerformed
-        ventana.cambiarVistaMetodoPago();
+        framePrincipal.cambiarVistaMetodoPago();
     }//GEN-LAST:event_btnRegresarMenuActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmarPago;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresarMenu;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel lblPuntosDisponibles;

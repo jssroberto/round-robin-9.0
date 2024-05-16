@@ -19,22 +19,22 @@ import metodos.CalcularCostoPuntos;
  * Permite a los usuarios iniciar sesión proporcionando su nombre de usuario y contraseña.
  */
 public class PanelPagoPuntosError extends javax.swing.JPanel {
-    private FramePrincipal ventana;
+    private FramePrincipal framePrincipal;
 
     /**
      * Constructor de la clase VistaInicioSesion.
      * 
-     * @param ventana La ventana principal de la aplicación.
+     * @param framePrincipal La framePrincipal principal de la aplicación.
      */
-    public PanelPagoPuntosError(FramePrincipal ventana) {
+    public PanelPagoPuntosError(FramePrincipal framePrincipal) {
         try {
-            this.ventana = ventana;
+            this.framePrincipal = framePrincipal;
             initComponents();
             
             IUsuarioBO usuarioBO= new UsuarioBO();
             IControlUsuario user = new ControlUsuario();
             Usuario u = new Usuario();
-            u.setIdCia(ventana.getNumID());
+            u.setIdCia(framePrincipal.getNumID());
             Usuario usuarioBueno= usuarioBO.consultarUsuario(u);
             List<DetalleProducto> detallesCarritos = usuarioBueno.getCarrito().getProductos();
             ICalcularCostoPuntos calcularPuntos= new CalcularCostoPuntos();
@@ -54,6 +54,7 @@ public class PanelPagoPuntosError extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnMenu = new javax.swing.JButton();
         lblPuntosDisponibles = new javax.swing.JLabel();
         lblPuntosRequeridos = new javax.swing.JLabel();
         btnRegresarMenu = new javax.swing.JButton();
@@ -64,6 +65,16 @@ public class PanelPagoPuntosError extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(400, 800));
         setPreferredSize(new java.awt.Dimension(400, 800));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
         add(lblPuntosDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 360, 40));
         add(lblPuntosRequeridos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 360, 40));
 
@@ -92,15 +103,20 @@ public class PanelPagoPuntosError extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuActionPerformed
-        ventana.cambiarVistaMetodoPago();
+        framePrincipal.cambiarVistaMetodoPago();
     }//GEN-LAST:event_btnRegresarMenuActionPerformed
 
     private void btnRegresarMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenu1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarMenu1ActionPerformed
 
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnRegresarMenu;
     private javax.swing.JButton btnRegresarMenu1;
     private javax.swing.JLabel fondo;

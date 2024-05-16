@@ -67,14 +67,26 @@ public class PanelHistorial extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnMenu = new javax.swing.JButton();
         btnCarrito = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
         btnHistorial = new javax.swing.JButton();
         lblHistorialVacio = new javax.swing.JLabel();
         panelTop = new javax.swing.JPanel();
+        btnRegresar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMenu.setBorder(null);
+        btnMenu.setContentAreaFilled(false);
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
 
         btnCarrito.setBorder(null);
         btnCarrito.setContentAreaFilled(false);
@@ -110,7 +122,17 @@ public class PanelHistorial extends javax.swing.JPanel {
         add(lblHistorialVacio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         panelTop.setOpaque(false);
-        add(panelTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 380, 600));
+        add(panelTop, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 380, 547));
+
+        btnRegresar.setBorder(null);
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 714, 40, 40));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelHistorial.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -130,6 +152,14 @@ public class PanelHistorial extends javax.swing.JPanel {
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         framePrincipal.cambiarPanelHistorial();
     }//GEN-LAST:event_btnHistorialActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        framePrincipal.cambiarVistaMenu();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     public void crearHistorial() throws BOException, PersistenciaException {
 
@@ -152,8 +182,8 @@ public class PanelHistorial extends javax.swing.JPanel {
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setOpaque(false);
-        mainPanel.setMaximumSize(new Dimension(380, 600));
-        mainPanel.setSize(new Dimension(380, 600));
+        mainPanel.setMaximumSize(new Dimension(380, 547));
+        mainPanel.setSize(new Dimension(380, 547));
 
         GridBagConstraints c = new GridBagConstraints();
 
@@ -225,11 +255,11 @@ public class PanelHistorial extends javax.swing.JPanel {
         // Configurar el JScrollPane para desplazamiento vertical
         JScrollPane scrollPane = new JScrollPane(mainPanel);
 
-        scrollPane.setPreferredSize(new Dimension(380, 600)); // Establece un tamaño predeterminado
-        scrollPane.setMaximumSize(new Dimension(380, 600)); // Establece un tamaño máximo
-        scrollPane.getViewport().setPreferredSize(new Dimension(380, 600)); // Establece un tamaño predeterminado para el viewport
-        scrollPane.getViewport().setMaximumSize(new Dimension(380, 600)); // Establece un tamaño mínimo para el viewport
-        scrollPane.getViewport().setSize(380, 600);
+        scrollPane.setPreferredSize(new Dimension(380, 547)); // Establece un tamaño predeterminado
+        scrollPane.setMaximumSize(new Dimension(380, 547)); // Establece un tamaño máximo
+        scrollPane.getViewport().setPreferredSize(new Dimension(380, 547)); // Establece un tamaño predeterminado para el viewport
+        scrollPane.getViewport().setMaximumSize(new Dimension(380, 547)); // Establece un tamaño mínimo para el viewport
+        scrollPane.getViewport().setSize(380, 547);
 
         scrollPane.setOpaque(false); // Hacer el JScrollPane transparente
         scrollPane.getViewport().setOpaque(false); // Hacer transparente el viewport del JScrollPane
@@ -337,7 +367,7 @@ public class PanelHistorial extends javax.swing.JPanel {
         numeroLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
         //Label de clave para recoger pedido
-        JLabel claveRecogerLabel = new JLabel(claveRecoger);
+        JLabel claveRecogerLabel = new JLabel(claveRecoger.toUpperCase());
         claveRecogerLabel.setFont(sizedFontDemi);
         claveRecogerLabel.setForeground(Color.BLACK);
         claveRecogerLabel.setPreferredSize(new Dimension(235, 31));
@@ -465,6 +495,8 @@ public class PanelHistorial extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCarrito;
     private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnUsuario;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblHistorialVacio;

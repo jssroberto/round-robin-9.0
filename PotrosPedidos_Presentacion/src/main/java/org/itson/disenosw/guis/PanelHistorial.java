@@ -41,7 +41,7 @@ public class PanelHistorial extends javax.swing.JPanel {
 
     FramePrincipal framePrincipal;
     private PedidoDTO pedidoDTO;
-    private Integer etiqueta;
+    //declarar etiqueta como pedidosdto.size dentro del metodo de crear historial y decrementar
 
     /**
      * Creates new form PanelHistorial
@@ -49,7 +49,6 @@ public class PanelHistorial extends javax.swing.JPanel {
     public PanelHistorial(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         this.pedidoDTO = new PedidoDTO();
-        this.etiqueta = 1;
         initComponents();
         try {
             crearHistorial();
@@ -162,24 +161,26 @@ public class PanelHistorial extends javax.swing.JPanel {
         c.anchor = GridBagConstraints.NORTH;
         c.fill = GridBagConstraints.BOTH;
 
+        
+        int posicionPedido = 0;
         String[] rutas;
         // Iterar sobre la lista de productos y crear los paneles correspondientes
-        for (int i = 0; i < pedidoDTOs.size(); i++) {
-            if (pedidoDTOs.get(i).getDetalleProductos().size() > 3) {
-                rutas = new String[3];
+        for (int i = pedidoDTOs.size() - 1; i >= 0; i--) {
+            if (pedidoDTOs.get(i).getDetalleProductos().size() > 2) {
+                rutas = new String[2];
 
             } else {
                 rutas = new String[pedidoDTOs.get(i).getDetalleProductos().size()];
 
             }
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < 2; j++) {
                 if (pedidoDTOs.get(i).getDetalleProductos().size() == j) {
                     break;
                 }
                 rutas[j] = pedidoDTOs.get(i).getDetalleProductos().get(j).getDireccionImagen();
             }
             JPanel productoPanel = crearPanelPedido(
-                    pedidoDTOs.get(i).getIdPedido(),
+                    i + 1,
                     pedidoDTOs.get(i).getEtiquetaPedido(),
                     pedidoDTOs.get(i).getClaveRecoleccion(),
                     pedidoDTOs.get(i).getNumeroProductos(),
@@ -187,6 +188,7 @@ public class PanelHistorial extends javax.swing.JPanel {
                     pedidoDTOs.get(i).getFecha(),
                     rutas);
 
+            //poner objectidpedido
             String identificador = pedidoDTOs.get(i).getIdPedido();
             productoPanel.putClientProperty(identificador, productoPanel);
             // Añade un ActionListener al panel de producto
@@ -203,19 +205,19 @@ public class PanelHistorial extends javax.swing.JPanel {
             });
             // Añade el panel del producto en la posición i * 2 (para dejar espacio para los separadores)
             c.gridx = 0;
-            c.gridy = i * 2;
+            c.gridy = posicionPedido * 2;
             mainPanel.add(productoPanel, c);
 
             // Añade un separador después de cada producto, excepto el último
-            if (i < pedidoDTOs.size() - 1) {
+            if (posicionPedido < pedidoDTOs.size() - 1) {
                 JPanel separatorPanel = createSeparatorPanel();
                 c.gridx = 0;
-                c.gridy = i * 2 + 1;
+                c.gridy = posicionPedido * 2 + 1;
                 mainPanel.add(separatorPanel, c);
             }
 
             productoPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            etiqueta++;
+            posicionPedido++;
 
         }
 
@@ -253,7 +255,7 @@ public class PanelHistorial extends javax.swing.JPanel {
      * @param rutaImagen La ruta de la imagen del producto.
      * @return El panel del producto creado.
      */
-    private JPanel crearPanelPedido(String identificador, String numero, String claveRecoger, Integer numArticulos, Float total, LocalDate fecha, String[] rutaImagenes) {
+    private JPanel crearPanelPedido(int identificador, String numero, String claveRecoger, Integer numArticulos, Float total, LocalDate fecha, String[] rutaImagenes) {
         // Crear un nuevo panel para el producto con GridBagLayout
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setOpaque(false); // Hacer que el fondo del panel sea transparente
@@ -288,7 +290,7 @@ public class PanelHistorial extends javax.swing.JPanel {
         Font sizedFontDemi = cargarFuente("/fonts/futura/FuturaPTDemi.otf", 24F);
 
         // Configurar la etiqueta del nombre del producto
-        JLabel identificadorLabel = new JLabel("Pedido #" + String.valueOf(etiqueta));
+        JLabel identificadorLabel = new JLabel("Pedido #" + String.valueOf(identificador));
         identificadorLabel.setFont(sizedFontDemi);
         identificadorLabel.setForeground(Color.BLACK);
         identificadorLabel.setPreferredSize(new Dimension(125, 31));

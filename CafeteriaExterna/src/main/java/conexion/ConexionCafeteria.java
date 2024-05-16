@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package conexion;
 
 import com.mongodb.MongoClientSettings;
@@ -13,10 +9,17 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 /**
+ * Esta clase proporciona una conexión singleton a una base de datos MongoDB
+ * para la gestión de una cafetería. Configura un cliente MongoDB con soporte
+ * para POJOs y permite obtener una instancia de la base de datos especificada.
  *
- * @author jl4ma
+ * @author José Luis Madero López
+ * @author Jesús Roberto García Armenta
+ * @author Yohan Gabriel Melendrez Leal
+ * @author Pablo Jesús Galán Valenzuela
  */
 public class ConexionCafeteria {
+
     private static MongoClient mongoClient = null;
     //Si se conectaron por Atlas su URL es la que les proporciona la página
 //    private static final String URI = "mongodb+srv://josemadero244903:12345@cluster0.82cvjpv.mongodb.net/";//CAMBIEN PARA EL SUYO
@@ -24,10 +27,20 @@ public class ConexionCafeteria {
 
     private static final String DATABASE_NAME = "cafeteria_externo";
 
+    /**
+     * Constructor privado para prevenir la instanciación de la clase.
+     */
     public ConexionCafeteria() {
         // Constructor privado para prevenir instanciación 
     }
 
+    /**
+     * Obtiene una instancia de la base de datos MongoDB con soporte para POJOs.
+     * Configura el cliente MongoDB si no ha sido inicializado previamente.
+     *
+     * @return una instancia de la base de datos MongoDB con la configuración de
+     * codecs.
+     */
     public static MongoDatabase getDatabase() {
         if (mongoClient == null) {
 
@@ -52,6 +65,10 @@ public class ConexionCafeteria {
         return mongoClient.getDatabase(DATABASE_NAME);
     }
 
+    /**
+     * Cierra la conexión con el cliente MongoDB y libera los recursos
+     * asociados.
+     */
     public static void close() {
         if (mongoClient != null) {
             mongoClient.close();

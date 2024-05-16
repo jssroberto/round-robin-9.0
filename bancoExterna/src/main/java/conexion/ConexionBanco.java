@@ -13,10 +13,17 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 /**
+ * Esta clase proporciona una conexión singleton a una base de datos MongoDB.
+ * Configura un cliente MongoDB con soporte para POJOs y permite obtener una
+ * instancia de la base de datos especificada.
  *
- * @author jl4ma
+ * @author José Luis Madero López
+ * @author Jesús Roberto García Armenta
+ * @author Yohan Gabriel Melendrez Leal
+ * @author Pablo Jesús Galán Valenzuela
  */
 public class ConexionBanco {
+
     private static MongoClient mongoClient = null;
     //Si se conectaron por Atlas su URL es la que les proporciona la página
 //    private static final String URI = "mongodb+srv://josemadero244903:12345@cluster0.82cvjpv.mongodb.net/";//CAMBIEN PARA EL SUYO
@@ -24,10 +31,20 @@ public class ConexionBanco {
 
     private static final String DATABASE_NAME = "banco_externo";
 
+    /**
+     * Constructor privado para prevenir la instanciación de la clase.
+     */
     public ConexionBanco() {
         // Constructor privado para prevenir instanciación 
     }
 
+    /**
+     * Obtiene una instancia de la base de datos MongoDB con soporte para POJOs.
+     * Configura el cliente MongoDB si no ha sido inicializado previamente.
+     *
+     * @return una instancia de la base de datos MongoDB con la configuración de
+     * codecs.
+     */
     public static MongoDatabase getDatabase() {
         if (mongoClient == null) {
 
@@ -52,6 +69,10 @@ public class ConexionBanco {
         return mongoClient.getDatabase(DATABASE_NAME);
     }
 
+    /**
+     * Cierra la conexión con el cliente MongoDB y libera los recursos
+     * asociados.
+     */
     public static void close() {
         if (mongoClient != null) {
             mongoClient.close();

@@ -1,28 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package inserciones;
 
 import com.mongodb.client.MongoCollection;
 import conexion.ConexionCafeteria;
 import dominio.ProductoCafeteria;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Clase para la inserción masiva de productos en la base de datos de la
+ * cafetería. Se encarga de agregar múltiples registros de productos a la
+ * colección de la base de datos.
  *
- * @author jl4ma
+ * @author José Luis Madero López
+ * @author Jesús Roberto García Armenta
+ * @author Yohan Gabriel Melendrez Leal
+ * @author Pablo Jesús Galán Valenzuela
  */
 public class InsercionMasivaProductosCafeteria {
 
     private final MongoCollection<ProductoCafeteria> coleccionCafeteria;
 
+    /**
+     * Constructor de la clase. Inicializa la conexión con la base de datos y
+     * obtiene la colección de productos de la cafetería.
+     */
     public InsercionMasivaProductosCafeteria() {
         this.coleccionCafeteria = ConexionCafeteria.getDatabase().getCollection("cafeteria", ProductoCafeteria.class);
     }
 
+    /**
+     * Método para insertar registros de productos en la base de datos. Los
+     * productos se agregan a la colección de la cafetería.
+     *
+     * @throws Exception si ocurre algún error durante la inserción de los
+     * productos.
+     */
     public void insertarRegistros() throws Exception {
         List<ProductoCafeteria> productosCafeteria = new ArrayList<>();
         productosCafeteria.add(new ProductoCafeteria("HCL080", 80.0F, "Hamburguesa clásica", "Hamburguesa con carne, queso y verdura, acompañada de papas a la francesa", 15, "hamburguesa-clasica.png"));

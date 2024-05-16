@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package daos;
 
 import com.mongodb.client.MongoCollection;
@@ -16,16 +12,27 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
+ * Clase que implementa la interfaz IProductoCafeteriaDAO para realizar
+ * operaciones sobre la colección de productos de una cafetería en una base de
+ * datos MongoDB.
  *
- * @author jl4ma
+ * @author José Luis Madero López
+ * @author Jesús Roberto García Armenta
+ * @author Yohan Gabriel Melendrez Leal
+ * @author Pablo Jesús Galán Valenzuela
  */
-public class ProductoCafeteriaDAO implements IProductoCafeteriaDAO{
+public class ProductoCafeteriaDAO implements IProductoCafeteriaDAO {
 
     private final MongoCollection<ProductoCafeteria> coleccionCafeteria;
 
+    /**
+     * Constructor que inicializa la colección de productos desde la base de
+     * datos.
+     */
     public ProductoCafeteriaDAO() {
         this.coleccionCafeteria = ConexionCafeteria.getDatabase().getCollection("cafeteria", ProductoCafeteria.class);
     }
+
     @Override
     public void actualizarProducto(ProductoCafeteria productoCafeteria) throws CafeteriaException {
         if (productoCafeteria.getId() == null) {
@@ -43,6 +50,7 @@ public class ProductoCafeteriaDAO implements IProductoCafeteriaDAO{
     public ProductoCafeteria buscarProductoCafeteriaPorID(ObjectId id) throws CafeteriaException {
         return coleccionCafeteria.find(Filters.eq("_id", id)).first();
     }
+
     @Override
     public ProductoCafeteria consultarProductosPorCodigo(String codigo) throws CafeteriaException {
         return coleccionCafeteria.find(Filters.eq("codigo", codigo)).first();
@@ -123,6 +131,5 @@ public class ProductoCafeteriaDAO implements IProductoCafeteriaDAO{
             throw new CafeteriaException("Error al ordenar productos filtrados por precio", e);
         }
     }
-    
-    
+
 }

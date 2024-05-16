@@ -18,7 +18,7 @@ public class PagarPuntos implements IPagarPuntos{
     ControlPagarPuntos control= new ControlPagarPuntos();
     
     @Override
-    public ArrayList<String> PagarPuntos(Usuario usuario, Integer puntosPagar, Integer puntosGenera) throws Exception {
-        return control.PagarPuntos(usuario, puntosPagar, puntosGenera);
+    public ArrayList<String> PagarPuntos(Usuario usuario, Integer puntosPagar, Integer puntosGenera, String numPedido1) throws Exception {
+        return control.PagarPuntos(usuario, puntosPagar, puntosGenera, numPedido1);
     }  
 }

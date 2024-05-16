@@ -34,6 +34,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private String idPedido;
     private int numPedido=0;
     private String idProducto2;
+    private Integer puntosGenerados=0;
     
 
     public String getIdProducto2() {
@@ -134,9 +135,9 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = vistaMenu;
     }
     
-    public void cambiarPanelPagoExitoPuntos(Integer puntosGenerados, String numPedido, String numID){
+    public void cambiarPanelPagoExitoPuntos(Integer puntosGenerados, String clave){
         limpiarFrame();
-        PanelPagoExitoPuntos panelBuscar = new PanelPagoExitoPuntos(this, puntosGenerados, numPedido, numID);
+        PanelPagoExitoPuntos panelBuscar = new PanelPagoExitoPuntos(this, puntosGenerados, clave);
         ponerEnJFrame(panelBuscar);
         panelActual = panelBuscar;
     }
@@ -337,6 +338,14 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     public void setNumPedido(int numPedido) {
         this.numPedido = numPedido;
+    }
+
+    public Integer getPuntosGenerados() {
+        return puntosGenerados;
+    }
+
+    public void setPuntosGenerados(Integer puntosGenerados) {
+        this.puntosGenerados = puntosGenerados;
     }
 
 }

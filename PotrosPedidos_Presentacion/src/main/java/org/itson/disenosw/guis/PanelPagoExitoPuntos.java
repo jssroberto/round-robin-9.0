@@ -23,14 +23,15 @@ public class PanelPagoExitoPuntos extends javax.swing.JPanel {
 
     }
 
-    public PanelPagoExitoPuntos(FramePrincipal framePrincipal, Integer puntosGenerados, String numPedido, String claveRecoger) {
+    public PanelPagoExitoPuntos(FramePrincipal framePrincipal, Integer puntosGenerados, String claveRecoger) {
         try {
             this.framePrincipal = framePrincipal;
             initComponents();
 
             lblPuntosGenerados.setText(puntosGenerados.toString() + " puntos");
             lblClaveRecoger.setText(claveRecoger);
-            lblNumPedido.setText(numPedido);
+            lblNumPedido.setText(Integer.toString(framePrincipal.getNumPedido() + 1));
+            framePrincipal.setIdPedido(framePrincipal.getIdPedido() + 1);
         } catch (Exception ex) {
             Logger.getLogger(PanelPagoExitoPuntos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,9 +66,18 @@ public class PanelPagoExitoPuntos extends javax.swing.JPanel {
             }
         });
         add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
-        add(lblPuntosGenerados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, 230, 30));
-        add(lblClaveRecoger, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 230, 30));
-        add(lblNumPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 230, 30));
+
+        lblPuntosGenerados.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        lblPuntosGenerados.setText("label");
+        add(lblPuntosGenerados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 230, 30));
+
+        lblClaveRecoger.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        lblClaveRecoger.setText("label");
+        add(lblClaveRecoger, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 230, 30));
+
+        lblNumPedido.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        lblNumPedido.setText("label");
+        add(lblNumPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 230, 30));
 
         btnRegresarMenu.setBorder(null);
         btnRegresarMenu.setContentAreaFilled(false);

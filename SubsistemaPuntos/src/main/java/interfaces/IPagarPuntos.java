@@ -13,5 +13,5 @@ import java.util.List;
  * @author galan
  */
 public interface IPagarPuntos {
-    public ArrayList<String> PagarPuntos(Usuario usuario, Integer puntosPagar, Integer puntosGenera) throws Exception;
+    public ArrayList<String> PagarPuntos(Usuario usuario, Integer puntosPagar, Integer puntosGenera, String numPedido1) throws Exception;
 }

@@ -18,4 +18,6 @@ public interface IControlUsuario {
     public Usuario consultarUsuario(Usuario usuario);
     
     public UsuarioDTO consultarUsuarioPorId(String idCia) throws PersistenciaException,BOException;
+    
+    public void actualizarPuntosUsuario(Usuario usuario, Integer puntos);
 }

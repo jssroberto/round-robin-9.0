@@ -237,8 +237,7 @@ public class UsuarioBO implements IUsuarioBO {
 //    }
     @Override
     public void actualizarPuntosUsuario(Usuario usuario, Integer puntos) {
-        IUsuarioDAO usuarioDAO = new UsuarioDAO();
-
+        IUsuarioDAO usuarioDAO = new UsuarioDAO();    
         usuarioDAO.actualizarPuntosUsuario(usuario, puntos);
     }
 }

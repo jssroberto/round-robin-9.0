@@ -47,4 +47,9 @@ public class ControlUsuario implements IControlUsuario {
         return usuarioDTO;
     }
 
+    @Override
+    public void actualizarPuntosUsuario(Usuario usuario, Integer puntos){
+        IUsuarioBO usuarioBO = new UsuarioBO();
+        usuarioBO.actualizarPuntosUsuario(usuario, puntos);
+    }
 }

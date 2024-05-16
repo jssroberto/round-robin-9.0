@@ -1,7 +1,6 @@
 control\ControlCalcularCostoPuntos.class
 control\ControlPagarPuntos.class
 interfaces\IGenerarPuntos.class
-metodos\PagarPuntos.class
 control\ControlGenerarPuntos.class
 interfaces\ICalcularCostoPuntos.class
 metodos\CalcularCostoPuntos.class

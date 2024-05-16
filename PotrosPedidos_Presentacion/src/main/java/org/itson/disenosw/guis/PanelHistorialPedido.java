@@ -445,7 +445,7 @@ public class PanelHistorialPedido extends javax.swing.JPanel {
         lblCodigoRecoleccion.setText("Clave de recolección: " + pedidoDTO.getClaveRecoleccion().toUpperCase());
         lblMetodoPago.setText("Método de pago: " + MetodoPago.getByCodigo(pedidoDTO.getMetodoPago()));
         lblArticulos.setText(pedidoDTO.getNumeroProductos() + " artículo(s)");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.of("es", "ES"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ROOT);
         String fechaFormateada = pedidoDTO.getFecha().format(formatter);
         lblFecha.setText("Fecha: " + fechaFormateada);
         String totalFormateado = String.valueOf(pedidoDTO.getTotal());

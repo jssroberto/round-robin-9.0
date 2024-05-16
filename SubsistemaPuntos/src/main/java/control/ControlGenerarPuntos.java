@@ -16,9 +16,11 @@ public class ControlGenerarPuntos {
 //        conexion.Conexion.getDatabase();
         Integer total=0;
         for (DetalleProducto producto : productos) {
-            total+= producto.getPuntosGenera();
+            total+= producto.getPuntosGenera()*producto.getCantidad();
         }
+        System.out.println(total);
 //        conexion.Conexion.close();
         return total;
     }
 }
+

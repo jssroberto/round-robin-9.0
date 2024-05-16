@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ControlPagarPuntos {
 
-    public ArrayList<String> PagarPuntos(Usuario usuario, Integer puntosPagar, Integer puntosGenera) throws Exception {
+    public ArrayList<String> PagarPuntos(Usuario usuario, Integer puntosPagar, Integer puntosGenera, String numPedido1) throws Exception {
         IControlPedido pedidoSub = new ControlPedido();
         IControlCarrito carritoSub = new ControlCarrito();
         IUsuarioBO usuarioBO = new UsuarioBO();
@@ -28,7 +28,7 @@ public class ControlPagarPuntos {
         ArrayList<String> arreglo = new ArrayList<>();
         try {
             Pedido pedidoGenerado = new Pedido();
-            String numPedido = pedidoSub.generateRandomString();
+            String numPedido = numPedido1;
             pedidoGenerado.setNumeroPedido(numPedido);
             arreglo.add(numPedido);
             String clave = pedidoSub.generateRandomString();
@@ -41,7 +41,7 @@ public class ControlPagarPuntos {
             pedidoSub.referenciarPedido(usuario, pedidoSub.consultarPedido(pedidoGenerado));
             carritoSub.vaciarCarrito(usuario);
             System.out.println("xd");
-            usuarioBO.actualizarPuntosUsuario(usuario, usuario.getSaldoPuntos() + puntosGenera - puntosPagar);
+            usuarioBO.actualizarPuntosUsuario(usuario, usuario.getSaldoPuntos()-puntosPagar+puntosGenera);
 //            conexion.Conexion.close();
             return arreglo;
         } catch (Exception e) {

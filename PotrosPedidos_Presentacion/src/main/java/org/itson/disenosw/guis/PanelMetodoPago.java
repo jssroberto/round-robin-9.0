@@ -13,11 +13,13 @@ import interfaces.ICalcularCostoPuntos;
 import interfaces.IControlCarrito;
 import interfaces.IControlPedido;
 import interfaces.IControlUsuario;
+import interfaces.IGenerarPuntos;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import metodos.CalcularCostoPuntos;
+import metodos.GenerarPuntos;
 
 /**
  * Esta clase representa la vista de inicio de sesión en la interfaz gráfica del
@@ -168,6 +170,8 @@ public class PanelMetodoPago extends javax.swing.JPanel {
         IControlPedido pedido = new ControlPedido();
         IControlCarrito carrito = new ControlCarrito();
         IControlUsuario usuario = new ControlUsuario();
+        IGenerarPuntos generarPuntos = new GenerarPuntos();
+        
         Usuario user = new Usuario();
         user.setIdCia(framePrincipal.getNumID());
         Usuario usuarioNuevo = usuario.consultarUsuario(user);
@@ -177,7 +181,11 @@ public class PanelMetodoPago extends javax.swing.JPanel {
         pedidoNuevo.setEtiquetaPedido(pedido.generateRandomString());
         pedido.persistir(pedidoNuevo);
         pedido.referenciarPedido(usuarioNuevo, pedido.consultarPedido(pedidoNuevo));
+        
+        usuario.actualizarPuntosUsuario(usuarioNuevo, usuarioNuevo.getSaldoPuntos()+generarPuntos.generarPuntos(usuarioNuevo.getCarrito().getProductos()));
+        framePrincipal.setPuntosGenerados(generarPuntos.generarPuntos(usuarioNuevo.getCarrito().getProductos()));
         carrito.vaciarCarrito(usuarioNuevo);
+        
         framePrincipal.setClaveRecoleccion(pedidoNuevo.getClaveRecoleccion());
         framePrincipal.cambiarPanelPagoExito();
         framePrincipal.mostrarAviso("Compra procesada con éxito", "Aviso");

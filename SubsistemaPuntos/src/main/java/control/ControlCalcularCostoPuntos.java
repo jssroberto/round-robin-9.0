@@ -17,7 +17,7 @@ public class ControlCalcularCostoPuntos {
 //        conexion.Conexion.getDatabase();
         Integer total=0;
         for (DetalleProducto producto : productos) {
-            total+= producto.getPuntosCuesta();
+            total+= producto.getPuntosCuesta()*producto.getCantidad();
         }
 //        conexion.Conexion.close();
         return total;

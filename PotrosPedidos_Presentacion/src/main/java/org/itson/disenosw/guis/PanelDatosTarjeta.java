@@ -13,6 +13,7 @@ import interfaces.IControlCarrito;
 import interfaces.IControlPedido;
 import interfaces.IControlTarjeta;
 import interfaces.IControlUsuario;
+import interfaces.IGenerarPuntos;
 import java.time.LocalDate;
 
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import metodos.GenerarPuntos;
 
 /**
  * Esta clase representa la vista de inicio de sesión en la interfaz gráfica del
@@ -184,6 +186,7 @@ public class PanelDatosTarjeta extends javax.swing.JPanel {
             IControlUsuario usuario = new ControlUsuario();
             IControlCarrito carrito = new ControlCarrito();
             IControlTarjeta tarjeta = new ControlTarjeta();
+            IGenerarPuntos generarPuntos = new GenerarPuntos();
             Usuario user = new Usuario();
             Tarjeta tar = new Tarjeta();
             tar.setNumeroTarjeta(txtNumero.getText());
@@ -202,6 +205,9 @@ public class PanelDatosTarjeta extends javax.swing.JPanel {
                         pedido.persistir(pedidoNuevo);
                         pedido.referenciarPedido(usuarioNuevo, pedido.consultarPedido(pedidoNuevo));
                         carrito.vaciarCarrito(usuarioNuevo);
+                        usuario.actualizarPuntosUsuario(usuarioNuevo, usuarioNuevo.getSaldoPuntos() + generarPuntos.generarPuntos(usuarioNuevo.getCarrito().getProductos()));
+
+                        framePrincipal.setPuntosGenerados(usuarioNuevo.getSaldoPuntos() + generarPuntos.generarPuntos(usuarioNuevo.getCarrito().getProductos()));
                         framePrincipal.setClaveRecoleccion(pedidoNuevo.getClaveRecoleccion());
                         framePrincipal.cambiarPanelPagoExito();
                     } else {

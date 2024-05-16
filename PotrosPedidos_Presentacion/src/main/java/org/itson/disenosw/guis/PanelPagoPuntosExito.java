@@ -83,8 +83,17 @@ public class PanelPagoPuntosExito extends javax.swing.JPanel {
             }
         });
         add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 65, 65));
-        add(lblPuntosDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 360, 40));
-        add(lblPuntosRequeridos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 360, 40));
+
+        lblPuntosDisponibles.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        lblPuntosDisponibles.setText("label");
+        add(lblPuntosDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 360, 40));
+
+        lblPuntosRequeridos.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        lblPuntosRequeridos.setText("label");
+        add(lblPuntosRequeridos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 360, 40));
+
+        lblPuntosRestantes.setFont(new java.awt.Font("Segoe UI Emoji", 0, 24)); // NOI18N
+        lblPuntosRestantes.setText("label");
         add(lblPuntosRestantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 350, 40));
 
         btnConfirmarPago.setBorder(null);
@@ -123,10 +132,10 @@ public class PanelPagoPuntosExito extends javax.swing.JPanel {
 
         IPagarPuntos pagarPuntos = new PagarPuntos();
         try {
-            ArrayList<String> info= pagarPuntos.PagarPuntos(usuarioBueno, calcularPuntos.calcularCostoPuntos(detallesCarritos), generarPuntos.generarPuntos(detallesCarritos));
+            ArrayList<String> info= pagarPuntos.PagarPuntos(usuarioBueno, calcularPuntos.calcularCostoPuntos(detallesCarritos), generarPuntos.generarPuntos(detallesCarritos), Integer.toString(framePrincipal.getNumPedido()));
             info.get(0);
             framePrincipal.mostrarConfirmacion("PEDIDO EXITOSO", "EXITO");
-            framePrincipal.cambiarPanelPagoExitoPuntos(generarPuntos.generarPuntos(detallesCarritos), info.get(0), info.get(1));
+            framePrincipal.cambiarPanelPagoExitoPuntos(generarPuntos.generarPuntos(detallesCarritos), info.get(1));
         } catch (Exception ex) {
             framePrincipal.mostrarAviso("Algo ha ocurrido mal", "ERROR");
             framePrincipal.cambiarVistaMetodoPago();

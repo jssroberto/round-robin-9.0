@@ -19,7 +19,7 @@ public class CiaExterna {
         
         i.insertarRegistros();
 //        IUsuarioCiaDAO user = new UsuarioCiaDAO();
-//        if (user.BuscarPersona("00000011211", "ABC12345")) {
+    //        if (user.BuscarPersona("00000011211", "ABC12345")) {
 //            System.out.println("si");
 //        } else {
 //            System.out.println("no");

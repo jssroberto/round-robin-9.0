@@ -1,9 +1,12 @@
 package org.itson.disenosw.guis;
 
+import Metodos.BusquedaDinamica;
 import control.ControlProductos;
 import dominio.Producto;
 import dominio.ProductoCafeteria;
+import dtos.ProductoCafeteriaDTO;
 import excepciones.CafeteriaException;
+import interfaces.IBusqueda;
 import interfaces.IControlProductos;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,10 +18,13 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,10 +32,12 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 /**
  * Esta clase representa la vista de inicio de sesión en la interfaz gráfica del
@@ -50,13 +58,41 @@ public final class PanelMenu extends javax.swing.JPanel {
 
         this.framePrincipal = framePrincipal;
         initComponents();
-
+inicializarMenu();
         try {
             crearMenu();
         } catch (IllegalArgumentException | CafeteriaException ex) {
             framePrincipal.mostrarAviso(ex.getMessage(), "Aviso");
         }
         setFuentes();
+    }
+ public void inicializarMenu() {
+        JMenuItem CerrarSesion = new JMenuItem("Cerrar Sesion");
+
+
+        ppMenu.add(CerrarSesion);
+        ppMenu.addSeparator();
+    
+        btnUsuario.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    ppMenu.show(btnOrdenar, e.getX(), e.getY());
+                }
+            }
+        });
+        btnOrdenar.setComponentPopupMenu(ppMenu);
+
+        CerrarSesion.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                framePrincipal.setIdUsuario(null);
+                framePrincipal.setNumID(null);
+                framePrincipal.cambiarVistaInicio();
+            }
+        });
+
+
     }
 
     /**
@@ -67,6 +103,7 @@ public final class PanelMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ppMenu = new javax.swing.JPopupMenu();
         btnMenu = new javax.swing.JButton();
         btnCarrito = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
@@ -415,5 +452,6 @@ public final class PanelMenu extends javax.swing.JPanel {
     private javax.swing.JLabel lblCantidadCarrito;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JPanel panelTop;
+    private javax.swing.JPopupMenu ppMenu;
     // End of variables declaration//GEN-END:variables
 }

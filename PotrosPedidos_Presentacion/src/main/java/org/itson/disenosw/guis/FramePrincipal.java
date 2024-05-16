@@ -4,7 +4,10 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import conexion.Conexion;
 import dominio.ProductoCafeteria;
 import excepciones.CafeteriaException;
+import java.awt.Image;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -46,12 +49,21 @@ public class FramePrincipal extends javax.swing.JFrame {
      * Constructor de la clase Ventana.
      */
     public FramePrincipal() {
-        initComponents();
         try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
         } catch (UnsupportedLookAndFeelException ex) {
             System.err.println("Failed to initialize LaF");
         }
+        
+        List<Image> iconImages = new ArrayList<>();
+        
+        iconImages.add(new ImageIcon(FramePrincipal.class.getResource("/icons/icon16.png")).getImage());
+        iconImages.add(new ImageIcon(FramePrincipal.class.getResource("/icons/icon32.png")).getImage());
+        iconImages.add(new ImageIcon(FramePrincipal.class.getResource("/icons/icon64.png")).getImage());
+        iconImages.add(new ImageIcon(FramePrincipal.class.getResource("/icons/icon128.png")).getImage());
+        initComponents();
+        
+        this.setIconImages(iconImages);
 
     }
 

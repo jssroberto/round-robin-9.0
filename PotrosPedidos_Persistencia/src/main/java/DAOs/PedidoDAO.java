@@ -54,7 +54,6 @@ public class PedidoDAO implements IPedidoDAO {
         try {
             List<Pedido> pedidos = new ArrayList<>();
 
-            // Create the pipeline for the aggregation
             List<Bson> pipeline = Arrays.asList(
                     Aggregates.match(Filters.eq("_id", new ObjectId(idUsuario))), // Match the user by id
                     Aggregates.lookup("pedidos", "pedidos", "_id", "pedidos"), // Lookup to join with pedidos
@@ -62,7 +61,6 @@ public class PedidoDAO implements IPedidoDAO {
                     Aggregates.replaceRoot("$pedidos") // Replace the root with the pedido document
             );
 
-            // Perform the aggregation
             coleccionUsuarios.aggregate(pipeline, Pedido.class).into(pedidos);
 
             return pedidos;

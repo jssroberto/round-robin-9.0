@@ -123,40 +123,6 @@ public class UsuarioDAO implements IUsuarioDAO {
         return total;
     }
     
-//      
-//    public void eliminarProductoDelCarrito(String idUsuario, String codigoProducto) throws PersistenciaException {
-//        try {
-//            // Crear el pipeline para la agregación
-//            List<Bson> pipeline = Arrays.asList(
-//                Aggregates.match(Filters.eq("_id", new ObjectId(idUsuario))), // Match el usuario por id
-//                Aggregates.project(new Document("carrito", new Document("productos", new Document("$filter", 
-//                    new Document("input", "$carrito.productos")
-//                            .append("as", "producto")
-//                            .append("cond", new Document("$ne", Arrays.asList("$$producto.codigoProducto", codigoProducto)))
-//                ))))
-//            );
-//
-//            // Convertir el resultado de la agregación a una lista de usuarios
-//            List<Usuario> usuarios = coleccionUsuarios.aggregate(pipeline).into(new ArrayList<>());
-//
-//            // Verificar si se encontró el usuario
-//            if (usuarios.isEmpty()) {
-//                throw new PersistenciaException("Usuario no encontrado");
-//            }
-//
-//            Usuario usuarioActualizado = usuarios.get(0);
-//
-//            // Actualizar el usuario con la lista de productos filtrada
-//            Bson filter = Filters.eq("_id", new ObjectId(idUsuario));
-//            Bson update = Updates.set("carrito.productos", usuarioActualizado.getCarrito().getProductos());
-//
-//            coleccionUsuarios.updateOne(filter, update);
-//
-//        } catch (MongoException e) {
-//            throw new PersistenciaException("Error al eliminar producto del carrito", e);
-//        }
-//    }
-    
     @Override
      public boolean eliminarProductoDelCarrito(String idUsuario, String codigoProducto) throws PersistenciaException {
         try {
@@ -181,28 +147,5 @@ public class UsuarioDAO implements IUsuarioDAO {
         }
     }
     
-//    public void eliminarProductoDelCarrito(String idUsuario, String codigoProducto) throws PersistenciaException {
-//        try {
-//            // Crear el filtro para encontrar el usuario por su _id
-//            Document filter = new Document("_id", new ObjectId(idUsuario));
-//            
-//            // Crear la actualización usando $pull para eliminar el producto específico del arreglo productos
-//            Document update = new Document("$pull", new Document("carrito.productos", new Document("codigoProducto", codigoProducto)));
-//
-//            // Realizar la actualización
-//            UpdateResult result = coleccionUsuarios.updateOne(filter, update);
-//
-//            if (result.getMatchedCount() == 0) {
-//                throw new PersistenciaException("Usuario no encontrado");
-//            }
-//
-//            if (result.getModifiedCount() == 0) {
-//                throw new PersistenciaException("El producto no se encontró en el carrito");
-//            }
-//
-//        } catch (MongoException e) {
-//            throw new PersistenciaException("Error al eliminar producto del carrito", e);
-//        }
-//    }
 
 }

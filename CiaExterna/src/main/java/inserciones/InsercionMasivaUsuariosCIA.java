@@ -9,6 +9,7 @@ import conexion.ConexionCia;
 import dominio.UsuarioCia;
 import java.util.ArrayList;
 import java.util.List;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
 /**
  *
@@ -22,12 +23,19 @@ public class InsercionMasivaUsuariosCIA {
     }
     
     public void insertarRegistros() throws Exception{
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        
+        String contra1 = spe.encryptPassword("ABC12345");
+        String contra2 = spe.encryptPassword("DEF67890");
+        String contra3 = spe.encryptPassword("GHI13579");
+        String contra4 = spe.encryptPassword("JKL24680");
+        String contra5 = spe.encryptPassword("MNO97531");
         List<UsuarioCia> usuariosCIA = new ArrayList<>();
-        usuariosCIA.add(new UsuarioCia("00000011211", "ABC12345", "Juan", "Perez", "Garcia"));
-        usuariosCIA.add(new UsuarioCia("00000244454", "DEF67890", "Maria", "Lopez", "Martinez"));
-        usuariosCIA.add(new UsuarioCia("00000046574", "GHI13579", "Pedro", "Gonzalez", "Santos"));
-        usuariosCIA.add(new UsuarioCia("00000240157", "JKL24680", "Ana", "Rodriguez", "Fernandez"));
-        usuariosCIA.add(new UsuarioCia("00000244978", "MNO97531", "Luis", "Martinez", "Diaz"));
+        usuariosCIA.add(new UsuarioCia("00000011211", contra1, "Juan", "Perez", "Garcia"));
+        usuariosCIA.add(new UsuarioCia("00000244454", contra2, "Maria", "Lopez", "Martinez"));
+        usuariosCIA.add(new UsuarioCia("00000046574", contra3, "Pedro", "Gonzalez", "Santos"));
+        usuariosCIA.add(new UsuarioCia("00000240157", contra4, "Ana", "Rodriguez", "Fernandez"));
+        usuariosCIA.add(new UsuarioCia("00000244978", contra5, "Luis", "Martinez", "Diaz"));
         
         coleccionUsuarioCia.insertMany(usuariosCIA);
         

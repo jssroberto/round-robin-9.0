@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package daos;
 
 import com.mongodb.client.MongoCollection;
@@ -10,6 +6,8 @@ import conexion.ConexionCia;
 import dominio.UsuarioCia;
 import exepciones.CiaException;
 import interfaces.IUsuarioCiaDAO;
+import org.jasypt.util.binary.StrongBinaryEncryptor;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 
 /**
  *
@@ -25,10 +23,18 @@ public class UsuarioCiaDAO implements IUsuarioCiaDAO {
 
     @Override
     public Boolean BuscarPersona(String idEstudiante, String contra) throws CiaException {
-        
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
         try {
             UsuarioCia usuario = coleccionUsuarioCia.find(Filters.eq("idEstudiante", idEstudiante)).first();
-            return usuario != null && usuario.getContrasena().equals(contra);
+            if (usuario != null) {
+                // Obtener la contraseña encriptada almacenada en la base de datos
+                String contrasenaEncriptada = usuario.getContrasena();
+                // Verificar la contraseña ingresada con la contraseña encriptada
+                if (spe.checkPassword(contra, contrasenaEncriptada)) {
+                    return true;
+                }
+            }
+            return false;
         } catch (Exception e) {
             throw new CiaException("Error al buscar persona", e);
         }

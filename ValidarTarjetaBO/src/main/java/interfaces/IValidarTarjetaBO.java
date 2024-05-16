@@ -14,4 +14,8 @@ import excepciones.BancoException;
 public interface IValidarTarjetaBO {
     
     public Tarjeta validarDatos(Tarjeta tarjeta) throws BancoException;
+    public void actualizarSaldo(Tarjeta tar, float saldo);
+
+
 }
+

@@ -28,6 +28,7 @@ public class ValidarCompraTarjeta {
         Tarjeta tar = tarjeta.validarDatos(num);
         float saldo = tar.getSaldo()-total;
         if (saldo >=0) {
+            tarjeta.actualizarSaldo(tar, saldo);
             return true;
         }else{
             throw new BancoException("Saldo insuficiente");

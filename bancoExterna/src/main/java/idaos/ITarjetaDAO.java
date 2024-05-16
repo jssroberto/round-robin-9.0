@@ -10,5 +10,6 @@ import excepciones.BancoException;
 public interface ITarjetaDAO {
 
     public Tarjeta consultarTarjetaMongo(Tarjeta tarjeta) throws BancoException;
+    public void actualizarSaldo(Tarjeta tar, float saldo);
 
 }

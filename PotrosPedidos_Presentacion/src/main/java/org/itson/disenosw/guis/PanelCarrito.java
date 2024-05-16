@@ -1,6 +1,5 @@
 package org.itson.disenosw.guis;
 
-
 import control.ControlCarrito;
 import control.ControlPedido;
 import control.ControlUsuario;
@@ -53,8 +52,8 @@ public final class PanelCarrito extends javax.swing.JPanel {
         this.framePrincipal = framePrincipal;
         initComponents();
 //            ayuda();
-            crearMenu();
-        
+        crearMenu();
+
     }
 
     /**
@@ -115,20 +114,20 @@ public final class PanelCarrito extends javax.swing.JPanel {
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         IControlPedido pedido = new ControlPedido();
         IControlUsuario usuario = new ControlUsuario();
-            IControlCarrito carrito = new ControlCarrito();
-            
-            Usuario user = new Usuario();
-            user.setIdCia(framePrincipal.getNumID());
+        IControlCarrito carrito = new ControlCarrito();
+
+        Usuario user = new Usuario();
+        user.setIdCia(framePrincipal.getNumID());
+        framePrincipal.cambiarVistaMetodoPago();
+        if (pedido.pedidoAceptado()) {
+            framePrincipal.mostrarAviso("PEDIDO ACEPTADO", "Solicitud");
             framePrincipal.cambiarVistaMetodoPago();
-//        if (pedido.pedidoAceptado()) {
-//            framePrincipal.mostrarAviso("PEDIDO ACEPTADO", "Solicitud");
-//            framePrincipal.cambiarVistaMetodoPago();
-//        }else{
-//        framePrincipal.mostrarAviso("PEDIDO NO ACEPADO", "Solicitud");
-//        carrito.vaciarCarrito(usuario.consultarUsuario(user));
-//        framePrincipal.cambiarVistaMenu();
-//        }
-        
+        }else{
+        framePrincipal.mostrarAviso("PEDIDO NO ACEPADO", "Solicitud");
+        carrito.vaciarCarrito(usuario.consultarUsuario(user));
+        framePrincipal.cambiarVistaMenu();
+        }
+
     }//GEN-LAST:event_btnPagarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -143,12 +142,11 @@ public final class PanelCarrito extends javax.swing.JPanel {
 //        }
 //        DetalleCarritoDAO d = new DetalleCarritoDAO();
 //    }
-    public void crearMenu(){
+    public void crearMenu() {
         Font sizedFontBook = cargarFuente("/fonts/futura/FuturaPTBook.otf", 28F);
         lblTotal.setFont(sizedFontBook);
         lblTotal.setForeground(Color.BLACK);
-        
-        
+
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.setOpaque(false);
         mainPanel.setMaximumSize(new Dimension(380, 477));// Elimina esta línea
@@ -157,7 +155,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
         IControlUsuario user = new ControlUsuario();
         Usuario u = new Usuario();
         u.setIdCia(framePrincipal.getNumID());
-        List<DetalleProducto> detallesCarritos = user.consultarUsuario(u).getCarrito().getProductos();        
+        List<DetalleProducto> detallesCarritos = user.consultarUsuario(u).getCarrito().getProductos();
         if (detallesCarritos.isEmpty()) {
             Font sizedFont = cargarFuente("/fonts/futura/FuturaPTBook.otf", 48F);
             lblCarritoVacío.setFont(sizedFont);
@@ -173,9 +171,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
             panelTop.add(panelVacio);
             return;
         }
-        
-       
-        
+
         GridBagConstraints c = new GridBagConstraints();
 
         //TODO no jala el insertar elemento de arriba a abajo, empiezan del centro
@@ -228,9 +224,11 @@ public final class PanelCarrito extends javax.swing.JPanel {
         cont.setOpaque(false);
 
         panelTop.add(cont);
-        
-        lblTotal.setText("Total: "+framePrincipal.getTotalCarrito());
-        
+        IControlCarrito con = new ControlCarrito();
+        Usuario ua = new Usuario();
+        ua.setIdCia(framePrincipal.getNumID());
+        framePrincipal.setTotalCarrito(con.actualizarTotalCarrito(user.consultarUsuario(ua)));
+        lblTotal.setText("Total: " + framePrincipal.getTotalCarrito());
 
     }
 
@@ -270,7 +268,6 @@ public final class PanelCarrito extends javax.swing.JPanel {
         nombreLabel.setPreferredSize(new Dimension(240, 31));
         nombreLabel.setVerticalAlignment(SwingConstants.CENTER);
 
-
         String precioFormateado = String.valueOf(precio);
         if (precioFormateado.endsWith(".0")) {
             precioFormateado = precioFormateado.substring(0, precioFormateado.length() - 2);
@@ -281,7 +278,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
         precioLabel.setForeground(Color.BLACK);
         precioLabel.setPreferredSize(new Dimension(110, 31));
         precioLabel.setVerticalAlignment(SwingConstants.TOP);
-        
+
         JLabel cantidadLabel = new JLabel("Cantidad: " + String.valueOf(cantidad));
         cantidadLabel.setFont(sizedFontBook);
         cantidadLabel.setForeground(Color.BLACK);
@@ -305,7 +302,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
         c.gridx = 0;
         c.gridy = 1;
         panel.add(precioLabel, c);
-        
+
         // Añadir la etiqueta de cantidad en la tercerr fila
         c.gridx = 0;
         c.gridy = 2;

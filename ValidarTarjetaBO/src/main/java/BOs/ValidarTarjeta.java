@@ -31,5 +31,10 @@ public class ValidarTarjeta implements IValidarTarjetaBO {
         }
             
     }
+    @Override
+    public void actualizarSaldo(Tarjeta tar, float saldo){
+        ITarjetaDAO tarjetas = new TarjetaDAO();
+        tarjetas.actualizarSaldo(tar, saldo);
+    }
 
 }

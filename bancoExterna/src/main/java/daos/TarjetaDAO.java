@@ -4,9 +4,11 @@ import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Aggregates.limit;
 import static com.mongodb.client.model.Aggregates.match;
+import com.mongodb.client.model.Filters;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.exists;
 import static com.mongodb.client.model.Filters.expr;
+import com.mongodb.client.model.Updates;
 import conexion.ConexionBanco;
 import dominio.Tarjeta;
 import excepciones.BancoException;
@@ -51,6 +53,11 @@ public class TarjetaDAO implements ITarjetaDAO {
         } catch (MongoException e) {
             throw new BancoException(e.getMessage(), e);
         }
+    }
+    
+    @Override
+    public void actualizarSaldo(Tarjeta tar, float saldo){
+        coleccionTarjetas.updateOne(Filters.eq("_id", tar.getId()), Updates.set("saldo", saldo));
     }
 
 }

@@ -237,7 +237,13 @@ public class UsuarioBO implements IUsuarioBO {
 //    }
     @Override
     public void actualizarPuntosUsuario(Usuario usuario, Integer puntos) {
-        IUsuarioDAO usuarioDAO = new UsuarioDAO();    
+        IUsuarioDAO usuarioDAO = new UsuarioDAO();
         usuarioDAO.actualizarPuntosUsuario(usuario, puntos);
+    }
+
+    @Override
+    public boolean eliminarProductoDelCarrito(String idUsuario, String codigoProducto) throws PersistenciaException {
+        IUsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.eliminarProductoDelCarrito(idUsuario, codigoProducto);
     }
 }

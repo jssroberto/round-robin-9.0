@@ -219,7 +219,6 @@ public final class PanelMenu extends javax.swing.JPanel {
                 @Override
                 public void mouseClicked(MouseEvent e) {
 
-                    // Aquí puedes acceder al identificador del panel haciendo uso de la variable 'identificador'
                     framePrincipal.setIdProducto(identificador);
                     framePrincipal.cambiarVistaProducto();
 

@@ -23,9 +23,9 @@ public class pruebaMongo {
 
     public static void main(String[] args) throws IOException, Exception {
 
-//        InsercionMasivaProductos pro = new InsercionMasivaProductos();
+        InsercionMasivaProductos pro = new InsercionMasivaProductos();
 //
-//        pro.insertarRegistros();
+        pro.insertarRegistros();
 //        InsercionMasivaUsuarios u = new InsercionMasivaUsuarios();
 //        u.insertarRegistros();
 
@@ -49,17 +49,20 @@ public class pruebaMongo {
 //        pe.setEtiquetaPedido("123455");
 //        System.out.println(p.consultar(pe));
 //    }
-            IUsuarioDAO user = new UsuarioDAO();
-            Usuario u = new Usuario();
-            u.setIdCia("00000011211");
-                    
-            System.out.println(user.actualizarTotalCarrito(user.consultarUsuario(u)));
+//            IUsuarioDAO user = new UsuarioDAO();
+//            Usuario u = new Usuario();
+//            u.setIdCia("00000011211");
+//                    
+//            System.out.println(user.actualizarTotalCarrito(user.consultarUsuario(u)));
 //            DetalleProducto aa = new DetalleProducto();
 //            aa.setCodigoProducto("HCL080");
 //            user.eliminarProductoCarrito(user.consultarUsuario("00000011211").getId(), aa);
 //            Usuario ue = new Usuario();
 //            ue.setIdCia("00000011211");
-//        System.out.println(user.consultarUsuario(ue));
+//        System.out.println(user.consultarUsuario(ue));3
+//        UsuarioDAO usuarioDAO = new UsuarioDAO();
+//        usuarioDAO.eliminarProductoDelCarrito("6645571172b91746a5c674a8", "CCN025");
+        
     }
 
 }

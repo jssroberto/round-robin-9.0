@@ -35,9 +35,19 @@ public class InsercionMasivaProductos {
         productosCafeteria.add(new Producto("CCN025", "Coca-Cola", 25.0F, "Coca-Cola regular en lata de 355ml", "coca-cola-regular.png"));
         productosCafeteria.add(new Producto("CCL025", "Coca-Cola light", 25.0F, "Coca-Cola light en lata de 355ml", "coca-cola-light.png"));
         productosCafeteria.add(new Producto("CCZ025", "Coca-Cola zero", 25.0F, "Coca-Cola zero en lata de 355ml", "coca-cola-zero.png"));
+        productosCafeteria.add(new Producto("HDD090", "Hamburguesa Doble", 90.0F, "Hamburguesa doble con doble carne, queso y verduras, acompañada de papas a la francesa", "hamburguesa-doble.png"));
+        productosCafeteria.add(new Producto("TAP055", "Tacos al Pastor", 55.0F, "Tacos al pastor con carne de cerdo, piña, cebolla y cilantro", "tacos-pastor.png"));
+        productosCafeteria.add(new Producto("TPL070", "Torta de Pollo", 70.0F, "Torta con pollo asado, aguacate, queso y verduras frescas", "torta-pollo.png"));
+        productosCafeteria.add(new Producto("HDG050", "Hot Dog", 50.0F, "Hot dog con salchicha, salsa de tomate, mostaza, cebolla y jalapeños", "hot-dog.png"));
+        productosCafeteria.add(new Producto("ECS060", "Ensalada César", 60.0F, "Ensalada César con lechuga, pollo a la parrilla, crutones, parmesano y aderezo César", "ensalada-cesar.png"));
+        productosCafeteria.add(new Producto("PEP080", "Pizza de Pepperoni", 80.0F, "Pizza de pepperoni con salsa de tomate, queso mozzarella y rodajas de pepperoni", "pizza-pepperoni.png"));
+        productosCafeteria.add(new Producto("RMM030", "Refresco de Manzana", 30.0F, "Refresco de manzana en botella de 500ml", "refresco-manzana.png"));
+        productosCafeteria.add(new Producto("ADC040", "Agua de Coco", 40.0F, "Agua de coco natural en botella de 500ml", "agua-coco.png"));
+        productosCafeteria.add(new Producto("CAF035", "Café Americano", 35.0F, "Café americano negro servido en taza grande", "cafe-americano.png"));
+        productosCafeteria.add(new Producto("TEV025", "Té Verde", 25.0F, "Té verde natural servido en taza grande", "te-verde.png"));
 
-            coleccionProducto.insertMany(productosCafeteria);
-        
+        coleccionProducto.insertMany(productosCafeteria);
+
     }
 
 }

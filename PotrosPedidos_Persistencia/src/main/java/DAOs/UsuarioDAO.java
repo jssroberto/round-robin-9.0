@@ -7,6 +7,7 @@ package DAOs;
 import IDAOs.IUsuarioDAO;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Aggregates;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
@@ -16,6 +17,11 @@ import dominio.DetalleProducto;
 import dominio.Pedido;
 import dominio.Usuario;
 import excepciones.PersistenciaException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -24,36 +30,36 @@ import org.bson.types.ObjectId;
  */
 public class UsuarioDAO implements IUsuarioDAO {
 
-    private final MongoCollection<Usuario> coleccionCursos;
+    private final MongoCollection<Usuario> coleccionUsuarios;
 
     public UsuarioDAO() {
-        this.coleccionCursos = Conexion.getDatabase().getCollection("usuarios", Usuario.class);
+        this.coleccionUsuarios = Conexion.getDatabase().getCollection("usuarios", Usuario.class);
     }
 
     @Override
     public void actualizarPuntosUsuario(Usuario usuario, Integer puntos) {
-        coleccionCursos.updateOne(Filters.eq("_id", usuario.getId()), Updates.set("saldoPuntos", puntos));
+        coleccionUsuarios.updateOne(Filters.eq("_id", usuario.getId()), Updates.set("saldoPuntos", puntos));
     }
 
     @Override
     public void persistir(Usuario usuario) {
-        coleccionCursos.insertOne(usuario);
+        coleccionUsuarios.insertOne(usuario);
     }
 
     @Override
     public Usuario consultarUsuarioPorId(Usuario usuario) {
-        return coleccionCursos.find(Filters.eq("_id", usuario.getId())).first();
+        return coleccionUsuarios.find(Filters.eq("_id", usuario.getId())).first();
     }
 
     @Override
     public Usuario consultarUsuario(Usuario usuario) {
-        return coleccionCursos.find(Filters.eq("idCia", usuario.getIdCia())).first();
+        return coleccionUsuarios.find(Filters.eq("idCia", usuario.getIdCia())).first();
     }
 
     @Override
     public Usuario consultarUsuario(String idCia) throws PersistenciaException {
         try {
-            Usuario usuario = coleccionCursos.find(Filters.eq("idCia", idCia)).first();
+            Usuario usuario = coleccionUsuarios.find(Filters.eq("idCia", idCia)).first();
             if (usuario == null) {
                 throw new PersistenciaException("Usuario no encontrado");
             }
@@ -66,12 +72,12 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public void agregarDetalleProductoAlCarrito(ObjectId usuarioId, DetalleProducto nuevoDetalleProducto) {
 
-        coleccionCursos.updateOne(Filters.eq("_id", usuarioId), Updates.push("carrito.productos", nuevoDetalleProducto));
+        coleccionUsuarios.updateOne(Filters.eq("_id", usuarioId), Updates.push("carrito.productos", nuevoDetalleProducto));
     }
 
     @Override
     public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto codigo) {
-          UpdateResult result = coleccionCursos.updateOne(Filters.eq("_id", usuarioId), Updates.pull("carrito.productos", codigo));
+          UpdateResult result = coleccionUsuarios.updateOne(Filters.eq("_id", usuarioId), Updates.pull("carrito.productos", codigo));
           if (result.wasAcknowledged()) {
             if (result.getModifiedCount() > 0) {
                 System.out.println("");
@@ -92,7 +98,7 @@ public class UsuarioDAO implements IUsuarioDAO {
     @Override
     public void vaciarCarrito(Usuario usuario) {
         for (DetalleProducto p: usuario.getCarrito().getProductos()) {
-            coleccionCursos.updateOne(Filters.eq("_id", usuario.getId()), Updates.pull("carrito.productos", p));
+            coleccionUsuarios.updateOne(Filters.eq("_id", usuario.getId()), Updates.pull("carrito.productos", p));
         }
 
     }
@@ -102,7 +108,7 @@ public class UsuarioDAO implements IUsuarioDAO {
         PedidoDAO pedidoDAO = new PedidoDAO();
         // Assuming pedido is saved and has an ObjectId assigned
         ObjectId pedidoId = pedido.getId();
-        coleccionCursos.updateOne(Filters.eq("_id", usuario.getId()), Updates.push("pedidos", pedidoId));
+        coleccionUsuarios.updateOne(Filters.eq("_id", usuario.getId()), Updates.push("pedidos", pedidoId));
     }
     
     @Override
@@ -113,8 +119,90 @@ public class UsuarioDAO implements IUsuarioDAO {
             total += a.getSubtotal();
         }
         u.getCarrito().setTotalCarrito(total);
-        coleccionCursos.updateOne(Filters.eq("_id", u.getId()), Updates.set("carrito", u.getCarrito()));
+        coleccionUsuarios.updateOne(Filters.eq("_id", u.getId()), Updates.set("carrito", u.getCarrito()));
         return total;
     }
+    
+//      
+//    public void eliminarProductoDelCarrito(String idUsuario, String codigoProducto) throws PersistenciaException {
+//        try {
+//            // Crear el pipeline para la agregación
+//            List<Bson> pipeline = Arrays.asList(
+//                Aggregates.match(Filters.eq("_id", new ObjectId(idUsuario))), // Match el usuario por id
+//                Aggregates.project(new Document("carrito", new Document("productos", new Document("$filter", 
+//                    new Document("input", "$carrito.productos")
+//                            .append("as", "producto")
+//                            .append("cond", new Document("$ne", Arrays.asList("$$producto.codigoProducto", codigoProducto)))
+//                ))))
+//            );
+//
+//            // Convertir el resultado de la agregación a una lista de usuarios
+//            List<Usuario> usuarios = coleccionUsuarios.aggregate(pipeline).into(new ArrayList<>());
+//
+//            // Verificar si se encontró el usuario
+//            if (usuarios.isEmpty()) {
+//                throw new PersistenciaException("Usuario no encontrado");
+//            }
+//
+//            Usuario usuarioActualizado = usuarios.get(0);
+//
+//            // Actualizar el usuario con la lista de productos filtrada
+//            Bson filter = Filters.eq("_id", new ObjectId(idUsuario));
+//            Bson update = Updates.set("carrito.productos", usuarioActualizado.getCarrito().getProductos());
+//
+//            coleccionUsuarios.updateOne(filter, update);
+//
+//        } catch (MongoException e) {
+//            throw new PersistenciaException("Error al eliminar producto del carrito", e);
+//        }
+//    }
+    
+    @Override
+     public boolean eliminarProductoDelCarrito(String idUsuario, String codigoProducto) throws PersistenciaException {
+        try {
+            // Crear el filtro para encontrar el usuario por su _id
+            Bson filter = Filters.eq("_id", new ObjectId(idUsuario));
+            
+            // Crear la actualización usando $pull para eliminar el producto específico del arreglo productos
+            Bson update = Updates.pull("carrito.productos", Filters.eq("codigoProducto", codigoProducto));
+
+            // Realizar la actualización
+            UpdateResult result = coleccionUsuarios.updateOne(filter, update);
+            
+            if (result.getMatchedCount() == 0) {
+                throw new PersistenciaException("Usuario no encontrado");
+            }
+            if (result.getModifiedCount() == 0) {
+                throw new PersistenciaException("El producto no se encontró en el carrito");
+            }
+            return true;
+        } catch (MongoException e) {
+            throw new PersistenciaException("Error al eliminar producto del carrito", e);
+        }
+    }
+    
+//    public void eliminarProductoDelCarrito(String idUsuario, String codigoProducto) throws PersistenciaException {
+//        try {
+//            // Crear el filtro para encontrar el usuario por su _id
+//            Document filter = new Document("_id", new ObjectId(idUsuario));
+//            
+//            // Crear la actualización usando $pull para eliminar el producto específico del arreglo productos
+//            Document update = new Document("$pull", new Document("carrito.productos", new Document("codigoProducto", codigoProducto)));
+//
+//            // Realizar la actualización
+//            UpdateResult result = coleccionUsuarios.updateOne(filter, update);
+//
+//            if (result.getMatchedCount() == 0) {
+//                throw new PersistenciaException("Usuario no encontrado");
+//            }
+//
+//            if (result.getModifiedCount() == 0) {
+//                throw new PersistenciaException("El producto no se encontró en el carrito");
+//            }
+//
+//        } catch (MongoException e) {
+//            throw new PersistenciaException("Error al eliminar producto del carrito", e);
+//        }
+//    }
 
 }

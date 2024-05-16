@@ -275,6 +275,38 @@ public class FramePrincipal extends javax.swing.JFrame {
     public void mostrarInformacion(String mensaje, String titulo) {
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
+    /**
+     * Método para mostrar una ventana emergente con dos opciones al usuario.
+     *
+     * @param mensaje El mensaje a mostrar en la ventana emergente.
+     * @param titulo El título de la ventana emergente.
+     * @param opcion1 El texto de la primera opción.
+     * @param opcion2 El texto de la segunda opción.
+     * @return La opción seleccionada por el usuario (1 para la primera opción,
+     * 2 para la segunda opción). Si el usuario cierra la ventana sin
+     * seleccionar ninguna opción, se devuelve 0.
+     */
+    public int mostrarOpciones(String mensaje, String titulo, String opcion1, String opcion2) {
+        Object[] opciones = {opcion1, opcion2};
+        int seleccion = JOptionPane.showOptionDialog(
+                this, //Padre
+                mensaje, // Mensaje a mostrar
+                titulo, // Título del JOptionPane
+                JOptionPane.YES_NO_OPTION, // Tipo de opciones (en este caso, Sí/No)
+                JOptionPane.QUESTION_MESSAGE, // Tipo de icono (en este caso, pregunta)
+                null, // Icono personalizado (en este caso, ninguno)
+                opciones, // Opciones a mostrar
+                -1); // Opción por defecto seleccionada
+        // Ajustar el valor de retorno para que coincida con las opciones (1 y 2)
+        return switch (seleccion) {
+            case JOptionPane.YES_OPTION ->
+                1;
+            case JOptionPane.NO_OPTION ->
+                2;
+            default ->
+                0;
+        }; // El usuario cerró el JOptionPane o presionó la X para salir
+    }
 
     public String getIdProducto() {
         return codigoProducto;

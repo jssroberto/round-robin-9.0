@@ -32,13 +32,13 @@ public class PruebaPedidos {
 //            Pedido pedido = pedidoDAO.consultarPorId("6643abab17695a30ca33af1c");
 //            System.out.println(pedido.getEtiquetaPedido());
 
-        try {
-            IUsuarioDAO usuarioDAO = new UsuarioDAO();
-            Usuario usuario = usuarioDAO.consultarUsuario("00000240157");
-            System.out.println(usuario.getNombre());
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(PruebaPedidos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            IUsuarioDAO usuarioDAO = new UsuarioDAO();
+//            Usuario usuario = usuarioDAO.consultarUsuario("00000240157");
+//            System.out.println(usuario.getNombre());
+//        } catch (PersistenciaException ex) {
+//            Logger.getLogger(PruebaPedidos.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 //        } catch (PersistenciaException ex) {
 //            Logger.getLogger(PruebaPedidos.class.getName()).log(Level.SEVERE, null, ex);
 //        }

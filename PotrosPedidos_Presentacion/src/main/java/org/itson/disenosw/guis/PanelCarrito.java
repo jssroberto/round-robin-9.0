@@ -3,8 +3,11 @@ package org.itson.disenosw.guis;
 import control.ControlCarrito;
 import control.ControlPedido;
 import control.ControlUsuario;
+import control.ProductosControl;
 import dominio.DetalleProducto;
 import dominio.Usuario;
+import dtos.ProductoDTO;
+import excepciones.PersistenciaException;
 import interfaces.IControlCarrito;
 import interfaces.IControlPedido;
 import interfaces.IControlUsuario;
@@ -16,6 +19,8 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -51,7 +56,6 @@ public final class PanelCarrito extends javax.swing.JPanel {
     public PanelCarrito(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
-//            ayuda();
         crearMenu();
 
     }
@@ -134,10 +138,10 @@ public final class PanelCarrito extends javax.swing.JPanel {
         if (pedido.pedidoAceptado()) {
             framePrincipal.mostrarAviso("PEDIDO ACEPTADO", "Solicitud");
             framePrincipal.cambiarVistaMetodoPago();
-        }else{
-        framePrincipal.mostrarAviso("PEDIDO NO ACEPADO", "Solicitud");
-        carrito.vaciarCarrito(usuario.consultarUsuario(user));
-        framePrincipal.cambiarVistaMenu();
+        } else {
+            framePrincipal.mostrarAviso("PEDIDO NO ACEPADO", "Solicitud");
+            carrito.vaciarCarrito(usuario.consultarUsuario(user));
+            framePrincipal.cambiarVistaMenu();
         }
 
     }//GEN-LAST:event_btnPagarActionPerformed
@@ -194,6 +198,31 @@ public final class PanelCarrito extends javax.swing.JPanel {
                     detallesCarritos.get(i).getCantidad(),
                     detallesCarritos.get(i).getDireccionImagen());
 
+            String nombre = detallesCarritos.get(i).getNombre();
+            String identificador = detallesCarritos.get(i).getCodigoProducto();
+            productoPanel.putClientProperty(identificador, productoPanel);
+            productoPanel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    int opcion = framePrincipal.mostrarOpciones("¿Que quieres hacer con el producto?", nombre, "Ver", "Eliminar");
+                    // Aquí puedes acceder al identificador del panel haciendo uso de la variable 'identificador'
+                    if (opcion == 1) {
+                        framePrincipal.setIdProducto(identificador);
+                        framePrincipal.cambiarVistaProducto();
+                    } else if (opcion == 2) {
+                        boolean respuesta = framePrincipal.mostrarConfirmacion(
+                                "¿Seguro que deseas\neliminar el producto del carrito?",
+                                "Aviso");
+                        if (respuesta) {
+                            
+                            if(eliminarCarrito(identificador)){
+                                framePrincipal.cambiarVistaCarrito();
+                            }
+                        }
+                    }
+                }
+            });
+
             // Añade el panel del producto en la posición i * 2 (para dejar espacio para los separadores)
             c.gridx = 0;
             c.gridy = i * 2;
@@ -240,6 +269,16 @@ public final class PanelCarrito extends javax.swing.JPanel {
         }
         lblTotal.setText("Total: $" + totalFormateado);
 
+    }
+
+    public boolean eliminarCarrito(String identificador) {
+        try {
+            IControlUsuario controlUsuario = new ControlUsuario();
+            return controlUsuario.eliminarProductoDelCarrito(framePrincipal.getIdUsuario(), identificador);
+        } catch (PersistenciaException ex) {
+            framePrincipal.mostrarAviso(ex.getMessage(), "Aviso");
+            return false;
+        }
     }
 
     /**

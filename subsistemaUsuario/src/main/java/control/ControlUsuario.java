@@ -39,7 +39,7 @@ public class ControlUsuario implements IControlUsuario {
      * @throws BOException
      */
     @Override
-    public UsuarioDTO consultarUsuarioPorId(String idCia) throws PersistenciaException, BOException{
+    public UsuarioDTO consultarUsuarioPorId(String idCia) throws PersistenciaException, BOException {
 //        conexion.Conexion.getDatabase();
         IUsuarioBO usuarioBO = new UsuarioBO();
         UsuarioDTO usuarioDTO = usuarioBO.consultarUsuario(idCia);
@@ -48,8 +48,14 @@ public class ControlUsuario implements IControlUsuario {
     }
 
     @Override
-    public void actualizarPuntosUsuario(Usuario usuario, Integer puntos){
+    public void actualizarPuntosUsuario(Usuario usuario, Integer puntos) {
         IUsuarioBO usuarioBO = new UsuarioBO();
         usuarioBO.actualizarPuntosUsuario(usuario, puntos);
+    }
+
+    @Override
+    public boolean eliminarProductoDelCarrito(String idUsuario, String codigoProducto) throws PersistenciaException {
+        IUsuarioBO usuarioBO = new UsuarioBO();
+        return usuarioBO.eliminarProductoDelCarrito(idUsuario, codigoProducto);
     }
 }

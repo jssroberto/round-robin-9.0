@@ -8,9 +8,14 @@ import IDAOs.IProductoDAO;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.UpdateResult;
 import conexion.Conexion;
+import dominio.DetalleProducto;
 import dominio.Producto;
+import dominio.Usuario;
 import excepciones.PersistenciaException;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *

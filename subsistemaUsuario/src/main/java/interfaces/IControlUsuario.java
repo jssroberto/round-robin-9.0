@@ -14,10 +14,12 @@ import excepciones.PersistenciaException;
  * @author jl4ma
  */
 public interface IControlUsuario {
-    
+
     public Usuario consultarUsuario(Usuario usuario);
-    
-    public UsuarioDTO consultarUsuarioPorId(String idCia) throws PersistenciaException,BOException;
-    
+
+    public UsuarioDTO consultarUsuarioPorId(String idCia) throws PersistenciaException, BOException;
+
     public void actualizarPuntosUsuario(Usuario usuario, Integer puntos);
+
+    public boolean eliminarProductoDelCarrito(String idUsuario, String codigoProducto) throws PersistenciaException;
 }

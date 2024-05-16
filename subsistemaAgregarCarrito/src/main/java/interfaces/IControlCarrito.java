@@ -19,4 +19,5 @@ public interface IControlCarrito {
     public boolean agregarCarrito(Usuario usuarioId, Producto product, int cantidad) throws PersistenciaException;
     public void vaciarCarrito(Usuario user);
     public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto nuevoDetalleProducto);
+    public float actualizarTotalCarrito(Usuario u);
 }

@@ -33,6 +33,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
@@ -122,7 +123,14 @@ public final class PanelBuscar extends javax.swing.JPanel {
         ppMenu.add(ordenarZA);
         ppMenu.addSeparator();
         ppMenu.add(ordenarPrecio);
-
+        btnOrdenar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    ppMenu.show(btnOrdenar, e.getX(), e.getY());
+                }
+            }
+        });
         btnOrdenar.setComponentPopupMenu(ppMenu);
 
         ordenarAZ.addActionListener(new ActionListener() {

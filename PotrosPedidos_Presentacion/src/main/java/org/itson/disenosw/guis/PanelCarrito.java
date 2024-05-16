@@ -157,9 +157,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
         IControlUsuario user = new ControlUsuario();
         Usuario u = new Usuario();
         u.setIdCia(framePrincipal.getNumID());
-        List<DetalleProducto> detallesCarritos = user.consultarUsuario(u).getCarrito().getProductos();
-        float total = 0.0f;
-        
+        List<DetalleProducto> detallesCarritos = user.consultarUsuario(u).getCarrito().getProductos();        
         if (detallesCarritos.isEmpty()) {
             Font sizedFont = cargarFuente("/fonts/futura/FuturaPTBook.otf", 48F);
             lblCarritoVacío.setFont(sizedFont);
@@ -175,10 +173,9 @@ public final class PanelCarrito extends javax.swing.JPanel {
             panelTop.add(panelVacio);
             return;
         }
-        for(DetalleProducto de: detallesCarritos){
-            total+=de.getSubtotal();
-        }
-        framePrincipal.setTotalCarrito(total);
+        
+       
+        
         GridBagConstraints c = new GridBagConstraints();
 
         //TODO no jala el insertar elemento de arriba a abajo, empiezan del centro
@@ -231,6 +228,7 @@ public final class PanelCarrito extends javax.swing.JPanel {
         cont.setOpaque(false);
 
         panelTop.add(cont);
+        
         lblTotal.setText("Total: "+framePrincipal.getTotalCarrito());
         
 

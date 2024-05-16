@@ -41,4 +41,8 @@ public class ControlCarrito implements IControlCarrito{
     public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto nuevoDetalleProducto){
         carro.eliminarProductoCarrito(usuarioId, nuevoDetalleProducto);
     }
+    @Override
+    public float actualizarTotalCarrito(Usuario u){
+        return carro.actualizarTotalCarrito(u);
+    }
 }

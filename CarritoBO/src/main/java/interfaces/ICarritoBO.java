@@ -7,7 +7,6 @@ package interfaces;
 import dominio.DetalleProducto;
 import dominio.Producto;
 import dominio.Usuario;
-import excepciones.PersistenciaException;
 import org.bson.types.ObjectId;
 
 /**
@@ -19,4 +18,5 @@ public interface ICarritoBO {
     public void agregarCarrito(Usuario usuarioId, Producto codigoProducto, int cantidad);
     public void vaciarCarrito(Usuario user);
     public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto nuevoDetalleProducto);
+    public float actualizarTotalCarrito(Usuario u);
 }

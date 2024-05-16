@@ -33,4 +33,5 @@ public interface IUsuarioDAO {
     public void actualizarPuntosUsuario(Usuario usuario, Integer puntos);
 
     public Usuario consultarUsuarioPorId(Usuario usuario);
+    public float actualizarTotalCarrito(Usuario u);
 }

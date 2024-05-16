@@ -8,6 +8,7 @@ import DAOs.PedidoDAO;
 import DAOs.UsuarioDAO;
 import IDAOs.IPedidoDAO;
 import IDAOs.IUsuarioDAO;
+import dominio.DetalleProducto;
 import dominio.Pedido;
 import dominio.Usuario;
 import insercionesMasivas.InsercionMasivaProductos;
@@ -22,11 +23,11 @@ public class pruebaMongo {
 
     public static void main(String[] args) throws IOException, Exception {
 
-        InsercionMasivaProductos pro = new InsercionMasivaProductos();
-
-        pro.insertarRegistros();
-        InsercionMasivaUsuarios u = new InsercionMasivaUsuarios();
-        u.insertarRegistros();
+//        InsercionMasivaProductos pro = new InsercionMasivaProductos();
+//
+//        pro.insertarRegistros();
+//        InsercionMasivaUsuarios u = new InsercionMasivaUsuarios();
+//        u.insertarRegistros();
 
 //        ProductoDAO pro = new ProductoDAO();
 //        Producto pros = new Producto();
@@ -48,7 +49,14 @@ public class pruebaMongo {
 //        pe.setEtiquetaPedido("123455");
 //        System.out.println(p.consultar(pe));
 //    }
-//            IUsuarioDAO user = new UsuarioDAO();
+            IUsuarioDAO user = new UsuarioDAO();
+            Usuario u = new Usuario();
+            u.setIdCia("00000011211");
+                    
+            System.out.println(user.actualizarTotalCarrito(user.consultarUsuario(u)));
+//            DetalleProducto aa = new DetalleProducto();
+//            aa.setCodigoProducto("HCL080");
+//            user.eliminarProductoCarrito(user.consultarUsuario("00000011211").getId(), aa);
 //            Usuario ue = new Usuario();
 //            ue.setIdCia("00000011211");
 //        System.out.println(user.consultarUsuario(ue));

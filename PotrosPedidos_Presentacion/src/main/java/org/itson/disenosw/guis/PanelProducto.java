@@ -2,6 +2,7 @@ package org.itson.disenosw.guis;
 
 import control.ControlCarrito;
 import control.ControlProductos;
+import control.ControlUsuario;
 import dominio.Producto;
 import dominio.ProductoCafeteria;
 import dominio.Usuario;
@@ -9,6 +10,7 @@ import excepciones.CafeteriaException;
 import excepciones.PersistenciaException;
 import interfaces.IControlCarrito;
 import interfaces.IControlProductos;
+import interfaces.IControlUsuario;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.IOException;
@@ -143,12 +145,15 @@ public class PanelProducto extends javax.swing.JPanel {
             try {
                 IControlCarrito controlC = new ControlCarrito();
                 IControlProductos controlP = new ControlProductos();
+                IControlUsuario u = new ControlUsuario();
                 Usuario user = new Usuario();
                 Producto pro = new Producto();
                 pro.setCodigoProducto(framePrincipal.getIdProducto());
                 user.setIdCia(framePrincipal.getNumID());
                 controlC.agregarCarrito(user, pro, Integer.parseInt(txtCantidad.getText()));
                 framePrincipal.setIdProducto(null);
+                IControlCarrito con = new ControlCarrito();
+                framePrincipal.setTotalCarrito(con.actualizarTotalCarrito(u.consultarUsuario(user)));
                 framePrincipal.cambiarVistaCarrito();
 
             } catch (PersistenciaException ex) {

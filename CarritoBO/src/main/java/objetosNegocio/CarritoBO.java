@@ -14,6 +14,7 @@ import dominio.Producto;
 import dominio.Usuario;
 import excepciones.PersistenciaException;
 import interfaces.ICarritoBO;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bson.types.ObjectId;
@@ -31,19 +32,20 @@ public class CarritoBO implements ICarritoBO{
        
     }
     
-   
 
     @Override
     public void agregarCarrito(Usuario usuarioId, Producto product, int cantidad){
         IProductoDAO producto = new ProductoDAO();
         IUsuarioDAO carrito = new UsuarioDAO();
         Producto pro = null;
+        boolean entrarRecorrido = false;
+        float subtotal;
         try {
             pro = producto.consultar(product);
         } catch (PersistenciaException ex) {
             Logger.getLogger(CarritoBO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        float subtotal = cantidad* pro.getPrecio();
+        subtotal = cantidad* pro.getPrecio();
         DetalleProducto detalle = new DetalleProducto();
         detalle.setCantidad(cantidad);
         detalle.setCodigoProducto(pro.getCodigoProducto());
@@ -53,8 +55,26 @@ public class CarritoBO implements ICarritoBO{
         detalle.setPrecio(pro.getPrecio());
         detalle.setPuntosCuesta(pro.getPuntosCuesta());
         detalle.setPuntosGenera(pro.getPuntosGenera());
-        ObjectId o = carrito.consultarUsuario(usuarioId).getId();
-        carrito.agregarDetalleProductoAlCarrito(o, detalle);
+        Usuario o = carrito.consultarUsuario(usuarioId);
+        List<DetalleProducto> produ = o.getCarrito().getProductos();
+        if(produ.isEmpty()){
+            carrito.agregarDetalleProductoAlCarrito(o.getId(), detalle);
+        }else{
+            for(DetalleProducto z: produ){
+                if(z.getCodigoProducto().equals(pro.getCodigoProducto())){
+                    carrito.eliminarProductoCarrito(o.getId(), z);
+                    detalle.setCantidad(z.getCantidad()+cantidad);
+                    subtotal = detalle.getCantidad()* z.getPrecio();
+                    detalle.setSubtotal(subtotal);
+                    carrito.agregarDetalleProductoAlCarrito(o.getId(), detalle);
+                    entrarRecorrido = true;
+                }
+            }
+            if(!entrarRecorrido){
+                carrito.agregarDetalleProductoAlCarrito(o.getId(), detalle);
+            }
+        }
+        
     }
     
     @Override
@@ -67,6 +87,12 @@ public class CarritoBO implements ICarritoBO{
     public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto nuevoDetalleProducto){
         IUsuarioDAO carrito = new UsuarioDAO();
         carrito.eliminarProductoCarrito(usuarioId, nuevoDetalleProducto);
+    }
+    
+    @Override
+    public float actualizarTotalCarrito(Usuario u){
+        IUsuarioDAO carrito = new UsuarioDAO();
+        return carrito.actualizarTotalCarrito(u);
     }
     
     

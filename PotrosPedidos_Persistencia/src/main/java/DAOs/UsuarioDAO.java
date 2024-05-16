@@ -9,7 +9,9 @@ import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
 import conexion.Conexion;
+import dominio.Carrito;
 import dominio.DetalleProducto;
 import dominio.Pedido;
 import dominio.Usuario;
@@ -68,15 +70,29 @@ public class UsuarioDAO implements IUsuarioDAO {
     }
 
     @Override
-    public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto nuevoDetalleProducto) {
-        
-        coleccionCursos.updateOne(Filters.eq("_id", usuarioId), Updates.pull("carrito.productos", nuevoDetalleProducto));
+    public void eliminarProductoCarrito(ObjectId usuarioId, DetalleProducto codigo) {
+          UpdateResult result = coleccionCursos.updateOne(Filters.eq("_id", usuarioId), Updates.pull("carrito.productos", codigo));
+          if (result.wasAcknowledged()) {
+            if (result.getModifiedCount() > 0) {
+                System.out.println("");
+                System.out.println("La actualización fue exitosa. Se modificaron " + result.getModifiedCount() + " documentos.");
+                System.out.println("");
+            } else {
+                System.out.println("");
+                System.out.println("La actualización no modificó ningún documento.");
+                System.out.println("");
+            }
+        } else {
+              System.out.println("");
+            System.out.println("La operación de actualización no fue confirmada por el servidor.");
+              System.out.println("");
+          }
     }
 
     @Override
     public void vaciarCarrito(Usuario usuario) {
-        for (int i = 0; i < usuario.getCarrito().getProductos().size(); i++) {
-            this.eliminarProductoCarrito(usuario.getId(), usuario.getCarrito().getProductos().get(i));
+        for (DetalleProducto p: usuario.getCarrito().getProductos()) {
+            coleccionCursos.updateOne(Filters.eq("_id", usuario.getId()), Updates.pull("carrito.productos", p));
         }
 
     }
@@ -87,6 +103,18 @@ public class UsuarioDAO implements IUsuarioDAO {
         // Assuming pedido is saved and has an ObjectId assigned
         ObjectId pedidoId = pedido.getId();
         coleccionCursos.updateOne(Filters.eq("_id", usuario.getId()), Updates.push("pedidos", pedidoId));
+    }
+    
+    @Override
+    public float actualizarTotalCarrito(Usuario u){
+        float total = 0;
+        Carrito c;
+        for(DetalleProducto a: u.getCarrito().getProductos()){
+            total += a.getSubtotal();
+        }
+        u.getCarrito().setTotalCarrito(total);
+        coleccionCursos.updateOne(Filters.eq("_id", u.getId()), Updates.set("carrito", u.getCarrito()));
+        return total;
     }
 
 }

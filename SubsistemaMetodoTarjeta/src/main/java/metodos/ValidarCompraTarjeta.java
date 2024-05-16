@@ -26,12 +26,16 @@ public class ValidarCompraTarjeta {
     public boolean validacionCompra(Tarjeta num, float total) throws BancoException{
         
         Tarjeta tar = tarjeta.validarDatos(num);
+        if(tar.getSaldo()!=0){
         float saldo = tar.getSaldo()-total;
         if (saldo >=0) {
             tarjeta.actualizarSaldo(tar, saldo);
             return true;
         }else{
             throw new BancoException("Saldo insuficiente");
+        }
+        }else{
+            throw new BancoException("Saldo en 0");
         }
         
     }

@@ -44,8 +44,6 @@ public class ControlTarjeta implements IControlTarjeta{
                 throw new BancoException("Saldo Insuficiente");
             }
         } catch (BancoException ex) {
-            Logger.getLogger(ControlTarjeta.class.getName()).log(Level.SEVERE, null, ex);
-            conexion.ConexionBanco.close();
             return false;
         }
     }

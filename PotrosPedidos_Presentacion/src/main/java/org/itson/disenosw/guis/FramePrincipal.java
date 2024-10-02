@@ -94,6 +94,8 @@ public class FramePrincipal extends javax.swing.JFrame {
             .addGap(0, 800, Short.MAX_VALUE)
         );
 
+        getAccessibleContext().setAccessibleName("Cafetería Potros");
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
